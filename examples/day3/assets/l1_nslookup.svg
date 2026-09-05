@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="900" viewBox="0 0 1800 900">
+<rect width="100%" height="100%" fill="white"/>
+<text x="50.00" y="64.80" font-family="Apple SD Gothic Neo, sans-serif" font-size="40" fill="#1a2834">nslookup 출력의 두 주소를 실제 서버와 연결하기</text>
+<text x="52.00" y="105.08" font-family="Apple SD Gothic Neo, sans-serif" font-size="24" fill="#697885">출력은 내부 DNS를 지정한 예시다. 위쪽은 질문 대상, 아래쪽은 DNS가 알려준 웹 서버다.</text>
+<polyline points="50,129 1750,129" fill="none" stroke="#b8c5cd" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="123.2,353.0 263.2,353.0 284.2,371.2 284.2,469.2 123.2,469.2" fill="#b9c3c8" stroke="#54646f" stroke-width="2"/>
+<polygon points="263.2,353.0 284.2,371.2 284.2,469.2 263.2,455.2" fill="#81929c" stroke="#54646f" stroke-width="2"/>
+<rect x="135.8" y="365.6" width="113.39999999999999" height="81.19999999999999" rx="2" fill="#c6e6f7" stroke="#657e90" stroke-width="2"/>
+<polygon points="140.0,371.2 240.8,371.2 140.0,441.2" fill="#edf9fe" stroke="#edf9fe" stroke-width="1"/>
+<rect x="187.6" y="469.2" width="30.799999999999997" height="26.599999999999998" rx="0" fill="#87959d" stroke="#54646f" stroke-width="2"/>
+<polygon points="144.2,498.6 268.8,498.6 303.8,525.2 120.4,525.2" fill="#d4dadd" stroke="#627380" stroke-width="2"/>
+<polyline points="155.4,507.0 260.4,507.0" fill="none" stroke="#91a1ab" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="155.4,515.4 260.4,515.4" fill="none" stroke="#91a1ab" stroke-width="1" stroke-linejoin="round"/>
+<rect x="295.4" y="393.6" width="37.8" height="107.8" rx="3" fill="#d7d9d1" stroke="#657580" stroke-width="2"/>
+<polyline points="302.4,414.6 326.2,414.6" fill="none" stroke="#7c8b94" stroke-width="2" stroke-linejoin="round"/>
+<ellipse cx="315.0" cy="473.4" rx="5.0" ry="5.0" fill="#39b657" stroke="#39b657" stroke-width="1"/>
+<text x="186.25" y="569.64" font-family="Apple SD Gothic Neo, sans-serif" font-size="27" fill="#1a2834">PC0</text>
+<text x="146.75" y="619.16" font-family="Apple SD Gothic Neo, sans-serif" font-size="23" fill="#697885">192.168.10.10</text>
+<rect x="430" y="206" width="875" height="380" rx="4" fill="#f9fbfc" stroke="#83929e" stroke-width="2"/>
+<text x="458.00" y="247.08" font-family="Apple SD Gothic Neo, sans-serif" font-size="24" fill="#697885">Command Prompt · 출력 예시</text>
+<text x="458.00" y="303.84" font-family="Apple SD Gothic Neo, sans-serif" font-size="27" fill="#1a2834">&gt; nslookup portal.a-company.test 192.168.20.53</text>
+<text x="458.00" y="376.60" font-family="Apple SD Gothic Neo, sans-serif" font-size="30" fill="#1573bb">Server:  dns.a-company.test</text>
+<text x="458.00" y="417.40" font-family="Apple SD Gothic Neo, sans-serif" font-size="30" fill="#1573bb">Address: 192.168.20.53</text>
+<text x="458.00" y="489.60" font-family="Apple SD Gothic Neo, sans-serif" font-size="30" fill="#008461">Name:    portal.a-company.test</text>
+<text x="458.00" y="530.40" font-family="Apple SD Gothic Neo, sans-serif" font-size="30" fill="#008461">Address: 192.168.20.100</text>
+<polygon points="1485.95,237.25 1561.85,237.25 1592.9,262.55 1517.0,262.55" fill="#f3efe1" stroke="#726f65" stroke-width="2"/>
+<polygon points="1561.85,237.25 1592.9,262.55 1592.9,379.85 1561.85,356.85" fill="#b4ad9b" stroke="#726f65" stroke-width="2"/>
+<polygon points="1485.95,237.25 1561.85,237.25 1561.85,356.85 1485.95,356.85" fill="#ded9c8" stroke="#726f65" stroke-width="2"/>
+<rect x="1496.3" y="259.1" width="51.74999999999999" height="11.5" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="1496.3" y="279.8" width="51.74999999999999" height="11.5" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="1496.3" y="300.5" width="51.74999999999999" height="11.5" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<ellipse cx="1504.925" cy="330.975" rx="5.175" ry="5.175" fill="#46b758" stroke="#278c3f" stroke-width="1"/>
+<polyline points="1503.2,344.2 1503.2,349.95" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1513.55,344.2 1513.55,349.95" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1523.9,344.2 1523.9,349.95" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1534.25,344.2 1534.25,349.95" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<text x="1479.00" y="423.09" font-family="Apple SD Gothic Neo, sans-serif" font-size="27" fill="#1a2834">DNSServer</text>
+<text x="1473.75" y="463.11" font-family="Apple SD Gothic Neo, sans-serif" font-size="23" fill="#697885">192.168.20.53</text>
+<polygon points="1485.95,550.25 1561.85,550.25 1592.9,575.55 1517.0,575.55" fill="#f3efe1" stroke="#726f65" stroke-width="2"/>
+<polygon points="1561.85,550.25 1592.9,575.55 1592.9,692.85 1561.85,669.85" fill="#b4ad9b" stroke="#726f65" stroke-width="2"/>
+<polygon points="1485.95,550.25 1561.85,550.25 1561.85,669.85 1485.95,669.85" fill="#ded9c8" stroke="#726f65" stroke-width="2"/>
+<rect x="1496.3" y="572.1" width="51.74999999999999" height="11.5" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="1496.3" y="592.8" width="51.74999999999999" height="11.5" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="1496.3" y="613.5" width="51.74999999999999" height="11.5" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<ellipse cx="1504.925" cy="643.9749999999999" rx="5.175" ry="5.175" fill="#46b758" stroke="#278c3f" stroke-width="1"/>
+<polyline points="1503.2,657.2 1503.2,662.95" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1513.55,657.2 1513.55,662.95" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1523.9,657.2 1523.9,662.95" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1534.25,657.2 1534.25,662.95" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<text x="1458.25" y="736.09" font-family="Apple SD Gothic Neo, sans-serif" font-size="27" fill="#1a2834">IntranetServer</text>
+<text x="1467.25" y="776.11" font-family="Apple SD Gothic Neo, sans-serif" font-size="23" fill="#697885">192.168.20.100</text>
+<polyline points="830,409 1370,409 1370,314 1475,314" fill="none" stroke="#1573bb" stroke-width="4" stroke-linejoin="round"/>
+<polygon points="1475,314 1460.0810964478637,322.15023415627144 1460.0810964478637,305.84976584372856" fill="#1573bb" stroke="#1573bb" stroke-width="1"/>
+<polyline points="850,519 1370,519 1370,625 1475,625" fill="none" stroke="#008461" stroke-width="4" stroke-linejoin="round"/>
+<polygon points="1475,625 1460.0810964478637,633.1502341562715 1460.0810964478637,616.8497658437285" fill="#008461" stroke="#008461" stroke-width="1"/>
+<rect x="1390" y="301" width="53" height="34" rx="2" fill="#fffef8" stroke="#1573bb" stroke-width="2"/>
+<polyline points="1390,301 1416.5,320.04 1443,301" fill="none" stroke="#1573bb" stroke-width="2" stroke-linejoin="round"/>
+<polyline points="1390,335 1408.55,316.3" fill="none" stroke="#1573bb" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1443,335 1424.45,316.3" fill="none" stroke="#1573bb" stroke-width="1" stroke-linejoin="round"/>
+<rect x="1390" y="611" width="53" height="34" rx="2" fill="#fffef8" stroke="#008461" stroke-width="2"/>
+<polyline points="1390,611 1416.5,630.04 1443,611" fill="none" stroke="#008461" stroke-width="2" stroke-linejoin="round"/>
+<polyline points="1390,645 1408.55,626.3" fill="none" stroke="#008461" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1443,645 1424.45,626.3" fill="none" stroke="#008461" stroke-width="1" stroke-linejoin="round"/>
+<text x="456.00" y="679.68" font-family="Apple SD Gothic Neo, sans-serif" font-size="29" fill="#1573bb">Server / 첫 Address → 질문을 받은 DNS 서버</text>
+<text x="456.00" y="739.68" font-family="Apple SD Gothic Neo, sans-serif" font-size="29" fill="#008461">Name / 마지막 Address → 조회한 이름과 그 주소</text>
+<text x="50.00" y="869.08" font-family="Apple SD Gothic Neo, sans-serif" font-size="24" fill="#697885">선은 출력 값과 장비의 대응 관계다. 실제 패킷은 Switch0과 Router0을 거친다.</text>
+</svg>

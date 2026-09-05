@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1140" viewBox="0 0 1800 1140">
+<rect width="100%" height="100%" fill="white"/>
+<text x="50.00" y="64.80" font-family="Apple SD Gothic Neo, sans-serif" font-size="40" fill="#1a2834">재귀 리졸버가 다음 DNS 서버에 직접 다시 묻는다</text>
+<text x="52.00" y="105.08" font-family="Apple SD Gothic Neo, sans-serif" font-size="24" fill="#697885">캐시가 없는 공개 DNS 조회 모델 · 파랑 = 질문   /   주황 = 다음 담당자 안내   /   초록 = 최종 답</text>
+<polyline points="50,129 1750,129" fill="none" stroke="#b8c5cd" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="106.84,545.1 224.84,545.1 242.54,560.44 242.54,643.04 106.84,643.04" fill="#b9c3c8" stroke="#54646f" stroke-width="2"/>
+<polygon points="224.84,545.1 242.54,560.44 242.54,643.04 224.84,631.24" fill="#81929c" stroke="#54646f" stroke-width="2"/>
+<rect x="117.46000000000001" y="555.72" width="95.58" height="68.44" rx="2" fill="#c6e6f7" stroke="#657e90" stroke-width="2"/>
+<polygon points="121.0,560.44 205.96,560.44 121.0,619.44" fill="#edf9fe" stroke="#edf9fe" stroke-width="1"/>
+<rect x="161.12" y="643.04" width="25.959999999999997" height="22.419999999999998" rx="0" fill="#87959d" stroke="#54646f" stroke-width="2"/>
+<polygon points="124.54,667.82 229.56,667.82 259.06,690.24 104.48,690.24" fill="#d4dadd" stroke="#627380" stroke-width="2"/>
+<polyline points="133.98000000000002,674.9 222.48,674.9" fill="none" stroke="#91a1ab" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="133.98000000000002,681.98 222.48,681.98" fill="none" stroke="#91a1ab" stroke-width="1" stroke-linejoin="round"/>
+<rect x="251.98" y="579.32" width="31.86" height="90.86" rx="3" fill="#d7d9d1" stroke="#657580" stroke-width="2"/>
+<polyline points="257.88,597.02 277.94,597.02" fill="none" stroke="#7c8b94" stroke-width="2" stroke-linejoin="round"/>
+<ellipse cx="268.5" cy="646.58" rx="5.0" ry="5.0" fill="#39b657" stroke="#39b657" stroke-width="1"/>
+<text x="164.75" y="731.60" font-family="Apple SD Gothic Neo, sans-serif" font-size="27" fill="#1a2834">PC</text>
+<text x="114.00" y="772.76" font-family="Apple SD Gothic Neo, sans-serif" font-size="23" fill="#697885">최종 답을 요청</text>
+<polygon points="613.6,532.0 692.8,532.0 725.2,558.4 646.0,558.4" fill="#f3efe1" stroke="#726f65" stroke-width="2"/>
+<polygon points="692.8,532.0 725.2,558.4 725.2,680.8 692.8,656.8" fill="#b4ad9b" stroke="#726f65" stroke-width="2"/>
+<polygon points="613.6,532.0 692.8,532.0 692.8,656.8 613.6,656.8" fill="#ded9c8" stroke="#726f65" stroke-width="2"/>
+<rect x="624.4" y="554.8" width="54.0" height="12.0" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="624.4" y="576.4" width="54.0" height="12.0" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="624.4" y="598.0" width="54.0" height="12.0" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<ellipse cx="633.4" cy="629.8" rx="5.3999999999999995" ry="5.3999999999999995" fill="#46b758" stroke="#278c3f" stroke-width="1"/>
+<polyline points="631.6,643.6 631.6,649.6" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="642.4,643.6 642.4,649.6" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="653.2,643.6 653.2,649.6" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="664.0,643.6 664.0,649.6" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<text x="607.75" y="724.84" font-family="Apple SD Gothic Neo, sans-serif" font-size="27" fill="#1a2834">재귀 리졸버</text>
+<text x="571.00" y="766.76" font-family="Apple SD Gothic Neo, sans-serif" font-size="23" fill="#697885">외부 조회를 계속 수행</text>
+<polyline points="1110,165 1745,165 1745,1000 1110,1000 1110,165" fill="none" stroke="#8fb3c3" stroke-width="2" stroke-linejoin="round" stroke-dasharray="12 8"/>
+<rect x="1110" y="165" width="635" height="835" rx="20" fill="#f5fafc" stroke="#8fb3c3" stroke-width="2" stroke-dasharray="10 7"/>
+<text x="1145.00" y="210.68" font-family="Apple SD Gothic Neo, sans-serif" font-size="29" fill="#1573bb">인터넷의 DNS 서버들</text>
+<polygon points="1469.58,294.1 1526.34,294.1 1549.56,313.02 1492.8,313.02" fill="#f3efe1" stroke="#726f65" stroke-width="2"/>
+<polygon points="1526.34,294.1 1549.56,313.02 1549.56,400.74 1526.34,383.54" fill="#b4ad9b" stroke="#726f65" stroke-width="2"/>
+<polygon points="1469.58,294.1 1526.34,294.1 1526.34,383.54 1469.58,383.54" fill="#ded9c8" stroke="#726f65" stroke-width="2"/>
+<rect x="1477.32" y="310.44" width="38.7" height="8.6" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="1477.32" y="325.92" width="38.7" height="8.6" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="1477.32" y="341.4" width="38.7" height="8.6" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<ellipse cx="1483.77" cy="364.19" rx="3.87" ry="3.87" fill="#46b758" stroke="#278c3f" stroke-width="1"/>
+<polyline points="1482.48,374.08 1482.48,378.38" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1490.22,374.08 1490.22,378.38" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1497.96,374.08 1497.96,378.38" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1505.7,374.08 1505.7,378.38" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<text x="1483.00" y="439.34" font-family="Apple SD Gothic Neo, sans-serif" font-size="27" fill="#1a2834">Root</text>
+<text x="1444.00" y="468.34" font-family="Apple SD Gothic Neo, sans-serif" font-size="23" fill="#697885">루트 이름 서버</text>
+<polygon points="1469.58,574.1 1526.34,574.1 1549.56,593.02 1492.8,593.02" fill="#f3efe1" stroke="#726f65" stroke-width="2"/>
+<polygon points="1526.34,574.1 1549.56,593.02 1549.56,680.74 1526.34,663.54" fill="#b4ad9b" stroke="#726f65" stroke-width="2"/>
+<polygon points="1469.58,574.1 1526.34,574.1 1526.34,663.54 1469.58,663.54" fill="#ded9c8" stroke="#726f65" stroke-width="2"/>
+<rect x="1477.32" y="590.44" width="38.7" height="8.6" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="1477.32" y="605.92" width="38.7" height="8.6" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="1477.32" y="621.4" width="38.7" height="8.6" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<ellipse cx="1483.77" cy="644.19" rx="3.87" ry="3.87" fill="#46b758" stroke="#278c3f" stroke-width="1"/>
+<polyline points="1482.48,654.08 1482.48,658.38" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1490.22,654.08 1490.22,658.38" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1497.96,654.08 1497.96,658.38" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1505.7,654.08 1505.7,658.38" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<text x="1456.75" y="719.34" font-family="Apple SD Gothic Neo, sans-serif" font-size="27" fill="#1a2834">.com TLD</text>
+<text x="1424.00" y="748.34" font-family="Apple SD Gothic Neo, sans-serif" font-size="23" fill="#697885">최상위 도메인 서버</text>
+<polygon points="1469.58,844.1 1526.34,844.1 1549.56,863.02 1492.8,863.02" fill="#f3efe1" stroke="#726f65" stroke-width="2"/>
+<polygon points="1526.34,844.1 1549.56,863.02 1549.56,950.74 1526.34,933.54" fill="#b4ad9b" stroke="#726f65" stroke-width="2"/>
+<polygon points="1469.58,844.1 1526.34,844.1 1526.34,933.54 1469.58,933.54" fill="#ded9c8" stroke="#726f65" stroke-width="2"/>
+<rect x="1477.32" y="860.44" width="38.7" height="8.6" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="1477.32" y="875.92" width="38.7" height="8.6" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="1477.32" y="891.4" width="38.7" height="8.6" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<ellipse cx="1483.77" cy="914.19" rx="3.87" ry="3.87" fill="#46b758" stroke="#278c3f" stroke-width="1"/>
+<polyline points="1482.48,924.08 1482.48,928.38" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1490.22,924.08 1490.22,928.38" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1497.96,924.08 1497.96,928.38" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1505.7,924.08 1505.7,928.38" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<text x="1459.50" y="989.34" font-family="Apple SD Gothic Neo, sans-serif" font-size="27" fill="#1a2834">권한 서버</text>
+<text x="1423.25" y="1018.34" font-family="Apple SD Gothic Neo, sans-serif" font-size="23" fill="#697885">example.com 구역</text>
+<polyline points="285,586 600,586" fill="none" stroke="#1573bb" stroke-width="5" stroke-linejoin="round"/>
+<polygon points="600,586 585.0810964478636,594.1502341562715 585.0810964478636,577.8497658437285" fill="#1573bb" stroke="#1573bb" stroke-width="1"/>
+<rect x="313" y="532" width="160.0" height="36" rx="2" fill="white" stroke="white" stroke-width="1"/>
+<text x="318.00" y="558.92" font-family="Apple SD Gothic Neo, sans-serif" font-size="26" fill="#1573bb">1  최종 답 요청</text>
+<polyline points="600,659 285,659" fill="none" stroke="#008461" stroke-width="5" stroke-linejoin="round"/>
+<polygon points="285,659 299.9189035521363,650.8497658437285 299.9189035521363,667.1502341562715" fill="#008461" stroke="#008461" stroke-width="1"/>
+<rect x="316" y="689" width="165.5" height="36" rx="2" fill="white" stroke="white" stroke-width="1"/>
+<text x="321.00" y="715.92" font-family="Apple SD Gothic Neo, sans-serif" font-size="26" fill="#008461">8  최종 답 반환</text>
+<polyline points="725,555 925,320 1430,320" fill="none" stroke="#1573bb" stroke-width="4" stroke-linejoin="round"/>
+<polygon points="1430,320 1415.0810964478637,328.15023415627144 1415.0810964478637,311.84976584372856" fill="#1573bb" stroke="#1573bb" stroke-width="1"/>
+<rect x="955" y="268" width="158.0" height="35" rx="2" fill="white" stroke="white" stroke-width="1"/>
+<text x="960.00" y="294.00" font-family="Apple SD Gothic Neo, sans-serif" font-size="25" fill="#1573bb">2  Root에 질문</text>
+<polyline points="1430,380 995,380 725,580" fill="none" stroke="#a06c16" stroke-width="4" stroke-linejoin="round"/>
+<polygon points="725,580 732.1369483522719,564.5706782969243 741.8394361799993,577.6690368643563" fill="#a06c16" stroke="#a06c16" stroke-width="1"/>
+<rect x="955" y="393" width="186.0" height="35" rx="2" fill="white" stroke="white" stroke-width="1"/>
+<text x="960.00" y="419.00" font-family="Apple SD Gothic Neo, sans-serif" font-size="25" fill="#a06c16">3  .com 서버 안내</text>
+<polyline points="735,610 1420,610" fill="none" stroke="#1573bb" stroke-width="4" stroke-linejoin="round"/>
+<polygon points="1420,610 1405.0810964478637,618.1502341562715 1405.0810964478637,601.8497658437285" fill="#1573bb" stroke="#1573bb" stroke-width="1"/>
+<rect x="980" y="555" width="158.5" height="35" rx="2" fill="white" stroke="white" stroke-width="1"/>
+<text x="985.00" y="581.00" font-family="Apple SD Gothic Neo, sans-serif" font-size="25" fill="#1573bb">4  .com에 질문</text>
+<polyline points="1420,670 735,670" fill="none" stroke="#a06c16" stroke-width="4" stroke-linejoin="round"/>
+<polygon points="735,670 749.9189035521364,661.8497658437285 749.9189035521364,678.1502341562715" fill="#a06c16" stroke="#a06c16" stroke-width="1"/>
+<rect x="959" y="688" width="177.5" height="35" rx="2" fill="white" stroke="white" stroke-width="1"/>
+<text x="964.00" y="714.00" font-family="Apple SD Gothic Neo, sans-serif" font-size="25" fill="#a06c16">5  권한 서버 안내</text>
+<polyline points="730,705 942,867 1430,867" fill="none" stroke="#1573bb" stroke-width="4" stroke-linejoin="round"/>
+<polygon points="1430,867 1415.0810964478637,875.1502341562715 1415.0810964478637,858.8497658437285" fill="#1573bb" stroke="#1573bb" stroke-width="1"/>
+<rect x="971" y="808" width="172.5" height="35" rx="2" fill="white" stroke="white" stroke-width="1"/>
+<text x="976.00" y="834.00" font-family="Apple SD Gothic Neo, sans-serif" font-size="25" fill="#1573bb">6  A 레코드 질문</text>
+<polyline points="1430,921 935,921 690,720" fill="none" stroke="#008461" stroke-width="4" stroke-linejoin="round"/>
+<polygon points="690,720 706.7034337566068,723.1615345543975 696.3645641796173,735.7636392626681" fill="#008461" stroke="#008461" stroke-width="1"/>
+<rect x="975" y="941" width="177.5" height="35" rx="2" fill="white" stroke="white" stroke-width="1"/>
+<text x="980.00" y="967.00" font-family="Apple SD Gothic Neo, sans-serif" font-size="25" fill="#008461">7  최종 A 값 응답</text>
+<rect x="810" y="441" width="53" height="34" rx="2" fill="#fffef8" stroke="#1573bb" stroke-width="2"/>
+<polyline points="810,441 836.5,460.04 863,441" fill="none" stroke="#1573bb" stroke-width="2" stroke-linejoin="round"/>
+<polyline points="810,475 828.55,456.3" fill="none" stroke="#1573bb" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="863,475 844.45,456.3" fill="none" stroke="#1573bb" stroke-width="1" stroke-linejoin="round"/>
+<rect x="1165" y="594" width="53" height="34" rx="2" fill="#fffef8" stroke="#1573bb" stroke-width="2"/>
+<polyline points="1165,594 1191.5,613.04 1218,594" fill="none" stroke="#1573bb" stroke-width="2" stroke-linejoin="round"/>
+<polyline points="1165,628 1183.55,609.3" fill="none" stroke="#1573bb" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1218,628 1199.45,609.3" fill="none" stroke="#1573bb" stroke-width="1" stroke-linejoin="round"/>
+<rect x="1130" y="905" width="53" height="34" rx="2" fill="#fffef8" stroke="#008461" stroke-width="2"/>
+<polyline points="1130,905 1156.5,924.04 1183,905" fill="none" stroke="#008461" stroke-width="2" stroke-linejoin="round"/>
+<polyline points="1130,939 1148.55,920.3" fill="none" stroke="#008461" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1183,939 1164.45,920.3" fill="none" stroke="#008461" stroke-width="1" stroke-linejoin="round"/>
+<text x="50.00" y="1109.08" font-family="Apple SD Gothic Neo, sans-serif" font-size="24" fill="#697885">PC의 재귀 요청을 받은 리졸버가 Root · TLD · 권한 서버에 반복 질의한다. 실제로는 캐시가 단계를 줄일 수 있다.</text>
+</svg>

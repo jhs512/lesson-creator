@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1030" viewBox="0 0 1800 1030">
+<rect width="100%" height="100%" fill="white"/>
+<text x="50.00" y="64.80" font-family="Apple SD Gothic Neo, sans-serif" font-size="40" fill="#1a2834">거짓 응답이 캐시에 남으면 다음 PC도 같은 답을 받는다</text>
+<text x="52.00" y="105.08" font-family="Apple SD Gothic Neo, sans-serif" font-size="24" fill="#697885">왼쪽: 한 질문에 대한 거짓 답   /   오른쪽: 저장된 거짓 정보의 재사용</text>
+<polyline points="50,129 1750,129" fill="none" stroke="#b8c5cd" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="875,171 875,935" fill="none" stroke="#aebbc4" stroke-width="2" stroke-linejoin="round" stroke-dasharray="12 8"/>
+<text x="65.00" y="202.44" font-family="Apple SD Gothic Neo, sans-serif" font-size="32" fill="#c63c39">DNS 스푸핑 · 거짓 응답을 신뢰</text>
+<text x="940.00" y="202.44" font-family="Apple SD Gothic Neo, sans-serif" font-size="32" fill="#c63c39">캐시 포이즈닝 · 거짓 정보를 재사용</text>
+<polygon points="152.7,301.5 212.1,301.5 236.4,321.3 177.0,321.3" fill="#f3efe1" stroke="#726f65" stroke-width="2"/>
+<polygon points="212.1,301.5 236.4,321.3 236.4,413.1 212.1,395.1" fill="#b4ad9b" stroke="#726f65" stroke-width="2"/>
+<polygon points="152.7,301.5 212.1,301.5 212.1,395.1 152.7,395.1" fill="#f1c5b9" stroke="#726f65" stroke-width="2"/>
+<rect x="160.8" y="318.6" width="40.5" height="9.0" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="160.8" y="334.8" width="40.5" height="9.0" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="160.8" y="351.0" width="40.5" height="9.0" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<ellipse cx="167.55" cy="374.85" rx="4.05" ry="4.05" fill="#46b758" stroke="#278c3f" stroke-width="1"/>
+<polyline points="166.2,385.2 166.2,389.7" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="174.3,385.2 174.3,389.7" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="182.4,385.2 182.4,389.7" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="190.5,385.2 190.5,389.7" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<text x="105.75" y="452.34" font-family="Apple SD Gothic Neo, sans-serif" font-size="27" fill="#1a2834">거짓 응답의 출처</text>
+<text x="152.00" y="482.86" font-family="Apple SD Gothic Neo, sans-serif" font-size="23" fill="#697885">개념 표현</text>
+<polygon points="578,575 678,575 693,588 693,658 578,658" fill="#b9c3c8" stroke="#54646f" stroke-width="2"/>
+<polygon points="678,575 693,588 693,658 678,648" fill="#81929c" stroke="#54646f" stroke-width="2"/>
+<rect x="587" y="584" width="81" height="58" rx="2" fill="#c6e6f7" stroke="#657e90" stroke-width="2"/>
+<polygon points="590,588 662,588 590,638" fill="#edf9fe" stroke="#edf9fe" stroke-width="1"/>
+<rect x="624" y="658" width="22" height="19" rx="0" fill="#87959d" stroke="#54646f" stroke-width="2"/>
+<polygon points="593,679 682,679 707,698 576,698" fill="#d4dadd" stroke="#627380" stroke-width="2"/>
+<polyline points="601,685 676,685" fill="none" stroke="#91a1ab" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="601,691 676,691" fill="none" stroke="#91a1ab" stroke-width="1" stroke-linejoin="round"/>
+<rect x="701" y="604" width="27" height="77" rx="3" fill="#d7d9d1" stroke="#657580" stroke-width="2"/>
+<polyline points="706,619 723,619" fill="none" stroke="#7c8b94" stroke-width="2" stroke-linejoin="round"/>
+<ellipse cx="715.0" cy="661.0" rx="5.0" ry="5.0" fill="#39b657" stroke="#39b657" stroke-width="1"/>
+<text x="586.00" y="736.84" font-family="Apple SD Gothic Neo, sans-serif" font-size="27" fill="#1a2834">질문한 PC</text>
+<text x="560.75" y="771.16" font-family="Apple SD Gothic Neo, sans-serif" font-size="23" fill="#697885">잘못된 .200 수신</text>
+<polyline points="255,397 581,590" fill="none" stroke="#c63c39" stroke-width="6" stroke-linejoin="round"/>
+<polygon points="581,590 564.0101363926311,589.4130292997067 572.3142563297826,575.3863811157099" fill="#c63c39" stroke="#c63c39" stroke-width="1"/>
+<rect x="385" y="475" width="53" height="34" rx="2" fill="#fffef8" stroke="#c63c39" stroke-width="2"/>
+<polyline points="385,475 411.5,494.04 438,475" fill="none" stroke="#c63c39" stroke-width="2" stroke-linejoin="round"/>
+<polyline points="385,509 403.55,490.3" fill="none" stroke="#c63c39" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="438,509 419.45,490.3" fill="none" stroke="#c63c39" stroke-width="1" stroke-linejoin="round"/>
+<rect x="254" y="539" width="219.5" height="38" rx="2" fill="white" stroke="white" stroke-width="1"/>
+<text x="259.00" y="567.76" font-family="Apple SD Gothic Neo, sans-serif" font-size="28" fill="#c63c39">거짓 DNS 답: .200</text>
+<polygon points="1013.3,328.5 1085.9,328.5 1115.6,352.7 1043.0,352.7" fill="#f3efe1" stroke="#726f65" stroke-width="2"/>
+<polygon points="1085.9,328.5 1115.6,352.7 1115.6,464.9 1085.9,442.9" fill="#b4ad9b" stroke="#726f65" stroke-width="2"/>
+<polygon points="1013.3,328.5 1085.9,328.5 1085.9,442.9 1013.3,442.9" fill="#f1c5b9" stroke="#726f65" stroke-width="2"/>
+<rect x="1023.2" y="349.4" width="49.50000000000001" height="11.0" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="1023.2" y="369.2" width="49.50000000000001" height="11.0" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="1023.2" y="389.0" width="49.50000000000001" height="11.0" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<ellipse cx="1031.45" cy="418.15" rx="4.95" ry="4.95" fill="#46b758" stroke="#278c3f" stroke-width="1"/>
+<polyline points="1029.8,430.8 1029.8,436.3" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1039.7,430.8 1039.7,436.3" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1049.6,430.8 1049.6,436.3" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1059.5,430.8 1059.5,436.3" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<text x="1002.75" y="507.34" font-family="Apple SD Gothic Neo, sans-serif" font-size="27" fill="#1a2834">오염된 캐시</text>
+<text x="976.75" y="545.46" font-family="Apple SD Gothic Neo, sans-serif" font-size="23" fill="#697885">거짓 A = .200 저장</text>
+<polygon points="1414.82,306.05 1503.82,306.05 1517.17,317.62 1517.17,379.92 1414.82,379.92" fill="#b9c3c8" stroke="#54646f" stroke-width="2"/>
+<polygon points="1503.82,306.05 1517.17,317.62 1517.17,379.92 1503.82,371.02" fill="#81929c" stroke="#54646f" stroke-width="2"/>
+<rect x="1422.83" y="314.06" width="72.09" height="51.62" rx="2" fill="#c6e6f7" stroke="#657e90" stroke-width="2"/>
+<polygon points="1425.5,317.62 1489.58,317.62 1425.5,362.12" fill="#edf9fe" stroke="#edf9fe" stroke-width="1"/>
+<rect x="1455.76" y="379.92" width="19.580000000000002" height="16.91" rx="0" fill="#87959d" stroke="#54646f" stroke-width="2"/>
+<polygon points="1428.17,398.61 1507.38,398.61 1529.63,415.52 1413.04,415.52" fill="#d4dadd" stroke="#627380" stroke-width="2"/>
+<polyline points="1435.29,403.95 1502.04,403.95" fill="none" stroke="#91a1ab" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1435.29,409.29 1502.04,409.29" fill="none" stroke="#91a1ab" stroke-width="1" stroke-linejoin="round"/>
+<rect x="1524.29" y="331.86" width="24.03" height="68.53" rx="3" fill="#d7d9d1" stroke="#657580" stroke-width="2"/>
+<polyline points="1528.74,345.21 1543.87,345.21" fill="none" stroke="#7c8b94" stroke-width="2" stroke-linejoin="round"/>
+<ellipse cx="1536.75" cy="382.59" rx="5.0" ry="5.0" fill="#39b657" stroke="#39b657" stroke-width="1"/>
+<text x="1443.00" y="452.82" font-family="Apple SD Gothic Neo, sans-serif" font-size="27" fill="#1a2834">PC A</text>
+<text x="1380.75" y="482.96" font-family="Apple SD Gothic Neo, sans-serif" font-size="23" fill="#697885">이후 질문에도 .200</text>
+<polyline points="1142,433 1350,355 1390,355" fill="none" stroke="#c63c39" stroke-width="5" stroke-linejoin="round"/>
+<polygon points="1390,355 1375.0810964478637,363.15023415627144 1375.0810964478637,346.84976584372856" fill="#c63c39" stroke="#c63c39" stroke-width="1"/>
+<rect x="1230" y="364" width="47.7" height="30.6" rx="2" fill="#fffef8" stroke="#c63c39" stroke-width="2"/>
+<polyline points="1230,364 1253.85,381.136 1277.7,364" fill="none" stroke="#c63c39" stroke-width="2" stroke-linejoin="round"/>
+<polyline points="1230,394.6 1246.695,377.77" fill="none" stroke="#c63c39" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1277.7,394.6 1261.005,377.77" fill="none" stroke="#c63c39" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="1414.82,617.05 1503.82,617.05 1517.17,628.62 1517.17,690.92 1414.82,690.92" fill="#b9c3c8" stroke="#54646f" stroke-width="2"/>
+<polygon points="1503.82,617.05 1517.17,628.62 1517.17,690.92 1503.82,682.02" fill="#81929c" stroke="#54646f" stroke-width="2"/>
+<rect x="1422.83" y="625.06" width="72.09" height="51.62" rx="2" fill="#c6e6f7" stroke="#657e90" stroke-width="2"/>
+<polygon points="1425.5,628.62 1489.58,628.62 1425.5,673.12" fill="#edf9fe" stroke="#edf9fe" stroke-width="1"/>
+<rect x="1455.76" y="690.92" width="19.580000000000002" height="16.91" rx="0" fill="#87959d" stroke="#54646f" stroke-width="2"/>
+<polygon points="1428.17,709.61 1507.38,709.61 1529.63,726.52 1413.04,726.52" fill="#d4dadd" stroke="#627380" stroke-width="2"/>
+<polyline points="1435.29,714.95 1502.04,714.95" fill="none" stroke="#91a1ab" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1435.29,720.29 1502.04,720.29" fill="none" stroke="#91a1ab" stroke-width="1" stroke-linejoin="round"/>
+<rect x="1524.29" y="642.86" width="24.03" height="68.53" rx="3" fill="#d7d9d1" stroke="#657580" stroke-width="2"/>
+<polyline points="1528.74,656.21 1543.87,656.21" fill="none" stroke="#7c8b94" stroke-width="2" stroke-linejoin="round"/>
+<ellipse cx="1536.75" cy="693.59" rx="5.0" ry="5.0" fill="#39b657" stroke="#39b657" stroke-width="1"/>
+<text x="1443.25" y="763.82" font-family="Apple SD Gothic Neo, sans-serif" font-size="27" fill="#1a2834">PC B</text>
+<text x="1380.75" y="793.96" font-family="Apple SD Gothic Neo, sans-serif" font-size="23" fill="#697885">이후 질문에도 .200</text>
+<polyline points="1142,433 1350,666 1390,666" fill="none" stroke="#c63c39" stroke-width="5" stroke-linejoin="round"/>
+<polygon points="1390,666 1375.0810964478637,674.1502341562715 1375.0810964478637,657.8497658437285" fill="#c63c39" stroke="#c63c39" stroke-width="1"/>
+<rect x="1230" y="675" width="47.7" height="30.6" rx="2" fill="#fffef8" stroke="#c63c39" stroke-width="2"/>
+<polyline points="1230,675 1253.85,692.136 1277.7,675" fill="none" stroke="#c63c39" stroke-width="2" stroke-linejoin="round"/>
+<polyline points="1230,705.6 1246.695,688.77" fill="none" stroke="#c63c39" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1277.7,705.6 1261.005,688.77" fill="none" stroke="#c63c39" stroke-width="1" stroke-linejoin="round"/>
+<text x="958.00" y="852.68" font-family="Apple SD Gothic Neo, sans-serif" font-size="29" fill="#c63c39">저장된 답을 여러 사용자에게 다시 전달</text>
+<text x="50.00" y="999.08" font-family="Apple SD Gothic Neo, sans-serif" font-size="24" fill="#697885">이 그림은 영향의 개념도다. Day 3 실습은 관리 화면에서 원본 A를 바꿔 접속 변화만 관찰한다.</text>
+</svg>

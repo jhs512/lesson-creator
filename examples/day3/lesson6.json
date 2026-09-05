@@ -1,0 +1,563 @@
+{
+  "type": "lesson",
+  "title": "6교시. 종합 정리 — DNS 장애와 이상 징후 문제풀이",
+  "lead": "숫자 주소로는 웹페이지가 열리지만 이름으로는 열리지 않는다면 어디부터 확인할까? 앞에서 배운 이름 조회와 웹 접속을 구분해 보자. 이번 시간에는 관찰한 값을 근거로 원인을 좁히고, 더 확인할 내용을 보고서로 정리한다.",
+  "toc": [
+    "이름 실패 범위 좁히기",
+    "DNS 계층과 레코드 맞추기",
+    "TTL·NXDOMAIN·응답 IP 분석하기",
+    "DNS 분석 보고서 완성하기"
+  ],
+  "preview": {
+    "intro": "한 교시의 흐름은 다음과 같다.",
+    "element": {
+      "kind": "table",
+      "headers": [
+        "구간",
+        "시간",
+        "활동"
+      ],
+      "rows": [
+        [
+          "첫 설명",
+          "15분",
+          "새 개념과 판단 기준을 본다."
+        ],
+        [
+          "첫 해보기",
+          "10분",
+          "완성 예시를 실행하고 결과를 확인한다."
+        ],
+        [
+          "두 번째 설명",
+          "15분",
+          "동작 과정과 실패 원인을 연결한다."
+        ],
+        [
+          "두 번째 해보기",
+          "10분",
+          "혼자 판단하고 도전 문제로 마무리한다."
+        ]
+      ]
+    }
+  },
+  "principle": "정답은 공격 여부를 단정하는 문장이 아니라, 관찰한 증거와 다음 확인을 연결한 문장이다.",
+  "sections": [
+    {
+      "heading": "이름 실패 범위 좁히기",
+      "importance": "✅",
+      "body": [
+        {
+          "kind": "paragraph",
+          "text": "직원이 공지와 업무 자료를 보는 내부 웹사이트가 오늘의 포털이다. 그림의 `IntranetServer`는 그 페이지를 보내는 서버이고 정상 주소는 `192.168.20.100`이다. `DNSServer`는 포털 이름 `portal.a-company.test`에 맞는 주소를 알려 주는 DNS 서버이며 주소는 `192.168.20.53`이다."
+        },
+        {
+          "kind": "paragraph",
+          "text": "그림의 `Switch0`은 같은 망의 장비를 잇는 스위치, `Router0`은 나뉜 망 사이를 잇는 라우터다. VLAN 10의 PC에서 VLAN 20의 서버로 가는 구성은 정상 실습과 같다. 이제 모든 설정을 다시 읽기보다, 질문과 답이 어느 장비까지 갔는지 찾아보자."
+        },
+        {
+          "kind": "paragraph",
+          "text": "A 레코드는 이름과 IPv4 주소의 대응 정보다. 캐시는 조회한 답을 잠시 저장하는 공간이며, NXDOMAIN은 질문한 이름이 없다는 응답이다. 시간 초과는 정해진 시간 안에 답을 받지 못했다는 뜻이다."
+        },
+        {
+          "kind": "paragraph",
+          "text": "주소 조회 다음에는 TCP로 연결을 맺고 HTTP로 웹페이지를 주고받는다. TCP 포트는 서버 안에서 통신을 받을 프로그램을 구분하는 번호다. 케이블을 꽂는 장비 포트와는 쓰임이 다르다. 방화벽은 정해진 규칙에 따라 통신을 허용하거나 막는 기능이다."
+        },
+        {
+          "kind": "paragraph",
+          "text": "이제 아래 구성도에서 이름을 물어보는 구간과 웹페이지를 받는 구간을 나누어 보자. 번호는 고장 위치를 확정한 표시가 아니라, 관찰한 증상에 따라 다음으로 확인할 곳이다."
+        },
+        {
+          "kind": "image",
+          "src": "assets/l6_diagnose.png",
+          "caption": "그림 6-1. 구성도 위의 진단 지점 — DNS까지의 경로, DNS 응답 내용, 웹 서비스 구간을 나누어 확인한다.",
+          "text_content": "장애가 의심되는 위치를 공통 구성도 위에서 좁힌다\n앞에서 사용한 장비 배치를 유지하고, 다음으로 확인할 지점을 번호로 표시했다.\nVLAN 10 · DEV\n192.168.10.0/24\nVLAN 20 · SEC    192.168.20.0/24\nPC0\n192.168.10.10 /24\n1\n2\n3\n4\n5\n6\n7\n8\n9\nSwitch0 · 2960\nRouter0 · 2911\nDNSServer\n192.168.20.53\nIntranetServer\n192.168.20.100\nFa0/1 · VLAN 10\nG0/0 · 192.168.10.1\nG0/1 · 192.168.20.1\nFa0/5\nFa0/6\nFa0/7\nFa0/8\n1–2, 5번 포트: VLAN 10\n3–4, 6–8번 포트: VLAN 20\n같은 스위치 안에서 포트를 나눈다.\n1\n2\n3\n1  시간 초과\nPC DNS 주소 · 경로\nDNS 서비스 응답 확인\n2  DNS 응답 내용\nNXDOMAIN: 이름 확인\n예상 밖 A: 원본 · 캐시 확인\n3  정상 A인데 웹 실패\nTCP 포트 · 방화벽\nHTTP 서비스 확인\n번호는 원인을 확정하는 표시가 아니다. 관찰 결과에 따라 다음으로 확인할 장비와 설정을 고르는 기준이다."
+        },
+        {
+          "kind": "paragraph",
+          "text": "앞에서 사용한 장비 배치에 번호를 붙였다. 시간 초과라면 1번처럼 PC의 DNS 주소와 서버까지 이어지는 경로, DNS 서비스부터 확인한다. 서버가 답을 보냈다면 2번에서 그 내용을 읽는다. NXDOMAIN이면 이름의 철자와 질문한 DNS를, 예상 밖 A 값이면 원본·캐시·변경 이력을 확인한다."
+        },
+        {
+          "kind": "paragraph",
+          "text": "A 값이 정상 `.100`인데 웹이 열리지 않으면 3번 구간의 TCP 포트·방화벽·HTTP 서비스를 확인한다. `ping`은 확인용 메시지의 응답 여부를 시험하는 명령이다. 이 통신만 차단한 환경도 있으므로 ping 실패 하나만으로 서버 중단을 단정하지 않는다."
+        },
+        {
+          "kind": "task",
+          "task_type": "predict",
+          "instruction": "문제 1의 증상에서 가장 먼저 의심할 영역과 다음 명령을 고르자.",
+          "setup_elements": [
+            {
+              "kind": "table",
+              "headers": [
+                "확인",
+                "결과"
+              ],
+              "rows": [
+                [
+                  "ping 192.168.20.100",
+                  "성공"
+                ],
+                [
+                  "nslookup portal.a-company.test",
+                  "시간 초과"
+                ],
+                [
+                  "웹 브라우저에서 IP 접속",
+                  "성공"
+                ]
+              ]
+            }
+          ],
+          "answer": {
+            "element": {
+              "kind": "paragraph",
+              "text": "DNS 서버 주소와 DNS 서버 도달성을 먼저 확인한다. `ipconfig /all`로 설정된 DNS 주소를 보고 `ping 192.168.20.53`과 `nslookup portal.a-company.test 192.168.20.53`으로 범위를 좁힌다."
+            },
+            "explain": "IP 통신과 웹 서버가 살아 있다는 증거가 있으므로 DNS 조회 구간부터 본다."
+          }
+        },
+        {
+          "kind": "task",
+          "task_type": "action",
+          "instruction": "문제 2의 두 `nslookup` 결과를 비교해 잘못된 설정 한 곳을 찾자.",
+          "setup_elements": [
+            {
+              "kind": "command",
+              "shell": "cmd",
+              "src": "C:\\> nslookup portal.a-company.test 192.168.20.53\nAddress: 192.168.20.100\n\nC:\\> nslookup portal.a-company.test 192.168.20.100\nDNS request timed out."
+            }
+          ],
+          "answer": {
+            "element": {
+              "kind": "paragraph",
+              "text": "`.53`은 DNS 서버이므로 정상 응답한다. `.100`은 웹 서버이므로 DNS 질문 대상으로 지정한 것이 잘못이다. PC의 DNS Server 칸은 `.53`이어야 한다."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "heading": "DNS 계층과 레코드 맞추기",
+      "importance": "✅",
+      "body": [
+        {
+          "kind": "paragraph",
+          "text": "Root는 큰 이름 분류의 담당 서버를, TLD는 그 아래 이름의 담당 서버를 안내한다. 권한 서버는 자신이 맡은 이름의 원본 정보를 보관한다. A는 IPv4 주소, MX는 메일을 받을 서버 정보를 나타내는 레코드 종류다."
+        },
+        {
+          "kind": "paragraph",
+          "text": "다음 문제는 안내하는 서버와 최종 정보를 가진 서버를 분리해 보는 문제다."
+        },
+        {
+          "kind": "task",
+          "task_type": "action",
+          "instruction": "문제 3의 다섯 항목을 알맞게 연결한 뒤 정답 표로 확인하자.",
+          "setup_elements": [
+            {
+              "kind": "table",
+              "headers": [
+                "항목",
+                "선택지"
+              ],
+              "rows": [
+                [
+                  "Root",
+                  "최종 A / TLD 안내 / 메일 서버"
+                ],
+                [
+                  "TLD",
+                  "권한 서버 안내 / 캐시 삭제"
+                ],
+                [
+                  "권한 서버",
+                  "원본 레코드 / 라우팅"
+                ],
+                [
+                  "MX",
+                  "메일 수신 서버 / IPv4"
+                ],
+                [
+                  "A",
+                  "IPv4 / 별명"
+                ]
+              ]
+            }
+          ],
+          "answer": {
+            "element": {
+              "kind": "table",
+              "headers": [
+                "항목",
+                "정답"
+              ],
+              "rows": [
+                [
+                  "Root",
+                  "TLD 안내"
+                ],
+                [
+                  "TLD",
+                  "권한 서버 안내"
+                ],
+                [
+                  "권한 서버",
+                  "원본 레코드"
+                ],
+                [
+                  "MX",
+                  "메일 수신 서버"
+                ],
+                [
+                  "A",
+                  "IPv4 주소"
+                ]
+              ]
+            },
+            "explain": "안내 역할과 최종 데이터를 가진 역할을 나누면 계층과 레코드를 쉽게 구분할 수 있다."
+          }
+        }
+      ]
+    },
+    {
+      "heading": "TTL·NXDOMAIN·응답 IP 분석하기",
+      "importance": "❗",
+      "body": [
+        {
+          "kind": "paragraph",
+          "text": "개별 값의 변화와 짧은 시간에 반복되는 패턴을 따로 표시한 뒤 함께 해석해 보자."
+        },
+        {
+          "kind": "paragraph",
+          "text": "로그는 동작을 기록한 자료다. 아래 각 줄은 `시각 | 질문한 이름 | 답으로 받은 IP | TTL(초) | 응답 코드` 순서다. TTL은 저장한 답을 사용할 수 있는 남은 시간이며, `-`는 응답 IP가 없다는 표시다. NOERROR는 DNS 처리 오류가 없다는 뜻으로, 주소가 업무상 올바른지까지 보장하지 않는다."
+        },
+        {
+          "kind": "task",
+          "task_type": "experiment",
+          "instruction": "문제 4의 로그를 실행해 출력하고 이상 징후를 세 묶음으로 나누자.",
+          "element": {
+            "kind": "code",
+            "lang": "python",
+            "src": "rows = [\n    ('10:00', 'portal.a-company.test', '192.168.20.100', 300, 'NOERROR'),\n    ('10:05', 'portal.a-company.test', '192.168.20.200', 86400, 'NOERROR'),\n    ('10:06', 'x1.a-company.test', '-', 0, 'NXDOMAIN'),\n    ('10:06', 'x2.a-company.test', '-', 0, 'NXDOMAIN'),\n    ('10:06', 'x3.a-company.test', '-', 0, 'NXDOMAIN'),\n]\nfor row in rows:\n    print(' | '.join(map(str, row)))\n",
+            "intent": "normal",
+            "output": "10:00 | portal.a-company.test | 192.168.20.100 | 300 | NOERROR\n10:05 | portal.a-company.test | 192.168.20.200 | 86400 | NOERROR\n10:06 | x1.a-company.test | - | 0 | NXDOMAIN\n10:06 | x2.a-company.test | - | 0 | NXDOMAIN\n10:06 | x3.a-company.test | - | 0 | NXDOMAIN",
+            "verified": "measured"
+          },
+          "observe": [
+            {
+              "point": "응답 IP",
+              "expected": "portal 응답이 .100에서 .200으로 바뀐다."
+            },
+            {
+              "point": "TTL",
+              "expected": "300에서 86400으로 급증한다."
+            },
+            {
+              "point": "응답 코드",
+              "expected": "10:06에 NXDOMAIN이 반복된다."
+            }
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "text": "문제 5. Packet Tracer에서 DNS 응답이 .200으로 바뀐 뒤 HTTP 목적지도 .200이 되었다. 이 결과는 잘못된 DNS 정보가 연결 대상을 바꿀 수 있음을 보여 준다. 하지만 관리 화면에서 레코드를 직접 바꾼 실습이므로 실제 캐시 포이즈닝 성공 증거는 아니다."
+        }
+      ]
+    },
+    {
+      "heading": "DNS 분석 보고서 완성하기",
+      "importance": "❗",
+      "body": [
+        {
+          "kind": "paragraph",
+          "text": "이 그림은 조사할 자료가 어느 장비에 있는지 정리한 개념도다. 권한 DNS 서버는 원본 정보를 보관하고, 재귀 리졸버는 PC 대신 주소를 찾아 받은 답을 캐시에 잠시 저장한다. 질의 출발지는 이름을 물어본 PC를 뜻한다. 비인가 변경은 허가받지 않은 변경이며, 변경 승인 이력은 담당자가 변경을 허락한 기록이다."
+        },
+        {
+          "kind": "paragraph",
+          "text": "`day03_dns_analysis.md`는 이번에 작성할 보고서 파일 이름이다. `.md`는 글자로 제목과 목록을 표시하는 Markdown 문서 형식이며, 메모장 같은 편집기에 아래 틀을 복사해 내용을 채우고 이 이름으로 저장하면 된다."
+        },
+        {
+          "kind": "image",
+          "src": "assets/l6_evidence.png",
+          "caption": "그림 6-2. 장비별 증거를 보고서로 모으기 — 원본, 캐시, 질의 출발지를 함께 대조한다.",
+          "text_content": "DNS 서버 · 캐시 · PC 기록을 모아 판단한다\n관찰한 값이 어디서 나왔는지 먼저 표시한 뒤, 가능한 원인과 다음 확인을 연결한다.\n권한 DNS 서버\n원본 A · 변경 이력\n재귀 리졸버\n캐시 A · 남은 TTL\n질의한 PC\n질의 시간 · 출발지\nday03_dns_analysis.md\n관찰: A .100 → .200 / TTL 300 → 86400\n해석: 서버 이전 · 비인가 변경 등 가능성\n다음 확인: 원본 · 캐시 상태 · 승인 기록 · 질의 출발지\nNXDOMAIN 3건은 관찰한 반복 기록이다. 평소 질의량과 비교해야 급증 여부를 판단할 수 있다."
+        },
+        {
+          "kind": "paragraph",
+          "text": "왼쪽 권한 DNS에서는 원본 A와 변경 이력을, 가운데 리졸버에서는 캐시의 A와 남은 TTL을, 오른쪽 PC에서는 질의 시간과 출발지를 확인한다. 한 장비의 값만으로 다른 장비의 상태까지 같다고 가정하지 않는다."
+        },
+        {
+          "kind": "paragraph",
+          "text": "아래 보고서에는 관찰한 값 → 가능한 의미 → 다음 확인 순서로 적는다. `.100 → .200`은 관찰 사실이지만 정상 이전인지 비인가 변경인지는 승인 이력이 필요하다. TTL `86400`은 24시간이므로 이전 `300`초보다 사본이 오래 남을 수 있지만 공격 확정 증거는 아니다. NXDOMAIN 3건도 평소 질의량과 비교해야 급증인지 판단할 수 있다."
+        },
+        {
+          "kind": "task",
+          "task_type": "challenge",
+          "title": "DNS 분석 보고서 작성",
+          "instruction": "`day03_dns_analysis.md`에 주어진 증거를 근거로 장애 범위, 이상 징후, 다음 확인을 갖춘 보고서를 완성해 보자.",
+          "requirements": [
+            "IP 접속 성공과 이름 조회 실패를 구분한다.",
+            "정상 IP .100과 관찰 IP .200을 비교한다.",
+            "TTL 급증과 NXDOMAIN 반복을 기록한다.",
+            "공격을 확정하지 않고 확인할 다음 자료를 적는다."
+          ],
+          "element": {
+            "kind": "code",
+            "lang": "markdown",
+            "src": "# Day 3 DNS 분석 보고서\n\n## 증상\n<!-- <<<<<<<<<<<< 수정 시작 <<<<<<<<<<<< -->\n# [여기를 채우기] IP 접속과 이름 접속 결과를 비교한다.\n<!-- >>>>>>>>>>>> 수정 끝 >>>>>>>>>>>> -->\n\n## DNS 조회 결과\n- 정상 기준: portal.a-company.test → 192.168.20.100\n<!-- <<<<<<<<<<<< 수정 시작 <<<<<<<<<<<< -->\n# [여기를 채우기] 관찰된 응답 IP와 TTL 변화를 적는다.\n<!-- >>>>>>>>>>>> 수정 끝 >>>>>>>>>>>> -->\n\n## 판단과 다음 확인\n<!-- <<<<<<<<<<<< 수정 시작 <<<<<<<<<<<< -->\n# [여기를 채우기] NXDOMAIN 패턴과 확인할 자료를 적는다.\n<!-- >>>>>>>>>>>> 수정 끝 >>>>>>>>>>>> -->\n",
+            "intent": "normal"
+          },
+          "goal_output": "# Day 3 DNS 분석 보고서\n\n## 증상\n- IP 접속은 성공하지만 이름 조회가 실패하거나 예상 밖 주소를 반환한다.\n\n## DNS 조회 결과\n- 정상 기준: portal.a-company.test → 192.168.20.100\n- 관찰 결과: 192.168.20.200, TTL 300 → 86400\n\n## 판단과 다음 확인\n- NXDOMAIN이 짧은 시간에 반복되고 응답 IP와 TTL이 바뀌었다.\n- 권한 서버 원본 레코드, 변경 승인 이력, 질의 출발지를 확인한다.\n- 현재 증거만으로 캐시 포이즈닝 공격을 확정하지 않는다.",
+          "answer": {
+            "element": {
+              "kind": "code",
+              "lang": "markdown",
+              "src": "# Day 3 DNS 분석 보고서\n\n## 증상\n<!-- <<<<<<<<<<<< 수정 시작 <<<<<<<<<<<< -->\n- IP 접속은 성공하지만 이름 조회가 실패하거나 예상 밖 주소를 반환한다.\n<!-- >>>>>>>>>>>> 수정 끝 >>>>>>>>>>>> -->\n\n## DNS 조회 결과\n- 정상 기준: portal.a-company.test → 192.168.20.100\n<!-- <<<<<<<<<<<< 수정 시작 <<<<<<<<<<<< -->\n- 관찰 결과: 192.168.20.200, TTL 300 → 86400\n<!-- >>>>>>>>>>>> 수정 끝 >>>>>>>>>>>> -->\n\n## 판단과 다음 확인\n<!-- <<<<<<<<<<<< 수정 시작 <<<<<<<<<<<< -->\n- NXDOMAIN이 짧은 시간에 반복되고 응답 IP와 TTL이 바뀌었다.\n- 권한 서버 원본 레코드, 변경 승인 이력, 질의 출발지를 확인한다.\n- 현재 증거만으로 캐시 포이즈닝 공격을 확정하지 않는다.\n<!-- >>>>>>>>>>>> 수정 끝 >>>>>>>>>>>> -->\n",
+              "intent": "normal"
+            },
+            "hint": "관찰 사실, 가능한 의미, 다음 확인의 세 층으로 나누어 쓰자.",
+            "explain": "파일명은 `day03_dns_analysis.md`이다. 공격 단정 대신 확인 가능한 증거와 조사 순서를 남기는 보고서다."
+          },
+          "goal_label": "완성할 보고서 예시",
+          "start_label": "시작 틀 — 편집기에 복사한 뒤 설명에 맞게 글을 채운다."
+        }
+      ]
+    },
+    {
+      "heading": "챙겨 가기 — 한눈 정리",
+      "importance": "",
+      "body": [
+        {
+          "kind": "table",
+          "headers": [
+            "판단 축",
+            "확인할 값",
+            "보고서 문장"
+          ],
+          "rows": [
+            [
+              "연결",
+              "IP 성공 / 이름 실패",
+              "DNS 조회 구간부터 확인"
+            ],
+            [
+              "계층",
+              "Root / TLD / 권한 서버",
+              "안내와 최종 답 구분"
+            ],
+            [
+              "레코드",
+              "A / MX / NS 등",
+              "질문의 형식 확인"
+            ],
+            [
+              "보안",
+              "응답 IP / TTL / NXDOMAIN",
+              "변화와 반복 패턴 기록"
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "extra_tasks": [
+    {
+      "title": "옆 사람의 보고서 교차 검토",
+      "text": "근거 없는 공격 단정이 있는지 서로 한 줄씩 확인하자.",
+      "element": {
+        "kind": "table",
+        "headers": [
+          "검토",
+          "기준"
+        ],
+        "rows": [
+          [
+            "관찰",
+            "실제 값이 적혀 있음"
+          ],
+          [
+            "판단",
+            "가능성과 확정을 구분함"
+          ],
+          [
+            "조치",
+            "다음 확인 대상이 구체적임"
+          ]
+        ]
+      }
+    }
+  ],
+  "hard_problem": {
+    "title": "정상 변경과 공격 의심 비교",
+    "text": "동일한 IP 변경을 두고 승인 기록 유무에 따라 판단 문장을 다르게 써 보자.",
+    "element": {
+      "kind": "table",
+      "headers": [
+        "승인 기록",
+        "판단"
+      ],
+      "rows": [
+        [
+          "있음",
+          "정상 변경 가능성 우선 확인"
+        ],
+        [
+          "없음",
+          "비인가 변경 가능성 조사"
+        ]
+      ]
+    },
+    "answer": {
+      "element": {
+        "kind": "code",
+        "lang": "text",
+        "src": "승인 기록이 있으면 계획된 서버 이전인지 검증한다. 기록이 없으면 권한 서버 수정 이력과 계정 활동을 조사하되, 추가 증거 전에는 공격을 확정하지 않는다.",
+        "intent": "normal"
+      }
+    }
+  },
+  "closing": "오늘 만든 정상·변경 토폴로지와 `day03_dns_analysis.md`를 함께 보면 이름 조회부터 보안 판단까지 한 흐름이 완성된다.",
+  "review": [
+    "IP 접속 성공과 이름 조회 실패가 함께 나타나면 어디부터 확인하는가?",
+    "잘못된 DNS 응답이 웹 접속 목적지를 바꾸는 순서를 설명할 수 있는가?",
+    "DNS 로그만으로 공격을 확정하지 않고 추가로 확인해야 하는 자료는 무엇인가?"
+  ],
+  "learning_terms": [
+    {
+      "term": "IntranetServer",
+      "aliases": [],
+      "introduced_by": "`IntranetServer`는 그 페이지를 보내는 서버"
+    },
+    {
+      "term": "DNSServer",
+      "aliases": [
+        "DNS 서버"
+      ],
+      "introduced_by": "`DNSServer`는 포털 이름 `portal.a-company.test`에 맞는 주소를 알려 주는 DNS 서버"
+    },
+    {
+      "term": "A 레코드",
+      "aliases": [
+        "A 응답",
+        "A 값"
+      ],
+      "introduced_by": "A 레코드는 이름과 IPv4 주소의 대응 정보다."
+    },
+    {
+      "term": "캐시",
+      "aliases": [],
+      "introduced_by": "캐시는 조회한 답을 잠시 저장하는 공간"
+    },
+    {
+      "term": "NXDOMAIN",
+      "aliases": [],
+      "introduced_by": "NXDOMAIN은 질문한 이름이 없다는 응답이다."
+    },
+    {
+      "term": "시간 초과",
+      "aliases": [],
+      "introduced_by": "시간 초과는 정해진 시간 안에 답을 받지 못했다는 뜻이다."
+    },
+    {
+      "term": "TCP",
+      "aliases": [],
+      "introduced_by": "TCP로 연결을 맺고 HTTP로 웹페이지를 주고받는다."
+    },
+    {
+      "term": "HTTP",
+      "aliases": [],
+      "introduced_by": "TCP로 연결을 맺고 HTTP로 웹페이지를 주고받는다."
+    },
+    {
+      "term": "TCP 포트",
+      "aliases": [],
+      "introduced_by": "서버 안에서 통신을 받을 프로그램을 구분하는 번호다."
+    },
+    {
+      "term": "방화벽",
+      "aliases": [],
+      "introduced_by": "방화벽은 정해진 규칙에 따라 통신을 허용하거나 막는 기능이다."
+    },
+    {
+      "term": "ping",
+      "aliases": [],
+      "introduced_by": "`ping`은 확인용 메시지의 응답 여부를 시험하는 명령이다."
+    },
+    {
+      "term": "Root",
+      "aliases": [
+        "TLD"
+      ],
+      "introduced_by": "Root는 큰 이름 분류의 담당 서버를, TLD는 그 아래 이름의 담당 서버를 안내한다."
+    },
+    {
+      "term": "권한 서버",
+      "aliases": [
+        "권한 DNS 서버"
+      ],
+      "introduced_by": "권한 서버는 자신이 맡은 이름의 원본 정보를 보관한다."
+    },
+    {
+      "term": "MX",
+      "aliases": [],
+      "introduced_by": "MX는 메일을 받을 서버 정보를 나타내는 레코드 종류다."
+    },
+    {
+      "term": "로그",
+      "aliases": [],
+      "introduced_by": "로그는 동작을 기록한 자료다."
+    },
+    {
+      "term": "TTL",
+      "aliases": [],
+      "introduced_by": "TTL은 저장한 답을 사용할 수 있는 남은 시간"
+    },
+    {
+      "term": "NOERROR",
+      "aliases": [],
+      "introduced_by": "NOERROR는 DNS 처리 오류가 없다는 뜻"
+    },
+    {
+      "term": "재귀 리졸버",
+      "aliases": [
+        "리졸버"
+      ],
+      "introduced_by": "재귀 리졸버는 PC 대신 주소를 찾아 받은 답을 캐시에 잠시 저장한다."
+    },
+    {
+      "term": "질의 출발지",
+      "aliases": [],
+      "introduced_by": "질의 출발지는 이름을 물어본 PC를 뜻한다."
+    },
+    {
+      "term": "비인가 변경",
+      "aliases": [],
+      "introduced_by": "비인가 변경은 허가받지 않은 변경"
+    },
+    {
+      "term": "변경 승인 이력",
+      "aliases": [],
+      "introduced_by": "변경 승인 이력은 담당자가 변경을 허락한 기록이다."
+    },
+    {
+      "term": "Markdown",
+      "aliases": [
+        ".md"
+      ],
+      "introduced_by": "글자로 제목과 목록을 표시하는 Markdown 문서 형식"
+    },
+    {
+      "term": "스위치",
+      "aliases": [
+        "Switch0"
+      ],
+      "introduced_by": "`Switch0`은 같은 망의 장비를 잇는 스위치"
+    },
+    {
+      "term": "라우터",
+      "aliases": [
+        "Router0"
+      ],
+      "introduced_by": "`Router0`은 나뉜 망 사이를 잇는 라우터다."
+    }
+  ]
+}

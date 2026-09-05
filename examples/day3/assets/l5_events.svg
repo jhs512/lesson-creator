@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1050" viewBox="0 0 1800 1050">
+<rect width="100%" height="100%" fill="white"/>
+<text x="50.00" y="64.80" font-family="Apple SD Gothic Neo, sans-serif" font-size="40" fill="#1a2834">PDU를 열어 DNS 메시지의 A 값과 다음 목적지를 연결하기</text>
+<text x="52.00" y="105.08" font-family="Apple SD Gothic Neo, sans-serif" font-size="24" fill="#697885">Packet Tracer 관찰 안내도 · DNS 응답 패킷의 목적지와 메시지 안의 웹 서버 주소를 구분한다.</text>
+<polyline points="50,129 1750,129" fill="none" stroke="#b8c5cd" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="162.35999999999999,255.2 236.28,255.2 266.52,279.84 192.6,279.84" fill="#f3efe1" stroke="#726f65" stroke-width="2"/>
+<polygon points="236.28,255.2 266.52,279.84 266.52,394.08000000000004 236.28,371.68" fill="#b4ad9b" stroke="#726f65" stroke-width="2"/>
+<polygon points="162.35999999999999,255.2 236.28,255.2 236.28,371.68 162.35999999999999,371.68" fill="#ded9c8" stroke="#726f65" stroke-width="2"/>
+<rect x="172.44" y="276.48" width="50.400000000000006" height="11.200000000000001" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="172.44" y="296.64" width="50.400000000000006" height="11.200000000000001" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="172.44" y="316.8" width="50.400000000000006" height="11.200000000000001" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<ellipse cx="180.84" cy="346.48" rx="5.040000000000001" ry="5.040000000000001" fill="#46b758" stroke="#278c3f" stroke-width="1"/>
+<polyline points="179.16,359.36 179.16,364.96" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="189.24,359.36 189.24,364.96" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="199.32,359.36 199.32,364.96" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="209.4,359.36 209.4,364.96" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<text x="154.00" y="436.84" font-family="Apple SD Gothic Neo, sans-serif" font-size="27" fill="#1a2834">DNSServer</text>
+<text x="148.75" y="475.72" font-family="Apple SD Gothic Neo, sans-serif" font-size="23" fill="#697885">192.168.20.53</text>
+<polygon points="808.56,266.4 920.56,266.4 937.36,280.96 937.36,359.36 808.56,359.36" fill="#b9c3c8" stroke="#54646f" stroke-width="2"/>
+<polygon points="920.56,266.4 937.36,280.96 937.36,359.36 920.56,348.16" fill="#81929c" stroke="#54646f" stroke-width="2"/>
+<rect x="818.64" y="276.48" width="90.72000000000001" height="64.96000000000001" rx="2" fill="#c6e6f7" stroke="#657e90" stroke-width="2"/>
+<polygon points="822.0,280.96 902.64,280.96 822.0,336.96" fill="#edf9fe" stroke="#edf9fe" stroke-width="1"/>
+<rect x="860.08" y="359.36" width="24.64" height="21.28" rx="0" fill="#87959d" stroke="#54646f" stroke-width="2"/>
+<polygon points="825.36,382.88 925.04,382.88 953.04,404.16 806.3199999999999,404.16" fill="#d4dadd" stroke="#627380" stroke-width="2"/>
+<polyline points="834.3199999999999,389.6 918.32,389.6" fill="none" stroke="#91a1ab" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="834.3199999999999,396.32 918.32,396.32" fill="none" stroke="#91a1ab" stroke-width="1" stroke-linejoin="round"/>
+<rect x="946.32" y="298.88" width="30.240000000000002" height="86.24000000000001" rx="3" fill="#d7d9d1" stroke="#657580" stroke-width="2"/>
+<polyline points="951.92,315.68 970.96,315.68" fill="none" stroke="#7c8b94" stroke-width="2" stroke-linejoin="round"/>
+<ellipse cx="962.0" cy="362.72" rx="5.0" ry="5.0" fill="#39b657" stroke="#39b657" stroke-width="1"/>
+<text x="854.25" y="444.68" font-family="Apple SD Gothic Neo, sans-serif" font-size="27" fill="#1a2834">PC0</text>
+<text x="814.75" y="483.56" font-family="Apple SD Gothic Neo, sans-serif" font-size="23" fill="#697885">192.168.10.10</text>
+<polygon points="1457.36,255.2 1531.28,255.2 1561.52,279.84 1487.6,279.84" fill="#f3efe1" stroke="#726f65" stroke-width="2"/>
+<polygon points="1531.28,255.2 1561.52,279.84 1561.52,394.08000000000004 1531.28,371.68" fill="#b4ad9b" stroke="#726f65" stroke-width="2"/>
+<polygon points="1457.36,255.2 1531.28,255.2 1531.28,371.68 1457.36,371.68" fill="#ded9c8" stroke="#726f65" stroke-width="2"/>
+<rect x="1467.44" y="276.48" width="50.400000000000006" height="11.200000000000001" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="1467.44" y="296.64" width="50.400000000000006" height="11.200000000000001" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="1467.44" y="316.8" width="50.400000000000006" height="11.200000000000001" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<ellipse cx="1475.84" cy="346.48" rx="5.040000000000001" ry="5.040000000000001" fill="#46b758" stroke="#278c3f" stroke-width="1"/>
+<polyline points="1474.16,359.36 1474.16,364.96" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1484.24,359.36 1484.24,364.96" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1494.32,359.36 1494.32,364.96" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1504.4,359.36 1504.4,364.96" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<text x="1428.25" y="436.84" font-family="Apple SD Gothic Neo, sans-serif" font-size="27" fill="#1a2834">IntranetServer</text>
+<text x="1437.25" y="475.72" font-family="Apple SD Gothic Neo, sans-serif" font-size="23" fill="#697885">192.168.20.100</text>
+<polyline points="280,300 790,300" fill="none" stroke="#1573bb" stroke-width="6" stroke-linejoin="round"/>
+<polygon points="790,300 775.0810964478636,308.15023415627144 775.0810964478636,291.84976584372856" fill="#1573bb" stroke="#1573bb" stroke-width="1"/>
+<rect x="470" y="282" width="53" height="34" rx="2" fill="#fffef8" stroke="#1573bb" stroke-width="2"/>
+<polyline points="470,282 496.5,301.04 523,282" fill="none" stroke="#1573bb" stroke-width="2" stroke-linejoin="round"/>
+<polyline points="470,316 488.55,297.3" fill="none" stroke="#1573bb" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="523,316 504.45,297.3" fill="none" stroke="#1573bb" stroke-width="1" stroke-linejoin="round"/>
+<rect x="430" y="227" width="120.5" height="39" rx="2" fill="white" stroke="white" stroke-width="1"/>
+<text x="435.00" y="256.68" font-family="Apple SD Gothic Neo, sans-serif" font-size="29" fill="#1573bb">DNS 응답</text>
+<polyline points="985,300 1428,300" fill="none" stroke="#008461" stroke-width="6" stroke-linejoin="round"/>
+<polygon points="1428,300 1413.0810964478637,308.15023415627144 1413.0810964478637,291.84976584372856" fill="#008461" stroke="#008461" stroke-width="1"/>
+<rect x="1120" y="282" width="53" height="34" rx="2" fill="#fffef8" stroke="#008461" stroke-width="2"/>
+<polyline points="1120,282 1146.5,301.04 1173,282" fill="none" stroke="#008461" stroke-width="2" stroke-linejoin="round"/>
+<polyline points="1120,316 1138.55,297.3" fill="none" stroke="#008461" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1173,316 1154.45,297.3" fill="none" stroke="#008461" stroke-width="1" stroke-linejoin="round"/>
+<rect x="1050" y="227" width="242.0" height="38" rx="2" fill="white" stroke="white" stroke-width="1"/>
+<text x="1055.00" y="255.76" font-family="Apple SD Gothic Neo, sans-serif" font-size="28" fill="#008461">새 TCP 연결 → HTTP</text>
+<rect x="70" y="563" width="750" height="290" rx="4" fill="#f9fcfe" stroke="#1573bb" stroke-width="2"/>
+<text x="92.00" y="614.44" font-family="Apple SD Gothic Neo, sans-serif" font-size="32" fill="#1573bb">DNS 응답 패킷</text>
+<text x="92.00" y="671.76" font-family="Apple SD Gothic Neo, sans-serif" font-size="28" fill="#1a2834">IP 출발지: 192.168.20.53</text>
+<text x="92.00" y="709.84" font-family="Apple SD Gothic Neo, sans-serif" font-size="28" fill="#1a2834">IP 목적지: 192.168.10.10</text>
+<text x="92.00" y="747.92" font-family="Apple SD Gothic Neo, sans-serif" font-size="28" fill="#1a2834">DNS 안의 A 값: 192.168.20.100</text>
+<rect x="970" y="563" width="750" height="290" rx="4" fill="#f9fcfe" stroke="#008461" stroke-width="2"/>
+<text x="992.00" y="614.44" font-family="Apple SD Gothic Neo, sans-serif" font-size="32" fill="#008461">다음 TCP / HTTP 패킷</text>
+<text x="992.00" y="671.76" font-family="Apple SD Gothic Neo, sans-serif" font-size="28" fill="#1a2834">IP 출발지: 192.168.10.10</text>
+<text x="992.00" y="709.84" font-family="Apple SD Gothic Neo, sans-serif" font-size="28" fill="#1a2834">IP 목적지: 192.168.20.100</text>
+<text x="992.00" y="747.92" font-family="Apple SD Gothic Neo, sans-serif" font-size="28" fill="#1a2834">DNS에서 받은 주소를 사용</text>
+<polyline points="655,799 891,902 1354,854" fill="none" stroke="#008461" stroke-width="4" stroke-linejoin="round"/>
+<polygon points="1354,854 1340.0010730635565,863.6452083766044 1338.3201845052213,847.4316374909953" fill="#008461" stroke="#008461" stroke-width="1"/>
+<rect x="678" y="913" width="387.0" height="38" rx="2" fill="white" stroke="white" stroke-width="1"/>
+<text x="683.00" y="941.76" font-family="Apple SD Gothic Neo, sans-serif" font-size="28" fill="#008461">응답 안의 A 값 → 새 연결의 목적지</text>
+<text x="50.00" y="1019.08" font-family="Apple SD Gothic Neo, sans-serif" font-size="24" fill="#697885">장비 사이의 선은 논리 통신이다. 실제 VLAN 경로는 공통 구성도에서 봉투를 따라 확인한다.</text>
+</svg>

@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1080" viewBox="0 0 1800 1080">
+<rect width="100%" height="100%" fill="white"/>
+<text x="50.00" y="64.80" font-family="Apple SD Gothic Neo, sans-serif" font-size="40" fill="#1a2834">레코드가 가리키는 장비와 이름을 나누어 읽기</text>
+<text x="52.00" y="105.08" font-family="Apple SD Gothic Neo, sans-serif" font-size="24" fill="#697885">A · AAAA는 주소를, CNAME · MX · NS는 다른 이름을 값으로 가진다.</text>
+<polyline points="50,129 1750,129" fill="none" stroke="#b8c5cd" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="229.2,389.0 321.6,389.0 359.4,419.8 267.0,419.8" fill="#f3efe1" stroke="#726f65" stroke-width="2"/>
+<polygon points="321.6,389.0 359.4,419.8 359.4,562.6 321.6,534.6" fill="#b4ad9b" stroke="#726f65" stroke-width="2"/>
+<polygon points="229.2,389.0 321.6,389.0 321.6,534.6 229.2,534.6" fill="#ded9c8" stroke="#726f65" stroke-width="2"/>
+<rect x="241.8" y="415.6" width="62.99999999999999" height="14.0" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="241.8" y="440.8" width="62.99999999999999" height="14.0" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="241.8" y="466.0" width="62.99999999999999" height="14.0" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<ellipse cx="252.3" cy="503.1" rx="6.3" ry="6.3" fill="#46b758" stroke="#278c3f" stroke-width="1"/>
+<polyline points="250.2,519.2 250.2,526.2" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="262.8,519.2 262.8,526.2" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="275.4,519.2 275.4,526.2" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="288.0,519.2 288.0,526.2" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<text x="243.50" y="609.84" font-family="Apple SD Gothic Neo, sans-serif" font-size="27" fill="#1a2834">DNS 서버</text>
+<text x="209.00" y="659.36" font-family="Apple SD Gothic Neo, sans-serif" font-size="23" fill="#697885">레코드를 찾아 응답</text>
+<rect x="75" y="718" width="670" height="205" rx="4" fill="#fbfbf8" stroke="#a6a6a0" stroke-width="2"/>
+<text x="100.00" y="768.68" font-family="Apple SD Gothic Neo, sans-serif" font-size="29" fill="#1573bb">www.a-company.test</text>
+<text x="100.00" y="816.68" font-family="Apple SD Gothic Neo, sans-serif" font-size="29" fill="#1573bb">CNAME → portal.a-company.test</text>
+<text x="100.00" y="864.68" font-family="Apple SD Gothic Neo, sans-serif" font-size="29" fill="#008461">A 조회 → 192.168.20.100</text>
+<polygon points="1195.82,214.9 1257.86,214.9 1283.24,235.58 1221.2,235.58" fill="#f3efe1" stroke="#726f65" stroke-width="2"/>
+<polygon points="1257.86,214.9 1283.24,235.58 1283.24,331.46 1257.86,312.65999999999997" fill="#b4ad9b" stroke="#726f65" stroke-width="2"/>
+<polygon points="1195.82,214.9 1257.86,214.9 1257.86,312.65999999999997 1195.82,312.65999999999997" fill="#ded9c8" stroke="#726f65" stroke-width="2"/>
+<rect x="1204.28" y="232.76" width="42.3" height="9.399999999999999" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="1204.28" y="249.68" width="42.3" height="9.399999999999999" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="1204.28" y="266.6" width="42.3" height="9.399999999999999" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<ellipse cx="1211.33" cy="291.51" rx="4.2299999999999995" ry="4.2299999999999995" fill="#46b758" stroke="#278c3f" stroke-width="1"/>
+<polyline points="1209.92,302.32 1209.92,307.02" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1218.38,302.32 1218.38,307.02" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1226.84,302.32 1226.84,307.02" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1235.3,302.32 1235.3,307.02" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<text x="1174.25" y="371.34" font-family="Apple SD Gothic Neo, sans-serif" font-size="27" fill="#1a2834">포털 웹 서버</text>
+<text x="1133.25" y="403.38" font-family="Apple SD Gothic Neo, sans-serif" font-size="23" fill="#697885">portal.a-company.test</text>
+<polyline points="365,460 705,276 1165,276" fill="none" stroke="#008461" stroke-width="4" stroke-linejoin="round"/>
+<polygon points="1165,276 1150.0810964478637,284.15023415627144 1150.0810964478637,267.84976584372856" fill="#008461" stroke="#008461" stroke-width="1"/>
+<rect x="720" y="213" width="249.0" height="39" rx="2" fill="white" stroke="white" stroke-width="1"/>
+<text x="725.00" y="242.68" font-family="Apple SD Gothic Neo, sans-serif" font-size="29" fill="#008461">A → 192.168.20.100</text>
+<rect x="1038" y="259" width="53" height="34" rx="2" fill="#fffef8" stroke="#008461" stroke-width="2"/>
+<polyline points="1038,259 1064.5,278.04 1091,259" fill="none" stroke="#008461" stroke-width="2" stroke-linejoin="round"/>
+<polyline points="1038,293 1056.55,274.3" fill="none" stroke="#008461" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1091,293 1072.45,274.3" fill="none" stroke="#008461" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="1195.82,528.9 1257.86,528.9 1283.24,549.58 1221.2,549.58" fill="#f3efe1" stroke="#726f65" stroke-width="2"/>
+<polygon points="1257.86,528.9 1283.24,549.58 1283.24,645.46 1257.86,626.66" fill="#b4ad9b" stroke="#726f65" stroke-width="2"/>
+<polygon points="1195.82,528.9 1257.86,528.9 1257.86,626.66 1195.82,626.66" fill="#ded9c8" stroke="#726f65" stroke-width="2"/>
+<rect x="1204.28" y="546.76" width="42.3" height="9.399999999999999" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="1204.28" y="563.68" width="42.3" height="9.399999999999999" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="1204.28" y="580.6" width="42.3" height="9.399999999999999" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<ellipse cx="1211.33" cy="605.51" rx="4.2299999999999995" ry="4.2299999999999995" fill="#46b758" stroke="#278c3f" stroke-width="1"/>
+<polyline points="1209.92,616.32 1209.92,621.02" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1218.38,616.32 1218.38,621.02" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1226.84,616.32 1226.84,621.02" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1235.3,616.32 1235.3,621.02" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<text x="1162.50" y="685.34" font-family="Apple SD Gothic Neo, sans-serif" font-size="27" fill="#1a2834">메일 수신 서버</text>
+<text x="1142.00" y="717.38" font-family="Apple SD Gothic Neo, sans-serif" font-size="23" fill="#697885">mail.a-company.test</text>
+<polyline points="365,460 705,590 1165,590" fill="none" stroke="#1573bb" stroke-width="4" stroke-linejoin="round"/>
+<polygon points="1165,590 1150.0810964478637,598.1502341562715 1150.0810964478637,581.8497658437285" fill="#1573bb" stroke="#1573bb" stroke-width="1"/>
+<rect x="720" y="527" width="251.0" height="39" rx="2" fill="white" stroke="white" stroke-width="1"/>
+<text x="725.00" y="556.68" font-family="Apple SD Gothic Neo, sans-serif" font-size="29" fill="#1573bb">MX → 메일 서버 이름</text>
+<rect x="1038" y="573" width="53" height="34" rx="2" fill="#fffef8" stroke="#1573bb" stroke-width="2"/>
+<polyline points="1038,573 1064.5,592.04 1091,573" fill="none" stroke="#1573bb" stroke-width="2" stroke-linejoin="round"/>
+<polyline points="1038,607 1056.55,588.3" fill="none" stroke="#1573bb" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1091,607 1072.45,588.3" fill="none" stroke="#1573bb" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="1195.82,831.9 1257.86,831.9 1283.24,852.58 1221.2,852.58" fill="#f3efe1" stroke="#726f65" stroke-width="2"/>
+<polygon points="1257.86,831.9 1283.24,852.58 1283.24,948.46 1257.86,929.66" fill="#b4ad9b" stroke="#726f65" stroke-width="2"/>
+<polygon points="1195.82,831.9 1257.86,831.9 1257.86,929.66 1195.82,929.66" fill="#ded9c8" stroke="#726f65" stroke-width="2"/>
+<rect x="1204.28" y="849.76" width="42.3" height="9.399999999999999" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="1204.28" y="866.68" width="42.3" height="9.399999999999999" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="1204.28" y="883.6" width="42.3" height="9.399999999999999" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<ellipse cx="1211.33" cy="908.51" rx="4.2299999999999995" ry="4.2299999999999995" fill="#46b758" stroke="#278c3f" stroke-width="1"/>
+<polyline points="1209.92,919.32 1209.92,924.02" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1218.38,919.32 1218.38,924.02" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1226.84,919.32 1226.84,924.02" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1235.3,919.32 1235.3,924.02" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<text x="1161.50" y="988.34" font-family="Apple SD Gothic Neo, sans-serif" font-size="27" fill="#1a2834">권한 DNS 서버</text>
+<text x="1146.75" y="1020.38" font-family="Apple SD Gothic Neo, sans-serif" font-size="23" fill="#697885">ns1.a-company.test</text>
+<polyline points="365,460 705,893 1165,893" fill="none" stroke="#80569d" stroke-width="4" stroke-linejoin="round"/>
+<polygon points="1165,893 1150.0810964478637,901.1502341562715 1150.0810964478637,884.8497658437285" fill="#80569d" stroke="#80569d" stroke-width="1"/>
+<rect x="720" y="830" width="247.5" height="39" rx="2" fill="white" stroke="white" stroke-width="1"/>
+<text x="725.00" y="859.68" font-family="Apple SD Gothic Neo, sans-serif" font-size="29" fill="#80569d">NS → 담당 DNS 이름</text>
+<rect x="1038" y="876" width="53" height="34" rx="2" fill="#fffef8" stroke="#80569d" stroke-width="2"/>
+<polyline points="1038,876 1064.5,895.04 1091,876" fill="none" stroke="#80569d" stroke-width="2" stroke-linejoin="round"/>
+<polyline points="1038,910 1056.55,891.3" fill="none" stroke="#80569d" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1091,910 1072.45,891.3" fill="none" stroke="#80569d" stroke-width="1" stroke-linejoin="round"/>
+<text x="1370.00" y="263.00" font-family="Apple SD Gothic Neo, sans-serif" font-size="25" fill="#697885">AAAA</text>
+<text x="1370.00" y="297.00" font-family="Apple SD Gothic Neo, sans-serif" font-size="25" fill="#697885">IPv6 주소</text>
+<text x="1370.00" y="331.00" font-family="Apple SD Gothic Neo, sans-serif" font-size="25" fill="#697885">2001:db8::100</text>
+<text x="50.00" y="1049.08" font-family="Apple SD Gothic Neo, sans-serif" font-size="24" fill="#697885">화살표는 레코드 값과 대상의 대응이다. DNS 서버가 이 웹·메일 서버에 질문을 보낸다는 뜻은 아니다.</text>
+</svg>

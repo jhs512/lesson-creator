@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1040" viewBox="0 0 1800 1040">
+<rect width="100%" height="100%" fill="white"/>
+<text x="50.00" y="64.80" font-family="Apple SD Gothic Neo, sans-serif" font-size="40" fill="#1a2834">DNS 서버 · 캐시 · PC 기록을 모아 판단한다</text>
+<text x="52.00" y="105.08" font-family="Apple SD Gothic Neo, sans-serif" font-size="24" fill="#697885">관찰한 값이 어디서 나왔는지 먼저 표시한 뒤, 가능한 원인과 다음 확인을 연결한다.</text>
+<polyline points="50,129 1750,129" fill="none" stroke="#b8c5cd" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="239.24,241.8 310.52,241.8 339.68,265.56 268.4,265.56" fill="#f3efe1" stroke="#726f65" stroke-width="2"/>
+<polygon points="310.52,241.8 339.68,265.56 339.68,375.72 310.52,354.12" fill="#b4ad9b" stroke="#726f65" stroke-width="2"/>
+<polygon points="239.24,241.8 310.52,241.8 310.52,354.12 239.24,354.12" fill="#ded9c8" stroke="#726f65" stroke-width="2"/>
+<rect x="248.95999999999998" y="262.32" width="48.6" height="10.8" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="248.95999999999998" y="281.76" width="48.6" height="10.8" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="248.95999999999998" y="301.2" width="48.6" height="10.8" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<ellipse cx="257.06" cy="329.82" rx="4.86" ry="4.86" fill="#46b758" stroke="#278c3f" stroke-width="1"/>
+<polyline points="255.44,342.24 255.44,347.64" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="265.15999999999997,342.24 265.15999999999997,347.64" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="274.88,342.24 274.88,347.64" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="284.6,342.24 284.6,347.64" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<text x="211.50" y="417.84" font-family="Apple SD Gothic Neo, sans-serif" font-size="27" fill="#1a2834">권한 DNS 서버</text>
+<text x="207.50" y="455.20" font-family="Apple SD Gothic Neo, sans-serif" font-size="23" fill="#697885">원본 A · 변경 이력</text>
+<polygon points="839.24,241.8 910.52,241.8 939.6800000000001,265.56 868.4,265.56" fill="#f3efe1" stroke="#726f65" stroke-width="2"/>
+<polygon points="910.52,241.8 939.6800000000001,265.56 939.6800000000001,375.72 910.52,354.12" fill="#b4ad9b" stroke="#726f65" stroke-width="2"/>
+<polygon points="839.24,241.8 910.52,241.8 910.52,354.12 839.24,354.12" fill="#ded9c8" stroke="#726f65" stroke-width="2"/>
+<rect x="848.96" y="262.32" width="48.6" height="10.8" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="848.96" y="281.76" width="48.6" height="10.8" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="848.96" y="301.2" width="48.6" height="10.8" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<ellipse cx="857.0600000000001" cy="329.82" rx="4.86" ry="4.86" fill="#46b758" stroke="#278c3f" stroke-width="1"/>
+<polyline points="855.44,342.24 855.44,347.64" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="865.16,342.24 865.16,347.64" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="874.88,342.24 874.88,347.64" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="884.6,342.24 884.6,347.64" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<text x="827.75" y="417.84" font-family="Apple SD Gothic Neo, sans-serif" font-size="27" fill="#1a2834">재귀 리졸버</text>
+<text x="809.25" y="455.20" font-family="Apple SD Gothic Neo, sans-serif" font-size="23" fill="#697885">캐시 A · 남은 TTL</text>
+<polygon points="1444.9,254.25 1549.9,254.25 1565.65,267.9 1565.65,341.4 1444.9,341.4" fill="#b9c3c8" stroke="#54646f" stroke-width="2"/>
+<polygon points="1549.9,254.25 1565.65,267.9 1565.65,341.4 1549.9,330.9" fill="#81929c" stroke="#54646f" stroke-width="2"/>
+<rect x="1454.35" y="263.7" width="85.05" height="60.900000000000006" rx="2" fill="#c6e6f7" stroke="#657e90" stroke-width="2"/>
+<polygon points="1457.5,267.9 1533.1,267.9 1457.5,320.4" fill="#edf9fe" stroke="#edf9fe" stroke-width="1"/>
+<rect x="1493.2" y="341.4" width="23.1" height="19.95" rx="0" fill="#87959d" stroke="#54646f" stroke-width="2"/>
+<polygon points="1460.65,363.45 1554.1,363.45 1580.35,383.4 1442.8,383.4" fill="#d4dadd" stroke="#627380" stroke-width="2"/>
+<polyline points="1469.05,369.75 1547.8,369.75" fill="none" stroke="#91a1ab" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1469.05,376.05 1547.8,376.05" fill="none" stroke="#91a1ab" stroke-width="1" stroke-linejoin="round"/>
+<rect x="1574.05" y="284.7" width="28.35" height="80.85000000000001" rx="3" fill="#d7d9d1" stroke="#657580" stroke-width="2"/>
+<polyline points="1579.3,300.45 1597.15,300.45" fill="none" stroke="#7c8b94" stroke-width="2" stroke-linejoin="round"/>
+<ellipse cx="1588.75" cy="344.55" rx="5.0" ry="5.0" fill="#39b657" stroke="#39b657" stroke-width="1"/>
+<text x="1456.00" y="422.94" font-family="Apple SD Gothic Neo, sans-serif" font-size="27" fill="#1a2834">질의한 PC</text>
+<text x="1427.50" y="459.16" font-family="Apple SD Gothic Neo, sans-serif" font-size="23" fill="#697885">질의 시간 · 출발지</text>
+<polyline points="290,481 290,540 890,625" fill="none" stroke="#008461" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="890,625 874.0853853544252,630.9770428041678 876.3717889153311,614.8377235507144" fill="#008461" stroke="#008461" stroke-width="1"/>
+<polyline points="890,481 890,540 890,625" fill="none" stroke="#1573bb" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="890,625 881.8497658437285,610.0810964478636 898.1502341562715,610.0810964478636" fill="#1573bb" stroke="#1573bb" stroke-width="1"/>
+<polyline points="1510,481 1510,540 890,625" fill="none" stroke="#80569d" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="890,625 903.6736294199311,614.8989179546746 905.8876609614805,631.0483244930351" fill="#80569d" stroke="#80569d" stroke-width="1"/>
+<rect x="456" y="640" width="870" height="322" rx="3" fill="#fffefa" stroke="#888e92" stroke-width="2"/>
+<text x="485.00" y="694.44" font-family="Apple SD Gothic Neo, sans-serif" font-size="32" fill="#1a2834">day03_dns_analysis.md</text>
+<polyline points="484,716 1294,716" fill="none" stroke="#c6c9ca" stroke-width="2" stroke-linejoin="round"/>
+<text x="484.00" y="765.76" font-family="Apple SD Gothic Neo, sans-serif" font-size="28" fill="#1a2834">관찰: A .100 → .200 / TTL 300 → 86400</text>
+<text x="484.00" y="817.76" font-family="Apple SD Gothic Neo, sans-serif" font-size="28" fill="#1a2834">해석: 서버 이전 · 비인가 변경 등 가능성</text>
+<text x="484.00" y="867.92" font-family="Apple SD Gothic Neo, sans-serif" font-size="26" fill="#1a2834">다음 확인: 원본 · 캐시 상태 · 승인 기록 · 질의 출발지</text>
+<text x="50.00" y="1009.08" font-family="Apple SD Gothic Neo, sans-serif" font-size="24" fill="#697885">NXDOMAIN 3건은 관찰한 반복 기록이다. 평소 질의량과 비교해야 급증 여부를 판단할 수 있다.</text>
+</svg>
