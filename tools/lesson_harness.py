@@ -18,6 +18,10 @@ page.learning_terms가 있으면 lesson_term_flow.check_page도 실행한다.
 레이블 목록)가 빠지면 FAIL이다. 메타데이터 없는 기존 페이지는 이 검사를
 SKIP한다. 용어 목록의 완전성·설명의 이해 가능성은 별도 저지에서 검수한다.
 선언 형식과 판정 단위는 lesson_term_flow.py 및 lesson_schema.py를 참조한다.
+
+supplement의 코드도 같은 방식으로 실행한다. lesson_structure는 보충을
+닫은 필수 본문의 용어 설명을 검사하고, 목차·중복 문단·보충 위치에 관한
+REVIEW를 출력한다. REVIEW는 읽기 검수할 위치이며 실패나 분량 축소 명령이 아니다.
 """
 import json
 import subprocess
@@ -60,6 +64,9 @@ def iter_code_targets(page):
                 yield from walk_el(path + ".answer", el2)
         elif el.get("kind") == "code":
             yield path, el
+        elif el.get("kind") == "supplement":
+            for i, child in enumerate(el.get("body", [])):
+                yield from walk_el(f"{path}.body[{i}]", child)
     for si, sec in enumerate(page.get("sections", [])):
         for bi, el in enumerate(sec.get("body", [])):
             yield from walk_el(f"sections[{si}].body[{bi}]", el)
@@ -81,6 +88,10 @@ def run_page(page):
     passed.extend(term_passed)
     failed.extend(term_failed)
     skipped.extend(term_skipped)
+    from lesson_structure import check_structure
+    structure_passed, structure_failed, _ = check_structure(page)
+    passed.extend(structure_passed)
+    failed.extend(structure_failed)
     with tempfile.TemporaryDirectory() as tmp:
         tmpdir = Path(tmp)
         for name, content in page.get("fixtures", {}).items():
@@ -129,7 +140,11 @@ def main():
         print(f"SKIP  {p} — {why}")
     for p, why in failed:
         print(f"FAIL  {p} — {why}")
-    print(f"\n요약: PASS {len(passed)} / FAIL {len(failed)} / SKIP {len(skipped)}")
+    from lesson_structure import check_structure
+    _, _, review = check_structure(page)
+    for p, why in review:
+        print(f"REVIEW  {p} — {why}")
+    print(f"\n요약: PASS {len(passed)} / FAIL {len(failed)} / SKIP {len(skipped)} / REVIEW {len(review)}")
     sys.exit(1 if failed else 0)
 
 

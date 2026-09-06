@@ -64,6 +64,12 @@ def render_element(el, indent=""):
     kind = el["kind"]
     if kind == "paragraph":
         return [indent + esc_block(el["text"])]
+    if kind == "supplement":
+        lines = [indent + "<details>", indent + "<summary>보충 — " + esc(el["title"]) + "</summary>"]
+        for child in el["body"]:
+            lines += render_element(child, indent + "\t")
+        lines.append(indent + "</details>")
+        return lines
     if kind == "definition":
         en = f"({el['en']})" if el.get("en") else ""
         return [indent + f"> **{esc(el['term'])}{esc(en)}** — {esc(el['text'])}"]

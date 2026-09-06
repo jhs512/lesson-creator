@@ -4,59 +4,277 @@
   "title": "5교시. 더 해보기 — DNS 응답 변화와 접속 경로 추적",
   "lead": "직원이 공지와 업무 자료를 보는 웹사이트인 내부 포털을 앞에서 만들었다. 이번에는 같은 포털 이름으로 접속했는데 다른 웹페이지가 열리는 상황을 만들어 보자. 이름에 대한 답이 바뀌면 PC의 접속 대상이 어떻게 달라지는지 따라간다.",
   "toc": [
-    "UnexpectedServer 추가하기",
-    "정상 DNS 흐름 추적하기",
-    "변경된 DNS 응답의 영향 확인하기",
-    "실제 공격과 실습 모델 구분하기"
+    "시작 상태를 확인하고 비교 서버 추가하기",
+    "정상 응답과 후속 접속 관찰하기",
+    "주소 한 곳을 바꾸고 변화 확인하기",
+    "정상 주소로 복구하고 다시 확인하기",
+    "관찰한 결과의 의미 정리하기"
   ],
-  "preview": {
-    "intro": "인트라넷은 조직 구성원이 내부 업무에 쓰는 네트워크다. 이 안에서 직원이 공지와 업무 자료를 보는 웹사이트를 내부 포털이라 부른다. 서버는 다른 컴퓨터의 요청에 정보나 기능을 제공하는 역할이다. 통신할 장비를 찾는 숫자 주소를 IP 주소라고 한다. `IntranetServer`는 포털 웹페이지를 보내는 웹 서버이며 주소는 `192.168.20.100`이다. `DNSServer`는 이름에 맞는 주소를 알려 주는 DNS 서버이며 주소는 `192.168.20.53`이다. 두 영어 표시는 장비를 구별하려 붙인 실습용 이름이다.\n\n`UnexpectedServer`는 정상 포털과 다른 화면을 보내도록 추가하는 비교용 웹 서버다. 이름은 “예상하지 않은 서버”라는 뜻이며, 특별한 장비 종류나 공격 도구 이름이 아니다. 주소는 `192.168.20.200`이다. 이후 `.53`, `.100`, `.200`은 세 서버 주소의 끝부분을 줄인 표기다.\n\n그림의 Switch0은 같은 망의 장비를 연결하는 스위치이고 Router0은 서로 다른 망을 잇는 라우터다. VLAN은 스위치 안에서 나눈 통신 그룹이며 DEV와 SEC는 두 그룹의 실습 이름이다.\n\n`Fa`·`G` 표시는 케이블을 꽂는 장비 포트 이름이다. `/24`는 같은 망의 범위를 구분하는 마스크 `255.255.255.0`의 짧은 표기다. access는 포트를 한 VLAN에 배정하는 방식이고 2960·2911은 앞에서 사용한 장비 모델명이다.\n\n완성할 장비 연결 구조, 즉 토폴로지다. 기존 배선에 Switch0 Fa0/9의 비교용 서버만 추가한다. 이 선을 따라 새 서버가 어디에 연결되는지 보자.",
-    "element": {
-      "kind": "image",
-      "src": "assets/l5_topology.png",
-      "caption": "확장 DNS 토폴로지 — 기존 정상 구성에 Fa0/9의 UnexpectedServer .200을 추가한다.",
-      "text_content": "응답 변화 실습 구성 · 예상 밖 서버 한 대 추가\n실습 구성도 · 검은 선 = 연결   /   점선 경계 = VLAN\nVLAN 10 · DEV\n192.168.10.0/24\nVLAN 20 · SEC    192.168.20.0/24\nPC0\n192.168.10.10 /24\nPC1\n192.168.10.20 /24\nPC2\n192.168.20.10 /24\nPC3\n192.168.20.20 /24\n1\n2\n3\n4\n5\n6\n7\n8\n9\nSwitch0 · 2960\nRouter0 · 2911\nDNSServer\n192.168.20.53\nIntranetServer\n192.168.20.100\nUnexpectedServer\n192.168.20.200\nFa0/1 · VLAN 10\nFa0/2\nG0/0 · 192.168.10.1\nG0/1 · 192.168.20.1\nFa0/5\nFa0/6\nFa0/7\nFa0/8\nFa0/3\nFa0/4\nFa0/9\n1–2, 5번 포트: VLAN 10\n3–4, 6–9번 포트: VLAN 20\n같은 스위치 안에서 포트를 나눈다.\n모든 장비의 마스크는 255.255.255.0이다. Router0의 두 선은 각 VLAN의 access 포트에 연결한다."
-    }
-  },
-  "principle": "관리 화면에서 이름에 대응하는 주소를 직접 바꾸고 그 결과를 관찰하는 실습이다. 다른 사람의 DNS에 거짓 답을 주입하는 공격 절차를 실습하는 것은 아니다.",
+  "principle": "설정을 한 곳씩 바꾸고, 답에 나온 주소와 실제로 접속한 주소를 짝으로 기록한다.",
   "sections": [
     {
-      "heading": "UnexpectedServer 추가하기",
-      "importance": "✅",
+      "heading": "시작 상태를 확인하고 비교 서버 추가하기",
       "body": [
+        {
+          "kind": "paragraph",
+          "text": "정상 구성을 저장한 `day03_dns_normal.pkt`를 열고 포털 첫 화면이 보이는 상태에서 시작한다. 제공 파일을 내려받는 지시가 아니라 직접 저장한 파일을 여는 지시다. 파일이 없으면 아래 보충의 전체 준비 절차로 정상 구성을 만든다. 주소 표로 시작 상태를 확인한 뒤 비교할 장비 한 대를 추가한다."
+        },
+        {
+          "kind": "paragraph",
+          "text": "인트라넷은 조직 구성원이 내부 업무에 쓰는 네트워크다. 이 안에서 직원이 공지와 업무 자료를 보는 웹사이트를 내부 포털이라 부른다."
+        },
+        {
+          "kind": "paragraph",
+          "text": "서버는 다른 컴퓨터의 요청에 정보나 기능을 제공하는 역할이다. 통신할 장비를 찾는 숫자 주소를 IP 주소라고 한다. 두 서버가 맡은 일을 주소와 짝지어 보자."
+        },
         {
           "kind": "table",
           "headers": [
-            "구간",
-            "시간",
-            "활동"
+            "실습 이름",
+            "역할",
+            "IP 주소"
           ],
           "rows": [
             [
-              "첫 설명",
-              "15분",
-              "새 개념과 판단 기준을 본다."
+              "IntranetServer",
+              "포털 웹페이지를 보내는 웹 서버",
+              "192.168.20.100"
             ],
             [
-              "첫 해보기",
-              "10분",
-              "완성 예시를 실행하고 결과를 확인한다."
-            ],
-            [
-              "두 번째 설명",
-              "15분",
-              "동작 과정과 실패 원인을 연결한다."
-            ],
-            [
-              "두 번째 해보기",
-              "10분",
-              "혼자 판단하고 도전 문제로 마무리한다."
+              "DNSServer",
+              "이름에 맞는 주소를 알려 주는 DNS 서버",
+              "192.168.20.53"
             ]
           ]
         },
         {
           "kind": "paragraph",
+          "text": "두 영어 표시는 장비를 구별하려 붙인 실습용 이름이다. 이름을 묻는 곳과 페이지를 받는 곳을 서로 다른 장비로 연결한다."
+        },
+        {
+          "kind": "paragraph",
+          "text": "`UnexpectedServer`는 정상 포털과 다른 화면을 보내도록 추가하는 비교용 웹 서버다. 이름은 “예상하지 않은 서버”라는 뜻이며, 특별한 장비 종류나 공격 도구 이름이 아니다. 주소는 `192.168.20.200`이다. 이후 `.53`, `.100`, `.200`은 세 서버 주소의 끝부분을 줄인 표기다."
+        },
+        {
+          "kind": "paragraph",
+          "text": "그림의 Switch0은 같은 망의 장비를 연결하는 스위치이고 Router0은 서로 다른 망을 잇는 라우터다. VLAN은 스위치 안에서 나눈 통신 그룹이며 DEV와 SEC는 두 그룹의 실습 이름이다."
+        },
+        {
+          "kind": "paragraph",
+          "text": "`Fa`·`G` 표시는 케이블을 꽂는 장비 포트 이름이다. `/24`는 같은 망의 범위를 구분하는 마스크 `255.255.255.0`의 짧은 표기다. access는 포트를 한 VLAN에 배정하는 방식이고 2960·2911은 앞에서 사용한 장비 모델명이다."
+        },
+        {
+          "kind": "paragraph",
           "text": "게이트웨이는 다른 망으로 갈 때 거치는 라우터 주소다. 새 서버도 VLAN 20에 연결하므로 게이트웨이는 `192.168.20.1`이다. 가상 장비 항목 `Server-PT` 한 대를 추가하고 이름을 바꾼다."
+        },
+        {
+          "kind": "table",
+          "headers": [
+            "장비",
+            "IP / 게이트웨이",
+            "Switch0 포트",
+            "VLAN"
+          ],
+          "rows": [
+            [
+              "PC0",
+              "192.168.10.10 / 192.168.10.1",
+              "Fa0/1",
+              "10 DEV"
+            ],
+            [
+              "PC1",
+              "192.168.10.20 / 192.168.10.1",
+              "Fa0/2",
+              "10 DEV"
+            ],
+            [
+              "PC2",
+              "192.168.20.10 / 192.168.20.1",
+              "Fa0/3",
+              "20 SEC"
+            ],
+            [
+              "PC3",
+              "192.168.20.20 / 192.168.20.1",
+              "Fa0/4",
+              "20 SEC"
+            ],
+            [
+              "Router0 G0/0",
+              "192.168.10.1",
+              "Fa0/5",
+              "10 DEV"
+            ],
+            [
+              "Router0 G0/1",
+              "192.168.20.1",
+              "Fa0/6",
+              "20 SEC"
+            ],
+            [
+              "DNSServer",
+              "192.168.20.53 / 192.168.20.1",
+              "Fa0/7",
+              "20 SEC"
+            ],
+            [
+              "IntranetServer",
+              "192.168.20.100 / 192.168.20.1",
+              "Fa0/8",
+              "20 SEC"
+            ]
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "text": "완성할 장비 연결 구조, 즉 토폴로지다. 기존 배선에 Switch0 Fa0/9의 비교용 서버만 추가한다. 이 선을 따라 새 서버가 어디에 연결되는지 보자."
+        },
+        {
+          "kind": "image",
+          "src": "assets/l5_topology.png",
+          "caption": "확장 DNS 토폴로지 — 기존 정상 구성에 Fa0/9의 UnexpectedServer .200을 추가한다.",
+          "text_content": "응답 변화 실습 구성 · 예상 밖 서버 한 대 추가\n실습 구성도 · 검은 선 = 연결   /   점선 경계 = VLAN\nVLAN 10 · DEV\n192.168.10.0/24\nVLAN 20 · SEC    192.168.20.0/24\nPC0\n192.168.10.10 /24\nPC1\n192.168.10.20 /24\nPC2\n192.168.20.10 /24\nPC3\n192.168.20.20 /24\n1\n2\n3\n4\n5\n6\n7\n8\n9\nSwitch0 · 2960\nRouter0 · 2911\nDNSServer\n192.168.20.53\nIntranetServer\n192.168.20.100\nUnexpectedServer\n192.168.20.200\nFa0/1 · VLAN 10\nFa0/2\nG0/0 · 192.168.10.1\nG0/1 · 192.168.20.1\nFa0/5\nFa0/6\nFa0/7\nFa0/8\nFa0/3\nFa0/4\nFa0/9\n1–2, 5번 포트: VLAN 10\n3–4, 6–9번 포트: VLAN 20\n같은 스위치 안에서 포트를 나눈다.\n모든 장비의 마스크는 255.255.255.0이다. Router0의 두 선은 각 VLAN의 access 포트에 연결한다."
+        },
+        {
+          "kind": "supplement",
+          "title": "정상 파일이 없을 때의 준비 절차",
+          "body": [
+            {
+              "kind": "paragraph",
+              "text": "정상 파일이 없을 때만 이 절차를 수행한다. 정상 포털이 이미 열리면 건너뛴다. 아직 비교용 장비는 추가하지 않고 기본 장비 여덟 대의 주소 표를 사용한다."
+            },
+            {
+              "kind": "paragraph",
+              "text": "Packet Tracer에서 `Logical`은 장비를 놓는 작업 화면이다. `Realtime`은 통신을 자동으로 진행하는 모드이며 화면 오른쪽 아래에서 선택한다. PC-PT 네 대, 2960 스위치 한 대, 2911 라우터 한 대, Server-PT 두 대를 사용한다."
+            },
+            {
+              "kind": "tool_steps",
+              "tool": "Cisco Packet Tracer 9.0.1",
+              "steps": [
+                "`Network Devices > Switches`(네트워크 장비 → 스위치)에서 `2960-24TT`를 놓고 Switch0인지 확인한다.",
+                "`Network Devices > Routers`(네트워크 장비 → 라우터)에서 `2911`을 놓고 Router0인지 확인한다.",
+                "`End Devices`(PC·서버 같은 끝 장비)에서 PC-PT 네 대와 Server-PT 두 대를 놓는다.",
+                "Server-PT 이름을 각각 DNSServer와 IntranetServer로 바꾼다.",
+                "`Copper Straight-Through`으로 PC0~PC3을 Fa0/1~Fa0/4, Router0 두 선을 Fa0/5~Fa0/6, 서버 두 대를 Fa0/7~Fa0/8에 연결한다."
+              ],
+              "note": "PC·서버와 스위치 사이의 연결 상태를 확인한다. 라우터 쪽은 다음 절에서 연결 단자를 켠 뒤 초록색 상태인지 확인한다."
+            },
+            {
+              "kind": "paragraph",
+              "text": "스위치와 라우터에서 `CLI` 탭을 열어 명령을 입력한다. 왼쪽의 `Switch>`·`Router(config)#` 같은 입력 위치 표시는 입력하지 않는다. `enable`과 `configure terminal`은 관리 설정으로 들어가는 명령이고, `interface`는 설정할 연결 단자를 고른다. `switchport`는 스위치 포트의 VLAN을 정하고 `ip address`는 라우터 단자의 주소와 마스크를 정한다. `no shutdown`은 단자를 켜며, `end`는 설정을 마친다."
+            },
+            {
+              "kind": "command",
+              "shell": "terminal",
+              "src": "Switch> enable\nSwitch# configure terminal\nSwitch(config)# vlan 10\nSwitch(config-vlan)# name DEV\nSwitch(config-vlan)# exit\nSwitch(config)# vlan 20\nSwitch(config-vlan)# name SEC\nSwitch(config-vlan)# exit\nSwitch(config)# interface range fastethernet 0/1 - 2\nSwitch(config-if-range)# switchport mode access\nSwitch(config-if-range)# switchport access vlan 10\nSwitch(config-if-range)# exit\nSwitch(config)# interface fastethernet 0/5\nSwitch(config-if)# switchport mode access\nSwitch(config-if)# switchport access vlan 10\nSwitch(config-if)# exit\nSwitch(config)# interface range fastethernet 0/3 - 4\nSwitch(config-if-range)# switchport mode access\nSwitch(config-if-range)# switchport access vlan 20\nSwitch(config-if-range)# exit\nSwitch(config)# interface range fastethernet 0/6 - 8\nSwitch(config-if-range)# switchport mode access\nSwitch(config-if-range)# switchport access vlan 20\nSwitch(config-if-range)# end\nSwitch# show vlan brief",
+              "output": "10   DEV   active   Fa0/1, Fa0/2, Fa0/5\n20   SEC   active   Fa0/3, Fa0/4, Fa0/6, Fa0/7, Fa0/8",
+              "output_label": "결과 요약 — 실제 CLI에서는 기본 VLAN 줄도 함께 표시된다.",
+              "verified": "example"
+            },
+            {
+              "kind": "command",
+              "shell": "terminal",
+              "src": "Router> enable\nRouter# configure terminal\nRouter(config)# interface gigabitethernet 0/0\nRouter(config-if)# ip address 192.168.10.1 255.255.255.0\nRouter(config-if)# no shutdown\nRouter(config-if)# exit\nRouter(config)# interface gigabitethernet 0/1\nRouter(config-if)# ip address 192.168.20.1 255.255.255.0\nRouter(config-if)# no shutdown\nRouter(config-if)# end\nRouter# show ip interface brief",
+              "output": "GigabitEthernet0/0   192.168.10.1   up   up\nGigabitEthernet0/1   192.168.20.1   up   up",
+              "output_label": "결과 요약 — `up up`은 연결 단자와 통신 상태가 모두 동작 중이라는 뜻이다.",
+              "verified": "example"
+            },
+            {
+              "kind": "paragraph",
+              "text": "`Desktop > IP Configuration`은 장비 주소를 넣는 창이고 `Static`은 직접 입력하는 선택이다. 마스크는 모두 255.255.255.0이다. 위 표의 장비별 주소를 다음 순서로 넣는다."
+            },
+            {
+              "kind": "tool_steps",
+              "tool": "Packet Tracer IP Configuration",
+              "steps": [
+                "각 장비에서 `Desktop > IP Configuration > Static`을 연다.",
+                "PC0·PC1에는 192.168.10.10·20, 마스크 255.255.255.0, 게이트웨이 192.168.10.1을 입력한다.",
+                "PC2·PC3에는 192.168.20.10·20, 마스크 255.255.255.0, 게이트웨이 192.168.20.1을 입력한다.",
+                "DNSServer에는 192.168.20.53, IntranetServer에는 192.168.20.100을 입력한다.",
+                "두 서버의 마스크는 255.255.255.0, 게이트웨이는 192.168.20.1로 설정한다."
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "text": "PC0의 `Desktop > Command Prompt`(명령 입력 창)에서 숫자 주소를 시험한다. `ping`은 확인용 메시지에 답이 돌아오는지 보는 명령이다."
+            },
+            {
+              "kind": "command",
+              "shell": "cmd",
+              "src": "C:\\> ping 192.168.20.53\nC:\\> ping 192.168.20.100",
+              "output": "192.168.20.53: Sent = 4, Received = 4, Lost = 0\n192.168.20.100: Sent = 4, Received = 4, Lost = 0",
+              "output_label": "결과 요약 — 첫 ping이 늦으면 같은 명령을 한 번 더 실행한다.",
+              "verified": "example"
+            },
+            {
+              "kind": "definition",
+              "term": "A 레코드",
+              "text": "DNS에 저장하는 이름과 IPv4 주소의 대응 정보다. 이 실습의 접속 이름 `portal.a-company.test`에 정상 포털 주소 `192.168.20.100`을 등록했다. 화면의 A 값은 바로 이 주소를 뜻한다.",
+              "en": "A record"
+            },
+            {
+              "kind": "paragraph",
+              "text": "HTTP는 브라우저의 웹페이지 요청과 서버의 응답에 쓰는 통신 규칙이다. `Services > HTTP`는 이 기능을 켜는 메뉴다. `index.html`은 서버가 첫 화면으로 보낼 문서다. HTML은 웹페이지의 글과 구조를 표시하는 문서 형식이다. `Services > DNS`는 이름에 대응하는 주소를 설정하는 메뉴이고 `On`은 켠다는 뜻이다."
+            },
+            {
+              "kind": "tool_steps",
+              "tool": "Cisco Packet Tracer 9.0.1",
+              "steps": [
+                "DNSServer를 열고 `Services > DNS`로 이동한다.",
+                "DNS Service를 `On`으로 바꾼다.",
+                "Name(질문할 이름)에 `portal.a-company.test`, Address(그 이름에 대응하는 주소)에 `192.168.20.100`을 입력한다.",
+                "`Add`(추가)를 눌러 레코드 목록에 한 줄이 생겼는지 확인한다."
+              ],
+              "note": "Name은 서비스 이름이고 Address는 접속할 IntranetServer의 주소다."
+            },
+            {
+              "kind": "paragraph",
+              "text": "PC0의 DNS Server 칸에는 이름을 물어볼 192.168.20.53을 입력한다. `nslookup`은 그 이름에 어떤 주소가 나오는지 확인하는 명령이다."
+            },
+            {
+              "kind": "tool_steps",
+              "tool": "Cisco Packet Tracer 9.0.1",
+              "steps": [
+                "PC0의 `Desktop > IP Configuration`에서 DNS Server에 `192.168.20.53`을 입력한다.",
+                "`Desktop > Command Prompt`에서 `nslookup portal.a-company.test`를 실행해 `192.168.20.100`이 나오는지 확인한다."
+              ],
+              "note": "이름 조회가 실패하면 PC0의 DNS Server 주소와 DNSServer의 A 레코드를 다시 비교한다."
+            },
+            {
+              "kind": "code",
+              "lang": "html",
+              "intent": "normal",
+              "src": "<html><body>A사 내부 포털 - 정상 서버</body></html>"
+            },
+            {
+              "kind": "tool_steps",
+              "tool": "Packet Tracer Server-PT HTTP",
+              "steps": [
+                "IntranetServer에서 `Services > HTTP`를 연다.",
+                "HTTP를 `On`으로 확인한다.",
+                "`index.html`의 편집기를 열고 기존 내용을 위의 HTML 문서 전체로 바꾼다.",
+                "`Save`(저장)를 누른다."
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "text": "`Web Browser`는 웹페이지를 여는 도구다. `http://`로 시작하는 아래 이름을 입력해 정상 포털 문구를 확인한다."
+            },
+            {
+              "kind": "tool_steps",
+              "tool": "Cisco Packet Tracer 9.0.1",
+              "steps": [
+                "`Desktop > Web Browser`를 열고 주소창에 `http://portal.a-company.test`를 입력한다.",
+                "`A사 내부 포털 - 정상 서버` 문구가 보이면 `File > Save As`(다른 이름으로 저장)에서 `day03_dns_normal.pkt`로 저장한다."
+              ],
+              "note": "이름 조회가 .100을 반환했는지 먼저 확인하고, 페이지가 열리지 않으면 IntranetServer의 HTTP 상태와 저장한 문구를 확인한다."
+            },
+            {
+              "kind": "paragraph",
+              "text": "정상 파일을 만들었으면 이 보충을 닫고 비교용 장비의 주소 표부터 계속한다."
+            }
+          ]
         },
         {
           "kind": "table",
@@ -130,8 +348,7 @@
       ]
     },
     {
-      "heading": "정상 DNS 흐름 추적하기",
-      "importance": "✅",
+      "heading": "정상 응답과 후속 접속 관찰하기",
       "body": [
         {
           "kind": "paragraph",
@@ -211,8 +428,14 @@
           "text": "다음 초록 봉투는 PC0이 웹 서버에 보내는 새 통신이다. 아래 오른쪽에서 목적지 IP가 `.100`으로 바뀐 것을 확인한다. Event List에서도 DNS 응답 PDU의 A 값과 뒤이은 TCP·HTTP PDU의 목적지를 짝지어 읽자. TCP 연결에는 여러 패킷이 필요하므로 그림의 화살표 수와 이벤트 줄 수는 같지 않다."
         },
         {
-          "kind": "paragraph",
-          "text": "DNS 이벤트가 보이지 않으면 캐시의 답을 사용했을 수 있다. 이벤트 목록을 비우는 작업과 DNS 캐시를 비우는 작업은 다르다. 새 DNS 응답을 확인한 뒤 정상·변경 결과를 비교한다."
+          "kind": "supplement",
+          "title": "이벤트 목록이 비어 있거나 DNS가 보이지 않을 때",
+          "body": [
+            {
+              "kind": "paragraph",
+              "text": "이벤트 목록을 비우는 작업은 기억한 주소를 지우지 않는다. 새 DNS 응답이 없으면 앞의 캐시 초기화 절차를 적용하고 다시 관찰한다. DNS 응답을 확인한 뒤 정상·변경 결과를 비교한다."
+            }
+          ]
         },
         {
           "kind": "task",
@@ -262,40 +485,25 @@
       ]
     },
     {
-      "heading": "변경된 DNS 응답의 영향 확인하기",
-      "importance": "❗",
+      "heading": "주소 한 곳을 바꾸고 변화 확인하기",
       "body": [
         {
           "kind": "paragraph",
-          "text": "이제 DNSServer의 A 레코드를 .200으로 바꾼다. 이것은 공격 방법이 아니라 잘못된 DNS 결과를 만든 시험 조건이다."
+          "text": "정상 결과를 기록했으니 A 레코드의 주소 한 곳을 `.200`으로 바꾸어 보자. 비교할 기준은 응답에 담긴 주소와 그 뒤 통신의 목적지다."
         },
         {
           "kind": "image",
           "src": "assets/l5_normal.png",
           "caption": "그림 5-2(a). 변경 전 — 정상 A 값 .100을 받아 IntranetServer로 접속한다.",
-          "text_content": "변경 전 · 같은 구성에서 정상 포털 .100에 접속한다\n실습 구성도 · 검은 선 = 연결   /   점선 경계 = VLAN   /   봉투 = 현재 패킷   /   나머지 PC 생략\nVLAN 10 · DEV\n192.168.10.0/24\nVLAN 20 · SEC    192.168.20.0/24\nPC0\n192.168.10.10 /24\n1\n2\n3\n4\n5\n6\n7\n8\n9\nSwitch0 · 2960\nRouter0 · 2911\nDNSServer\n192.168.20.53\nIntranetServer\n192.168.20.100\nUnexpectedServer\n192.168.20.200\nFa0/1 · VLAN 10\nG0/0 · 192.168.10.1\nG0/1 · 192.168.20.1\nFa0/5\nFa0/6\nFa0/7\nFa0/8\nFa0/9\n1–2, 5번 포트: VLAN 10\n3–4, 6–9번 포트: VLAN 20\n같은 스위치 안에서 포트를 나눈다.\nTCP 연결 후 HTTP 요청 → .100\nG0/1 · 192.168.20.1\nFa0/6\n모든 장비의 마스크는 255.255.255.0이다. Router0의 두 선은 각 VLAN의 access 포트에 연결한다."
+          "text_content": "변경 전 · 같은 구성에서 정상 포털 .100에 접속한다\n실습 구성도 · 검은 선 = 연결   /   점선 경계 = VLAN   /   봉투 = 현재 패킷   /   나머지 PC 생략\nVLAN 10 · DEV\n192.168.10.0/24\nVLAN 20 · SEC    192.168.20.0/24\nPC0\n192.168.10.10 /24\n1\n2\n3\n4\n5\n6\n7\n8\n9\nSwitch0 · 2960\nRouter0 · 2911\nDNSServer\n192.168.20.53\nIntranetServer\n192.168.20.100\nUnexpectedServer\n192.168.20.200\nFa0/1 · VLAN 10\nG0/0 · 192.168.10.1\nG0/1 · 192.168.20.1\nFa0/5\nFa0/6\nFa0/7\nFa0/8\nFa0/9\n1–2, 5번 포트: VLAN 10\n3–4, 6–9번 포트: VLAN 20\n같은 스위치 안에서 포트를 나눈다.\nTCP 연결 후 HTTP 요청 → .100\nG0/0 · 192.168.10.1\nG0/1 · 192.168.20.1\nFa0/6\n모든 장비의 마스크는 255.255.255.0이다. Router0의 두 선은 각 VLAN의 access 포트에 연결한다."
         },
         {
           "kind": "paragraph",
           "text": "같은 이름 `portal.a-company.test`와 같은 DNS 서버 `.53`을 사용한다. A 응답이 `.100`이면 초록 봉투가 Fa0/8에 연결된 IntranetServer로 간다. UnexpectedServer도 연결되어 있지만 이 요청의 목적지는 아니다."
         },
         {
-          "kind": "image",
-          "src": "assets/l5_compare.png",
-          "caption": "그림 5-2(b). 변경 후 — A 값 .200을 받아 Fa0/9의 UnexpectedServer로 접속한다.",
-          "text_content": "변경 후 · 같은 이름으로 .200 서버에 도착한다\n실습 구성도 · 검은 선 = 연결   /   점선 경계 = VLAN   /   봉투 = 현재 패킷   /   나머지 PC 생략\nVLAN 10 · DEV\n192.168.10.0/24\nVLAN 20 · SEC    192.168.20.0/24\nPC0\n192.168.10.10 /24\n1\n2\n3\n4\n5\n6\n7\n8\n9\nSwitch0 · 2960\nRouter0 · 2911\nDNSServer\n192.168.20.53\nIntranetServer\n192.168.20.100\nUnexpectedServer\n192.168.20.200\nFa0/1 · VLAN 10\nG0/0 · 192.168.10.1\nG0/1 · 192.168.20.1\nFa0/5\nFa0/6\nFa0/7\nFa0/8\nFa0/9\n1–2, 5번 포트: VLAN 10\n3–4, 6–9번 포트: VLAN 20\n같은 스위치 안에서 포트를 나눈다.\nTCP 연결 후 HTTP 요청 → .200\nG0/1 · 192.168.20.1\nFa0/6\n모든 장비의 마스크는 255.255.255.0이다. Router0의 두 선은 각 VLAN의 access 포트에 연결한다."
-        },
-        {
           "kind": "paragraph",
-          "text": "장비 위치와 배선은 그대로다. A 레코드의 응답만 `.200`으로 바꾸면 빨간 봉투가 Fa0/9의 UnexpectedServer로 향한다. 이름과 DNS 서버가 같아도 응답 값 때문에 실제 접속 장비가 달라진 것이다."
-        },
-        {
-          "kind": "paragraph",
-          "text": "새 응답은 `.200`인데 화면은 정상 포털로 남아 있다면 새 TCP·HTTP 이벤트의 목적지를 확인한다. 이전 화면이나 연결을 보고 있을 수 있기 때문이다. 마지막에는 A 값을 `.100`으로 복구하고 새 DNS 응답과 정상 포털 문구까지 확인한다."
-        },
-        {
-          "kind": "paragraph",
-          "text": "값을 바꾼 뒤에도 PC가 이전 답을 기억할 수 있다. `ipconfig /flushdns`는 현재 PC의 DNS 캐시를 지우는 명령이다. 서버에 등록한 원본 레코드는 지우지 않는다. `Command Prompt`는 명령 입력 창이며 `nslookup`으로 새 조회 결과를 확인한다."
+          "text": "값을 바꾼 뒤에도 이전 답이 남을 수 있으므로, 새 관찰을 시작하기 전에 앞에서 익힌 캐시 초기화를 적용한다. 원본 변경 → PC의 캐시 초기화 → 관찰 목록 초기화 → 같은 이름으로 접속 순서로 진행한다."
         },
         {
           "kind": "task",
@@ -307,13 +515,19 @@
             "steps": [
               "DNSServer의 `Services > DNS`에서 기존 portal.a-company.test 레코드를 선택한다.",
               "기존 레코드를 제거하고 Name은 그대로, Address만 `192.168.20.200`으로 입력해 `Add`를 누른다.",
+              "PC0의 Command Prompt에서 `ipconfig /flushdns`를 실행한다. 지원하지 않으면 PC0을 껐다 켜고 IP·게이트웨이·DNS Server 설정을 다시 확인한다.",
               "`Reset Simulation`(관찰 목록 초기화)으로 이벤트 목록을 비운다. DNS가 기억한 답을 지우는 작업과는 다르다.",
               "PC0 Web Browser에서 같은 `http://portal.a-company.test`를 다시 연다.",
+              "`Capture/Forward`를 반복해서 눌러 새 DNS 질문·응답, TCP 연결, HTTP 응답이 PC0에 돌아오는 데까지 진행한다. 브라우저에서 열기만 누르면 통신이 아직 대기 중일 수 있다.",
               "DNS 응답 주소와 뒤이은 HTTP 목적지가 모두 192.168.20.200인지 확인한다.",
               "페이지에 `예상하지 않은 서버`가 보이는지 확인한다."
             ],
-            "note": "화면이 이전 결과를 유지하면 PC0 Command Prompt에서 `ipconfig /flushdns`를 실행하거나 PC0을 껐다 켠 뒤 다시 조회한다."
+            "note": "DNS 응답에 새 주소 .200이 보였는지 먼저 확인한 뒤, 뒤이은 TCP·HTTP 목적지와 화면 문구를 비교한다."
           }
+        },
+        {
+          "kind": "paragraph",
+          "text": "이름 조회 명령으로도 새 주소를 확인할 수 있다. 아래 명령을 시뮬레이션 모드에서 실행하면 응답이 도착할 때까지 `Capture/Forward`로 진행한다. 뒤의 복구 확인은 통신을 자동으로 진행하는 `Realtime` 모드에서 한다. [시뮬레이션 진행 방법 — Cisco](https://tutorials.ptnetacad.net/help/default/myFirstPTLab.htm)"
         },
         {
           "kind": "command",
@@ -324,6 +538,29 @@
           "verified": "example"
         },
         {
+          "kind": "image",
+          "src": "assets/l5_compare.png",
+          "caption": "그림 5-2(b). 변경 후 — A 값 .200을 받아 Fa0/9의 UnexpectedServer로 접속한다.",
+          "text_content": "변경 후 · 같은 이름으로 .200 서버에 도착한다\n실습 구성도 · 검은 선 = 연결   /   점선 경계 = VLAN   /   봉투 = 현재 패킷   /   나머지 PC 생략\nVLAN 10 · DEV\n192.168.10.0/24\nVLAN 20 · SEC    192.168.20.0/24\nPC0\n192.168.10.10 /24\n1\n2\n3\n4\n5\n6\n7\n8\n9\nSwitch0 · 2960\nRouter0 · 2911\nDNSServer\n192.168.20.53\nIntranetServer\n192.168.20.100\nUnexpectedServer\n192.168.20.200\nFa0/1 · VLAN 10\nG0/0 · 192.168.10.1\nG0/1 · 192.168.20.1\nFa0/5\nFa0/6\nFa0/7\nFa0/8\nFa0/9\n1–2, 5번 포트: VLAN 10\n3–4, 6–9번 포트: VLAN 20\n같은 스위치 안에서 포트를 나눈다.\nTCP 연결 후 HTTP 요청 → .200\nG0/0 · 192.168.10.1\nG0/1 · 192.168.20.1\nFa0/6\n모든 장비의 마스크는 255.255.255.0이다. Router0의 두 선은 각 VLAN의 access 포트에 연결한다."
+        },
+        {
+          "kind": "paragraph",
+          "text": "장비 위치와 배선은 그대로다. A 레코드의 응답만 `.200`으로 바꾸면 빨간 봉투가 Fa0/9의 UnexpectedServer로 향한다. 이름과 DNS 서버가 같아도 응답 값 때문에 실제 접속 장비가 달라진 것이다."
+        }
+      ]
+    },
+    {
+      "heading": "정상 주소로 복구하고 다시 확인하기",
+      "body": [
+        {
+          "kind": "paragraph",
+          "text": "변경 결과를 기록했으면 시작할 때의 주소로 되돌린다. 복구도 설정값뿐 아니라 새 조회 결과와 페이지 문구까지 확인해야 끝난다."
+        },
+        {
+          "kind": "paragraph",
+          "text": "새 응답은 `.200`인데 화면은 정상 포털로 남아 있다면 새 TCP·HTTP 이벤트의 목적지를 확인한다. 이전 화면이나 연결을 보고 있을 수 있기 때문이다. 마지막에는 A 값을 `.100`으로 복구하고 새 DNS 응답과 정상 포털 문구까지 확인한다."
+        },
+        {
           "kind": "task",
           "task_type": "action",
           "instruction": "정상 상태로 복구하고 응답 주소가 다시 .100인지 확인하자.",
@@ -331,19 +568,19 @@
             "kind": "tool_steps",
             "tool": "Cisco Packet Tracer 9.0.1",
             "steps": [
+              "오른쪽 아래의 `Realtime`을 눌러 통신이 자동으로 진행하는 모드로 돌아온다. 아래 이름 조회와 페이지 확인은 이 모드에서 한다.",
               "DNSServer의 portal.a-company.test A 레코드를 `192.168.20.100`으로 되돌린다.",
-              "PC0에서 `ipconfig /flushdns`를 실행한다.",
+              "PC0에서 `ipconfig /flushdns`를 실행한다. 지원하지 않으면 PC0을 껐다 켜고 기존 주소 설정을 다시 확인한다.",
               "`nslookup portal.a-company.test` 결과가 192.168.20.100인지 확인한다.",
               "Web Browser에서 정상 포털 문구가 다시 보이는지 확인한다."
             ],
-            "note": "실습 파일을 저장할 때는 정상 레코드 .100 상태로 저장한다."
+            "note": "정상 레코드 .100과 정상 포털 문구까지 확인한 상태를 `day03_dns_response_comparison.pkt`로 저장한다. 시작 파일 `day03_dns_normal.pkt`는 그대로 보관한다."
           }
         }
       ]
     },
     {
-      "heading": "실제 공격과 실습 모델 구분하기",
-      "importance": "❗",
+      "heading": "관찰한 결과의 의미 정리하기",
       "body": [
         {
           "kind": "paragraph",
@@ -382,7 +619,6 @@
     },
     {
       "heading": "챙겨 가기 — 한눈 정리",
-      "importance": "",
       "body": [
         {
           "kind": "table",
@@ -611,14 +847,14 @@
     {
       "term": "IntranetServer",
       "aliases": [],
-      "introduced_by": "`IntranetServer`는 포털 웹페이지를 보내는 웹 서버"
+      "introduced_by": "포털 웹페이지를 보내는 웹 서버"
     },
     {
       "term": "DNSServer",
       "aliases": [
         "DNS 서버"
       ],
-      "introduced_by": "`DNSServer`는 이름에 맞는 주소를 알려 주는 DNS 서버"
+      "introduced_by": "이름에 맞는 주소를 알려 주는 DNS 서버"
     }
   ]
 }

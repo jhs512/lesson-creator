@@ -6,7 +6,7 @@
 
 1. **JSON 초안**: `tools/lesson_schema.py`의 문서와 `examples/day3/lesson1.json` 등을 참고한다. `code`, `command`, `tool_steps`, `image`, 관찰 과제를 지원한다. 새 용어는 `learning_terms`, 이미지의 실제 글자는 `text_content`로 기록한다.
 2. **스키마 검증·렌더**: `python3 tools/lesson_render.py path/to/lesson.json path/to/lesson.md`를 실행한다. 구조 오류를 고친다. 과제 번호·토글·파일명 서식은 렌더러에 맡긴다.
-3. **하네스**: `python3 tools/lesson_harness.py path/to/lesson.json`을 실행한다. FAIL을 해결하고 모든 SKIP의 이유를 검토한다.
+3. **하네스**: `python3 tools/lesson_harness.py path/to/lesson.json`을 실행한다. FAIL을 해결하고 모든 SKIP과 REVIEW의 이유를 검토한다. REVIEW는 목차 불일치·동일한 긴 설명의 반복·기본 설명보다 앞선 보충을 가리키는 검토 위치다. 수정하거나 반복·배치가 필요한 이유를 남긴다.
 4. **린트**: `python3 tools/lesson_lint.py path/to/lesson.md`를 실행한다. ERROR를 해결하고 WARN은 교과·수업 형식에 맞춰 판정한 이유를 남긴다.
 5. **읽기·시각 검수**: 렌더된 교안과 이미지를 `tools/judge_checklist.md`로 리뷰한다. 내용이 많으면 작성자와 다른 검수자를 활용한다. 용어 누락·정의 속 미설명 용어·선행 지식·상태 전환·과제 완결성·그림의 정확성을 확인한다.
 
@@ -15,6 +15,10 @@
 하네스는 보안 격리 도구가 아니다. 자신의 검토한 교육용 코드에 사용하고, 출처를 모르는 코드를 실행하는 검사는 격리된 환경에서 진행한다. 검사 도구가 `input()`에 기본 응답을 보내는 경우 외부 변경이 발생하지 않는 예제인지 먼저 확인한다.
 
 용어 검사 PASS는 선언한 목록과 실제 표시 순서에 관한 결과다. 같은 문단의 문장 순서, 정의의 쉬움, 목록에 빠진 용어는 저지가 확인한다. 뜻을 이해하지 못해도 문자만 맞추면 통과하는 형식 검사가 되지 않게 한다.
+
+`supplement`의 본문·코드·그림도 용어와 출력 검사를 받는다. 하네스는 보충을 제외한 필수 본문을 한 번 더 읽어, 필수 용어의 설명이 보충에만 들어 있으면 FAIL로 처리한다. 보충에서만 쓰는 용어는 그 안에서 소개할 수 있다. 검사에 맞추려고 필수 용어·별칭·그림 글자를 삭제하지 않는다.
+
+설명의 의미상 중복, 갑작스러운 주제 전환, 절 목표의 혼재, 예제와 해설의 분리, 미등록 용어와 어려운 정의는 자동 검사로 판정하지 않는다. 저지의 흐름·위계 검수에서 근거 문장과 수정안을 남긴다. REVIEW 0도 설명 품질의 통과 판정은 아니다.
 
 로컬 HTML 미리보기가 필요하면 `python3 tools/render_lesson_preview.py path/to/lesson.md path/to/preview.html`을 사용한다. 생성 완료만으로 렌더 검수를 대신하지 않고 브라우저에서 글·토글·그림을 확인한다. 입력 Markdown의 이미지 경로가 미리보기 위치에서도 열리는지 확인한다.
 

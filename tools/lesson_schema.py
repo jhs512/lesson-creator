@@ -35,6 +35,7 @@ Section: {heading: str, importance: ""|"✅"|"❗", body: [Element]}
 
 Element (kind로 구분):
   paragraph   {text}
+  supplement  {title, body: [Element]}                # 기본 설명 뒤의 선택 보충. 중첩·과제는 불가
   definition  {term, en?, text}                       # > **term(en)** — text
   bullets     {items: [str], intro?: str}
   code        {lang, src, output?, output_label?,
@@ -86,7 +87,7 @@ INTENTS = {"normal", "preview", "reinterpret", "intentional_error", "continuatio
 SHELLS = {"cmd", "powershell", "terminal"}
 TASK_TYPES = {"predict", "experiment", "action", "challenge"}
 ELEMENT_KINDS = {"paragraph", "definition", "bullets", "code", "command",
-                 "tool_steps", "image", "table", "task"}
+                 "tool_steps", "image", "table", "task", "supplement"}
 
 MARK_START = "<<<<<<<<<<<< 수정 시작 <<<<<<<<<<<<"
 MARK_END = ">>>>>>>>>>>> 수정 끝 >>>>>>>>>>>>"
@@ -124,6 +125,18 @@ def _validate_element(errors, path, el, allow_task=True):
     if kind == "paragraph":
         if not el.get("text", "").strip():
             _err(errors, path, "paragraph.text 비어 있음")
+    elif kind == "supplement":
+        if not isinstance(el.get("title"), str) or not el["title"].strip():
+            _err(errors, path, "supplement.title 필수")
+        body = el.get("body")
+        if not isinstance(body, list) or not body:
+            _err(errors, path, "supplement.body는 비어 있지 않은 요소 목록이어야 한다")
+        else:
+            for i, child in enumerate(body):
+                if child.get("kind") in ("supplement", "task"):
+                    _err(errors, f"{path}.body[{i}]", "보충 안에 보충이나 필수 과제를 넣지 않는다")
+                else:
+                    _validate_element(errors, f"{path}.body[{i}]", child, allow_task=False)
     elif kind == "definition":
         if not el.get("term") or not el.get("text"):
             _err(errors, path, "definition은 term·text 필수")

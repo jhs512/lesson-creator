@@ -9,7 +9,8 @@
 | [교안 작성 스킬](.agents/skills/lesson-page/SKILL.md) | 상황 → 역할 → 용어 → 동작 → 확인 결과의 흐름으로 교안을 작성하도록 안내 |
 | `tools/lesson_schema.py` | 교안 구조, 과제·정답, 예시 출력 표시 등을 검사 |
 | `tools/lesson_render.py` | 구조화한 교안 JSON을 노션용 Markdown으로 변환 |
-| `tools/lesson_harness.py` | Python 예제의 실제 출력과 기대 출력을 비교하고 용어 소개 순서를 검사 |
+| `tools/lesson_harness.py` | Python 출력·용어 순서·필수 본문의 보충 의존을 검사하고 구조 REVIEW를 출력 |
+| `tools/lesson_structure.py` | 목차 대응·동일 설명 반복·보충 위치를 검토하고 보충을 닫은 본문의 용어를 검사 |
 | `tools/lesson_term_flow.py` | 본문·표·명령·버튼·그림·과제에서 설명보다 먼저 사용한 등록 용어를 검사 |
 | `tools/lesson_lint.py` | 문체·깨진 서식·금지 표기·저장 변형 등을 검사 |
 | [읽기 검수 기준](tools/judge_checklist.md) | 설명의 쉬움, 선수 지식, 학습 흐름과 시각 자료의 적합성을 검토 |
@@ -49,6 +50,8 @@ python -m unittest discover -s tools/tests -v
 2. 예제 JSON을 복사해 상황·정의·그림·과제·정답을 작성한다.
 3. `learning_terms`에 핵심 용어의 실제 소개 문장과 별칭을 기록한다. 그림에는 실제 레이블을 추출한 `text_content`를 넣는다.
 4. 스키마 → 하네스 → 린터 → 읽기 검수 순서로 확인한다.
+
+절마다 중심 질문을 하나로 잡고 필요한 이유·개념·예제·인접 해설·실습을 잇는다. 예외나 추가 비교는 기본 설명 뒤의 `supplement` 요소에 넣으면 접을 수 있는 보충으로 표시된다. 보충을 닫아도 필수 본문을 이해할 수 있어야 한다. 하네스의 `REVIEW`는 목차·반복 설명·보충 위치의 검토 지점이며, 의미상 중복이나 갑작스러운 주제 전환은 읽기 검수에서 판단한다.
 
 ```bash
 python tools/lesson_render.py my_lesson.json my_lesson.md

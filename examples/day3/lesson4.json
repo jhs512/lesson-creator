@@ -4,59 +4,78 @@
   "title": "4교시. 따라 하기 — 정상 DNS 토폴로지 만들기",
   "lead": "이름에 맞는 주소를 알아내고, 그 주소로 웹페이지를 받는 과정을 직접 만들어 보자. 이번 시간에는 가상 장비로 통신을 시험하는 프로그램인 Packet Tracer에서 사용자 컴퓨터인 PC와 요청에 답하는 서버를 연결해 본다.",
   "toc": [
-    "장비와 주소 배치하기",
-    "VLAN과 Router0 연결하기",
-    "PC와 서버 주소 입력하기",
-    "DNS와 HTTP 서비스 설정하기"
+    "장비와 연결 자리 정하기",
+    "두 VLAN 사이의 통신 길 만들기",
+    "장비 주소를 넣고 숫자 주소로 확인하기",
+    "이름 조회를 설정하고 응답 확인하기",
+    "웹페이지를 준비하고 이름으로 접속하기"
   ],
-  "preview": {
-    "intro": "완성할 장비 연결 구조를 먼저 보자. 이런 연결 구조를 토폴로지라고 한다.\n\n인트라넷은 조직 구성원이 내부 업무에 쓰는 네트워크다. 이 안에서 직원이 공지와 업무 자료를 보는 웹사이트를 내부 포털이라 부른다. 서버는 다른 컴퓨터의 요청에 정보나 기능을 제공하는 역할이다. 통신할 장비를 찾는 숫자 주소를 IP 주소라고 한다. `IntranetServer`는 포털 웹페이지를 보내는 웹 서버이며 주소는 `192.168.20.100`이다. `DNSServer`는 이름에 맞는 주소를 알려 주는 DNS 서버이며 주소는 `192.168.20.53`이다. 두 영어 표시는 장비를 구별하려 붙인 실습용 이름이다.\n\n그림의 연결부터 복습하자. `Switch0`은 같은 망의 장비를 연결하는 스위치이고, `Router0`은 서로 다른 망 사이로 데이터를 전달하는 라우터다. VLAN은 한 스위치 안에서 나눈 통신 그룹이다. `DEV`와 `SEC`는 각각 VLAN 10과 20에 붙인 실습용 이름이다. 라우터가 두 그룹 사이를 이어 주는 일을 라우팅이라고 한다.\n\n`Fa0/1`과 `G0/0`은 케이블을 꽂는 연결 단자, 즉 장비 포트의 이름이다. Fa는 FastEthernet, G는 GigabitEthernet을 줄인 표기다. `access`는 해당 스위치 포트를 한 VLAN에 소속시키는 설정이고, `2960`과 `2911`은 장비 모델명이다. 서브넷 마스크는 IP 주소에서 같은 망에 속하는 범위를 구분하는 값이다. 이번 구성의 `/24`와 `255.255.255.0`은 같은 마스크를 나타낸다.",
-    "element": {
-      "kind": "image",
-      "src": "assets/l4_topology.png",
-      "caption": "정상 DNS 토폴로지 — PC 네 대와 Switch0·Router0·DNS·포털 서버를 실습 포트대로 연결한다.",
-      "text_content": "정상 DNS 실습 구성 · 장비와 포트 배치\n실습 구성도 · 검은 선 = 연결   /   점선 경계 = VLAN\nVLAN 10 · DEV\n192.168.10.0/24\nVLAN 20 · SEC    192.168.20.0/24\nPC0\n192.168.10.10 /24\nPC1\n192.168.10.20 /24\nPC2\n192.168.20.10 /24\nPC3\n192.168.20.20 /24\n1\n2\n3\n4\n5\n6\n7\n8\n9\nSwitch0 · 2960\nRouter0 · 2911\nDNSServer\n192.168.20.53\nIntranetServer\n192.168.20.100\nFa0/1 · VLAN 10\nFa0/2\nG0/0 · 192.168.10.1\nG0/1 · 192.168.20.1\nFa0/5\nFa0/6\nFa0/7\nFa0/8\nFa0/3\nFa0/4\n1–2, 5번 포트: VLAN 10\n3–4, 6–8번 포트: VLAN 20\n같은 스위치 안에서 포트를 나눈다.\n모든 장비의 마스크는 255.255.255.0이다. Router0의 두 선은 각 VLAN의 access 포트에 연결한다."
-    }
-  },
-  "principle": "DNS 서버 주소는 192.168.20.53이고, DNS가 알려주는 포털 주소는 192.168.20.100이다. 두 역할을 섞지 않는다.",
+  "principle": "연결, 숫자 주소 통신, 이름 조회, 웹페이지 확인을 차례로 완료하며 진행한다.",
   "sections": [
     {
-      "heading": "장비와 주소 배치하기",
-      "importance": "✅",
+      "heading": "장비와 연결 자리 정하기",
       "body": [
+        {
+          "kind": "paragraph",
+          "text": "먼저 어떤 장비를 어디에 연결할지 정한다. 장비 연결 구조를 토폴로지라고 한다."
+        },
+        {
+          "kind": "paragraph",
+          "text": "인트라넷은 조직 구성원이 내부 업무에 쓰는 네트워크다. 이 안에서 직원이 공지와 업무 자료를 보는 웹사이트를 내부 포털이라 부른다."
+        },
+        {
+          "kind": "paragraph",
+          "text": "서버는 다른 컴퓨터의 요청에 정보나 기능을 제공하는 역할이다. 통신할 장비를 찾는 숫자 주소를 IP 주소라고 한다. 두 서버가 맡은 일을 주소와 짝지어 보자."
+        },
         {
           "kind": "table",
           "headers": [
-            "구간",
-            "시간",
-            "활동"
+            "실습 이름",
+            "역할",
+            "IP 주소"
           ],
           "rows": [
             [
-              "첫 설명",
-              "15분",
-              "새 개념과 판단 기준을 본다."
+              "IntranetServer",
+              "포털 웹페이지를 보내는 웹 서버",
+              "192.168.20.100"
             ],
             [
-              "첫 해보기",
-              "10분",
-              "완성 예시를 실행하고 결과를 확인한다."
-            ],
-            [
-              "두 번째 설명",
-              "15분",
-              "동작 과정과 실패 원인을 연결한다."
-            ],
-            [
-              "두 번째 해보기",
-              "10분",
-              "혼자 판단하고 도전 문제로 마무리한다."
+              "DNSServer",
+              "이름에 맞는 주소를 알려 주는 DNS 서버",
+              "192.168.20.53"
             ]
           ]
         },
         {
           "kind": "paragraph",
-          "text": "IP 주소는 통신할 장비를 찾는 숫자 주소다. 게이트웨이는 다른 망으로 갈 때 먼저 거치는 라우터의 주소다. 아래 표는 장비마다 입력할 IP와 게이트웨이, 연결할 포트를 정리한 것이다."
+          "text": "두 영어 표시는 장비를 구별하려 붙인 실습용 이름이다. 이름을 묻는 곳과 페이지를 받는 곳을 서로 다른 장비로 연결한다."
+        },
+        {
+          "kind": "paragraph",
+          "text": "그림의 연결부터 복습하자. `Switch0`은 같은 망의 장비를 연결하는 스위치이고, `Router0`은 서로 다른 망 사이로 데이터를 전달하는 라우터다. VLAN은 한 스위치 안에서 나눈 통신 그룹이다. `DEV`와 `SEC`는 각각 VLAN 10과 20에 붙인 실습용 이름이다. 라우터가 두 그룹 사이를 이어 주는 일을 라우팅이라고 한다."
+        },
+        {
+          "kind": "paragraph",
+          "text": "`Fa0/1`과 `G0/0`은 케이블을 꽂는 연결 단자, 즉 장비 포트의 이름이다. Fa는 FastEthernet, G는 GigabitEthernet을 줄인 표기다. `access`는 해당 스위치 포트를 한 VLAN에 소속시키는 설정이고, `2960`과 `2911`은 장비 모델명이다."
+        },
+        {
+          "kind": "paragraph",
+          "text": "서브넷 마스크는 IP 주소에서 같은 망에 속하는 범위를 구분하는 값이다. 이번 구성의 `/24`와 `255.255.255.0`은 같은 마스크를 나타낸다."
+        },
+        {
+          "kind": "paragraph",
+          "text": "게이트웨이는 다른 망으로 갈 때 먼저 거치는 라우터의 주소다. 아래 표는 장비마다 입력할 IP와 게이트웨이, 연결할 포트를 정리한 것이다."
+        },
+        {
+          "kind": "image",
+          "src": "assets/l4_topology.png",
+          "caption": "정상 DNS 토폴로지 — PC 네 대와 Switch0·Router0·DNS·포털 서버를 실습 포트대로 연결한다.",
+          "text_content": "정상 DNS 실습 구성 · 장비와 포트 배치\n실습 구성도 · 검은 선 = 연결   /   점선 경계 = VLAN\nVLAN 10 · DEV\n192.168.10.0/24\nVLAN 20 · SEC    192.168.20.0/24\nPC0\n192.168.10.10 /24\nPC1\n192.168.10.20 /24\nPC2\n192.168.20.10 /24\nPC3\n192.168.20.20 /24\n1\n2\n3\n4\n5\n6\n7\n8\n9\nSwitch0 · 2960\nRouter0 · 2911\nDNSServer\n192.168.20.53\nIntranetServer\n192.168.20.100\nFa0/1 · VLAN 10\nFa0/2\nG0/0 · 192.168.10.1\nG0/1 · 192.168.20.1\nFa0/5\nFa0/6\nFa0/7\nFa0/8\nFa0/3\nFa0/4\n1–2, 5번 포트: VLAN 10\n3–4, 6–8번 포트: VLAN 20\n같은 스위치 안에서 포트를 나눈다.\n모든 장비의 마스크는 255.255.255.0이다. Router0의 두 선은 각 VLAN의 access 포트에 연결한다."
+        },
+        {
+          "kind": "paragraph",
+          "text": "PC0·PC1은 왼쪽, PC2·PC3과 서버 두 대는 오른쪽에 놓는다. 가운데 Switch0 한 대의 포트를 두 그룹으로 나누고 Router0의 두 연결을 각 그룹에 붙인다. 아래 표의 장비 이름과 포트를 그림에서 찾아본 뒤 연결한다."
         },
         {
           "kind": "table",
@@ -135,14 +154,13 @@
               "Server-PT 이름을 각각 DNSServer와 IntranetServer로 바꾼다.",
               "`Copper Straight-Through`으로 PC0~PC3을 Fa0/1~Fa0/4, Router0 두 선을 Fa0/5~Fa0/6, 서버 두 대를 Fa0/7~Fa0/8에 연결한다."
             ],
-            "note": "선의 끝이 초록색이 될 때까지 기다린다."
+            "note": "PC·서버와 스위치 사이의 연결 상태를 확인한다. 라우터 쪽은 다음 절에서 연결 단자를 켠 뒤 초록색 상태인지 확인한다."
           }
         }
       ]
     },
     {
-      "heading": "VLAN과 Router0 연결하기",
-      "importance": "✅",
+      "heading": "두 VLAN 사이의 통신 길 만들기",
       "body": [
         {
           "kind": "paragraph",
@@ -152,7 +170,7 @@
           "kind": "image",
           "src": "assets/l4_route.png",
           "caption": "그림 4-1. VLAN 간 DNS 질의 — 같은 Switch0을 Router0 양쪽에서 사용하며 DNS 서버까지 도달한다.",
-          "text_content": "DNS 질의가 VLAN 10에서 VLAN 20으로 건너간다\n실습 구성도 · 검은 선 = 연결   /   점선 경계 = VLAN   /   봉투 = 현재 패킷   /   나머지 PC 생략\nVLAN 10 · DEV\n192.168.10.0/24\nVLAN 20 · SEC    192.168.20.0/24\nPC0\n192.168.10.10 /24\n1\n2\n3\n4\n5\n6\n7\n8\n9\nSwitch0 · 2960\nRouter0 · 2911\nDNSServer\n192.168.20.53\nIntranetServer\n192.168.20.100\nFa0/1 · VLAN 10\nG0/0 · 192.168.10.1\nG0/1 · 192.168.20.1\nFa0/5\nFa0/6\nFa0/7\nFa0/8\n1–2, 5번 포트: VLAN 10\n3–4, 6–8번 포트: VLAN 20\n같은 스위치 안에서 포트를 나눈다.\nDNS 질문: portal.a-company.test의 A?\nG0/1 · 192.168.20.1\nFa0/6\n모든 장비의 마스크는 255.255.255.0이다. Router0의 두 선은 각 VLAN의 access 포트에 연결한다."
+          "text_content": "DNS 질의가 VLAN 10에서 VLAN 20으로 건너간다\n실습 구성도 · 검은 선 = 연결   /   점선 경계 = VLAN   /   봉투 = 현재 패킷   /   나머지 PC 생략\nVLAN 10 · DEV\n192.168.10.0/24\nVLAN 20 · SEC    192.168.20.0/24\nPC0\n192.168.10.10 /24\n1\n2\n3\n4\n5\n6\n7\n8\n9\nSwitch0 · 2960\nRouter0 · 2911\nDNSServer\n192.168.20.53\nIntranetServer\n192.168.20.100\nFa0/1 · VLAN 10\nG0/0 · 192.168.10.1\nG0/1 · 192.168.20.1\nFa0/5\nFa0/6\nFa0/7\nFa0/8\n1–2, 5번 포트: VLAN 10\n3–4, 6–8번 포트: VLAN 20\n같은 스위치 안에서 포트를 나눈다.\nDNS 질문: portal.a-company.test의 A?\nG0/0 · 192.168.10.1\nG0/1 · 192.168.20.1\nFa0/6\n모든 장비의 마스크는 255.255.255.0이다. Router0의 두 선은 각 VLAN의 access 포트에 연결한다."
         },
         {
           "kind": "paragraph",
@@ -232,8 +250,7 @@
       ]
     },
     {
-      "heading": "PC와 서버 주소 입력하기",
-      "importance": "✅",
+      "heading": "장비 주소를 넣고 숫자 주소로 확인하기",
       "body": [
         {
           "kind": "paragraph",
@@ -271,12 +288,15 @@
             "output_label": "결과 요약 — 첫 ping이 늦으면 같은 명령을 한 번 더 실행한다.",
             "verified": "example"
           }
+        },
+        {
+          "kind": "paragraph",
+          "text": "두 서버의 숫자 주소로 응답을 받으면 기본 경로 확인을 마친 것이다. 이제 이름을 물어볼 기능을 설정한다."
         }
       ]
     },
     {
-      "heading": "DNS와 HTTP 서비스 설정하기",
-      "importance": "❗",
+      "heading": "이름 조회를 설정하고 응답 확인하기",
       "body": [
         {
           "kind": "paragraph",
@@ -305,6 +325,24 @@
           }
         },
         {
+          "kind": "paragraph",
+          "text": "PC0의 `DNS Server` 칸에는 이름을 물어볼 `.53`을 넣는다. `nslookup`은 이름을 물어본 결과를 보여 주는 명령이다."
+        },
+        {
+          "kind": "task",
+          "task_type": "action",
+          "instruction": "PC0에 질문받을 서버를 지정하고 이름의 응답 주소를 확인하자.",
+          "element": {
+            "kind": "tool_steps",
+            "tool": "Cisco Packet Tracer 9.0.1",
+            "steps": [
+              "PC0의 `Desktop > IP Configuration`에서 DNS Server에 `192.168.20.53`을 입력한다.",
+              "`Desktop > Command Prompt`에서 `nslookup portal.a-company.test`를 실행해 `192.168.20.100`이 나오는지 확인한다."
+            ],
+            "note": "이름 조회가 실패하면 PC0의 DNS Server 주소와 DNSServer의 A 레코드를 다시 비교한다."
+          }
+        },
+        {
           "kind": "image",
           "src": "assets/l4_settings.png",
           "caption": "그림 4-2. 설정 값과 장비의 대응 — 게이트웨이, 질문할 DNS, A 레코드의 웹 서버 주소를 구분한다.",
@@ -317,6 +355,19 @@
         {
           "kind": "paragraph",
           "text": "오른쪽에서는 DNSServer의 A 레코드가 아래 IntranetServer `.100`을 가리킨다. PC0의 DNS Server에 `.100`을 넣으면 웹 서버에 DNS 질문을 보내게 된다. A 레코드에 `.53`을 넣으면 포털 이름이 DNS 서버를 가리킨다. 주소를 입력할 때 값에서 해당 장비까지 손으로 선을 따라가 보자."
+        },
+        {
+          "kind": "paragraph",
+          "text": "질문받은 서버가 `.53`이고 답에 나온 포털 주소가 `.100`이면 이름 조회 설정을 마쳤다. 마지막으로 그 주소에서 보낼 웹페이지를 준비한다."
+        }
+      ]
+    },
+    {
+      "heading": "웹페이지를 준비하고 이름으로 접속하기",
+      "body": [
+        {
+          "kind": "paragraph",
+          "text": "이제 IntranetServer가 보낼 첫 화면을 만든다. 이름 조회가 성공한 상태에서 실제 페이지도 받을 수 있는지 확인하는 절이다."
         },
         {
           "kind": "paragraph",
@@ -347,29 +398,26 @@
         },
         {
           "kind": "paragraph",
-          "text": "PC0에는 이름을 물어볼 곳도 알려 줘야 한다. `DNS Server` 칸에는 질문받을 `.53`을 넣는다. `nslookup`은 이름을 물어본 결과를 보여 주는 명령이다. `Web Browser`는 웹페이지를 여는 도구이고, 주소 앞의 `http://`는 HTTP로 접속한다는 표시다."
+          "text": "`Web Browser`는 웹페이지를 여는 도구이고, 주소 앞의 `http://`는 HTTP로 접속한다는 표시다."
         },
         {
           "kind": "task",
           "task_type": "action",
-          "instruction": "PC0의 DNS 서버를 지정하고 이름 조회와 웹 접속을 확인하자.",
+          "instruction": "같은 이름으로 웹페이지를 열고 정상 구성을 저장하자.",
           "element": {
             "kind": "tool_steps",
             "tool": "Cisco Packet Tracer 9.0.1",
             "steps": [
-              "PC0의 `Desktop > IP Configuration`에서 DNS Server에 `192.168.20.53`을 입력한다.",
-              "`Desktop > Command Prompt`에서 `nslookup portal.a-company.test`를 실행해 `192.168.20.100`이 나오는지 확인한다.",
               "`Desktop > Web Browser`를 열고 주소창에 `http://portal.a-company.test`를 입력한다.",
-              "`A사 내부 포털 - 정상 서버` 문구가 보이면 저장한다."
+              "`A사 내부 포털 - 정상 서버` 문구가 보이면 `File > Save As`(다른 이름으로 저장)에서 `day03_dns_normal.pkt`로 저장한다."
             ],
-            "note": "이름 조회가 실패하면 PC0의 DNS Server 주소와 DNSServer의 A 레코드를 다시 비교한다."
+            "note": "이름 조회가 .100을 반환했는지 먼저 확인하고, 페이지가 열리지 않으면 IntranetServer의 HTTP 상태와 저장한 문구를 확인한다."
           }
         }
       ]
     },
     {
       "heading": "챙겨 가기 — 한눈 정리",
-      "importance": "",
       "body": [
         {
           "kind": "table",
@@ -404,7 +452,7 @@
       ]
     }
   ],
-  "closing": "정상 상태를 저장해 두자. 다음 실습에서는 웹 서버를 한 대 더 놓고, 이름에 대응하는 주소가 바뀌었을 때 PC의 접속 대상도 달라지는지 한 단계씩 관찰한다.",
+  "closing": "정상 상태를 `day03_dns_normal.pkt`로 저장해 두자. 다음 실습에서는 웹 서버를 한 대 더 놓고, 이름에 대응하는 주소가 바뀌었을 때 PC의 접속 대상도 달라지는지 관찰한다.",
   "learning_terms": [
     {
       "term": "A 레코드",
@@ -423,7 +471,7 @@
     {
       "term": "토폴로지",
       "aliases": [],
-      "introduced_by": "이런 연결 구조를 토폴로지라고 한다."
+      "introduced_by": "장비 연결 구조를 토폴로지라고 한다."
     },
     {
       "term": "IP 주소",
@@ -631,14 +679,14 @@
     {
       "term": "IntranetServer",
       "aliases": [],
-      "introduced_by": "`IntranetServer`는 포털 웹페이지를 보내는 웹 서버"
+      "introduced_by": "포털 웹페이지를 보내는 웹 서버"
     },
     {
       "term": "DNSServer",
       "aliases": [
         "DNS 서버"
       ],
-      "introduced_by": "`DNSServer`는 이름에 맞는 주소를 알려 주는 DNS 서버"
+      "introduced_by": "이름에 맞는 주소를 알려 주는 DNS 서버"
     }
   ]
 }

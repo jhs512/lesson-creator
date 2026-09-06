@@ -4,48 +4,14 @@
   "lead": "DNS 서버 한 대가 세상의 모든 이름과 주소를 들고 있을 수는 없다. 그래서 이름의 점을 경계로 담당 범위를 나누고, 답을 가진 서버를 찾아간다. 이번 시간에는 이름을 나누는 방법과 여러 서버가 답을 찾는 과정을 알아보자.",
   "toc": [
     "도메인 이름을 오른쪽부터 읽기",
-    "Root·TLD·권한 서버 구분하기",
-    "재귀 질의와 반복 질의 비교하기",
+    "각 범위를 맡은 서버 구분하기",
+    "질문을 이어 가는 주체 따라가기",
     "조회 경로 복원하기"
   ],
-  "preview": {
-    "intro": "한 교시의 흐름은 다음과 같다.",
-    "element": {
-      "kind": "table",
-      "headers": [
-        "구간",
-        "시간",
-        "활동"
-      ],
-      "rows": [
-        [
-          "첫 설명",
-          "15분",
-          "새 개념과 판단 기준을 본다."
-        ],
-        [
-          "첫 해보기",
-          "10분",
-          "완성 예시를 실행하고 결과를 확인한다."
-        ],
-        [
-          "두 번째 설명",
-          "15분",
-          "동작 과정과 실패 원인을 연결한다."
-        ],
-        [
-          "두 번째 해보기",
-          "10분",
-          "혼자 판단하고 도전 문제로 마무리한다."
-        ]
-      ]
-    }
-  },
   "principle": "주소를 묻는 PC, 다른 서버에 대신 물어보는 DNS 서버, 원본 정보를 가진 DNS 서버의 역할을 구분한다.",
   "sections": [
     {
       "heading": "도메인 이름을 오른쪽부터 읽기",
-      "importance": "✅",
       "body": [
         {
           "kind": "paragraph",
@@ -100,8 +66,7 @@
       ]
     },
     {
-      "heading": "Root·TLD·권한 서버 구분하기",
-      "importance": "✅",
+      "heading": "각 범위를 맡은 서버 구분하기",
       "body": [
         {
           "kind": "paragraph",
@@ -162,6 +127,14 @@
           }
         },
         {
+          "kind": "paragraph",
+          "text": "흔한 오해는 루트 서버가 최종 IP 주소를 모두 알려준다고 생각하는 것이다. 루트와 TLD는 주로 다음 책임자의 위치를 안내하고, 최종 레코드는 권한 서버가 제공한다."
+        },
+        {
+          "kind": "paragraph",
+          "text": "아래 Python 코드는 정해 둔 설명을 순서대로 출력하는 학습용 모형이다. 실제 DNS 서버에 질문하지 않는다. Python 실행 환경에서는 코드를 새 파일에 저장해 실행하고, 환경이 없으면 함께 제시된 출력을 읽으며 같은 순서를 확인한다."
+        },
+        {
           "kind": "task",
           "task_type": "action",
           "instruction": "완성 코드를 실행해 계층 안내가 최종 주소로 좁혀지는 순서를 확인하자.",
@@ -176,7 +149,25 @@
         },
         {
           "kind": "paragraph",
-          "text": "흔한 오해는 루트 서버가 최종 IP 주소를 모두 알려준다고 생각하는 것이다. 루트와 TLD는 주로 다음 책임자의 위치를 안내하고, 최종 레코드는 권한 서버가 제공한다."
+          "text": "출력의 앞 두 줄은 다음 담당자 안내이고 마지막 줄이 주소 응답이다. 아래 명령은 실제 공개 도메인의 담당 서버 이름을 확인하는 추가 방법이다."
+        },
+        {
+          "kind": "supplement",
+          "title": "NS 레코드로 담당 서버 확인하기",
+          "body": [
+            {
+              "kind": "paragraph",
+              "text": "담당 서버의 이름을 명령으로도 확인해 보자. `-type=ns`는 주소 대신 NS 레코드를 질문하라는 선택이다. NS 레코드는 그 이름의 구역을 담당하는 DNS 서버 이름을 알려주는 정보다. 출력의 `nameserver`도 ‘이름 서버’를 뜻한다."
+            },
+            {
+              "kind": "command",
+              "shell": "cmd",
+              "src": "C:\\> nslookup -type=ns example.com",
+              "output": "example.com nameserver = a.iana-servers.net\nexample.com nameserver = b.iana-servers.net",
+              "output_label": "출력 형식 설명용 예시 — 아래 이름은 담당 서버 표시를 읽는 예이며 현재 실시간 조회 결과로 수집한 값이 아니다. 실제 응답과 대조해 읽자.",
+              "verified": "example"
+            }
+          ]
         },
         {
           "kind": "paragraph",
@@ -185,8 +176,7 @@
       ]
     },
     {
-      "heading": "재귀 질의와 반복 질의 비교하기",
-      "importance": "❗",
+      "heading": "질문을 이어 가는 주체 따라가기",
       "body": [
         {
           "kind": "paragraph",
@@ -253,6 +243,10 @@
           ]
         },
         {
+          "kind": "paragraph",
+          "text": "그림에서 본 질문 수를 코드의 두 목록으로 옮겨 보자. 여기서도 실제 통신은 하지 않으며, PC의 부탁 한 번과 이를 처리하는 서버의 여러 질문을 비교한다."
+        },
+        {
           "kind": "task",
           "task_type": "experiment",
           "instruction": "완성 코드를 실행해 사용자의 질문 수와 재귀 리졸버의 외부 질문 수를 비교하자.",
@@ -277,26 +271,17 @@
         },
         {
           "kind": "paragraph",
-          "text": "담당 서버의 이름을 명령으로도 확인해 보자. `-type=ns`는 주소 대신 NS 레코드를 질문하라는 선택이다. NS 레코드는 그 이름의 구역을 담당하는 DNS 서버 이름을 알려주는 정보다. 출력의 `nameserver`도 ‘이름 서버’를 뜻한다."
-        },
-        {
-          "kind": "command",
-          "shell": "cmd",
-          "src": "C:\\> nslookup -type=ns example.com",
-          "output": "example.com nameserver = a.iana-servers.net\nexample.com nameserver = b.iana-servers.net",
-          "output_label": "출력 형식 설명용 예시 — 아래 이름은 담당 서버 표시를 읽는 예이며 현재 실시간 조회 결과로 수집한 값이 아니다. 실제 응답과 대조해 읽자.",
-          "verified": "example"
-        },
-        {
-          "kind": "paragraph",
           "text": "이름의 담당 범위와 질문을 이어가는 주체를 함께 배웠다. 이제 섞인 기록을 순서대로 놓아 전체 흐름을 복원해 보자."
         }
       ]
     },
     {
       "heading": "조회 경로 복원하기",
-      "importance": "❗",
       "body": [
+        {
+          "kind": "paragraph",
+          "text": "어떤 서버가 무엇을 답했는지 배웠다. 기록을 정렬할 때에는 각 답을 받은 재귀 리졸버가 다음 질문을 보낸다는 점까지 설명해 보자."
+        },
         {
           "kind": "task",
           "task_type": "challenge",
@@ -357,7 +342,6 @@
     },
     {
       "heading": "챙겨 가기 — 한눈 정리",
-      "importance": "",
       "body": [
         {
           "kind": "table",

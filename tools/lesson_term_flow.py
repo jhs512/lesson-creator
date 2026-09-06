@@ -118,6 +118,10 @@ def _visible_units(page):
         kind = el.get("kind")
         if kind == "paragraph":
             yield unit(path + ".text", el.get("text", ""))
+        elif kind == "supplement":
+            # Supplement titles are roadmaps, like section headings.
+            for i, child in enumerate(el.get("body", [])):
+                yield from element(child, f"{path}.body[{i}]")
         elif kind == "definition":
             en = "(" + el["en"] + ")" if el.get("en") else ""
             yield unit(path, el.get("term", "") + en + " — " + el.get("text", ""))
