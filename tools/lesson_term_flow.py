@@ -118,6 +118,12 @@ def _visible_units(page):
         kind = el.get("kind")
         if kind == "paragraph":
             yield unit(path + ".text", el.get("text", ""))
+        elif kind == "checkpoint_question":
+            yield unit(path + ".question", el.get("question", ""), False)
+            for i, option in enumerate(el.get("options", [])):
+                yield unit(f"{path}.options[{i}].text", option.get("text", ""), False)
+            for i, option in enumerate(el.get("options", [])):
+                yield unit(f"{path}.options[{i}].feedback", option.get("feedback", ""), False)
         elif kind == "supplement":
             # Supplement titles are roadmaps, like section headings.
             for i, child in enumerate(el.get("body", [])):

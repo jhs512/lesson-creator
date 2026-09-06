@@ -64,6 +64,17 @@ def render_element(el, indent=""):
     kind = el["kind"]
     if kind == "paragraph":
         return [indent + esc_block(el["text"])]
+    if kind == "checkpoint_question":
+        lines = [indent + "<details>", indent + f"<summary>{el['number']}번</summary>",
+                 indent + "\t" + esc(el["question"])]
+        lines += [indent + "\t- " + label + ". " + esc(option["text"])
+                  for label, option in zip("ABCD", el["options"])]
+        lines += [indent + "\t<details>", indent + "\t<summary>정답·해설 보기</summary>",
+                  indent + "\t\t정답: " + el["correct"]]
+        lines += [indent + "\t\t- " + label + ". " + esc(option["feedback"])
+                  for label, option in zip("ABCD", el["options"])]
+        lines += [indent + "\t</details>", indent + "</details>"]
+        return lines
     if kind == "supplement":
         lines = [indent + "<details>", indent + "<summary>보충 — " + esc(el["title"]) + "</summary>"]
         for child in el["body"]:
@@ -269,9 +280,10 @@ def render(page):
         lines.append("<summary>도전 문제 — 더 파고들고 싶다면</summary>")
         lines += render_extra(hp)
         lines.append("</details>")
-    lines.append("## 되새김 문제")
-    lines.append("다음 질문에 말로 답할 수 있으면 이번 시간을 제대로 이해한 것이다.")
-    lines += ["- " + esc(q) for q in page["review"]]
+    if page.get("review"):
+        lines.append("## 되새김 문제")
+        lines.append("다음 질문에 말로 답할 수 있으면 이번 시간을 제대로 이해한 것이다.")
+        lines += ["- " + esc(q) for q in page["review"]]
     return "\n".join(lines)
 
 

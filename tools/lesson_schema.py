@@ -23,6 +23,7 @@ Page (type: "lesson" | "material")
     sections: [Section]                    # 과제는 섹션 body 안 task 요소
     extra_tasks?: [ExtraTask] (기존 역할 미지정 교시는 1개 이상)    # "추가 과제 — 빨리 끝났다면" 토글
     hard_problem?: ExtraTask               # "도전 문제" 토글 (2과목 규격)
+    checkpoint_count?: int                # 마지막 절의 4지선다 점검문제 수, review는 빈 목록
     require_final_challenge?: bool         # 사용자가 요청한 마지막 challenge 누락 방지
     closing?: str                          # 다음 시간 예고 한 줄
     review: [str] (정확히 3개)
@@ -93,7 +94,7 @@ INTENTS = {"normal", "preview", "reinterpret", "intentional_error", "continuatio
 SHELLS = {"cmd", "powershell", "terminal"}
 TASK_TYPES = {"predict", "experiment", "action", "challenge"}
 ELEMENT_KINDS = {"paragraph", "definition", "bullets", "code", "command",
-                 "tool_steps", "image", "table", "task", "supplement", "numbered_list"}
+                 "tool_steps", "image", "table", "task", "supplement", "numbered_list", "checkpoint_question"}
 LESSON_ROLES = {"concept", "guided_practice", "integrated_practice"}
 
 MARK_START = "<<<<<<<<<<<< 수정 시작 <<<<<<<<<<<<"
@@ -132,6 +133,26 @@ def _validate_element(errors, path, el, allow_task=True):
     if kind == "paragraph":
         if not el.get("text", "").strip():
             _err(errors, path, "paragraph.text 비어 있음")
+    elif kind == "checkpoint_question":
+        for key in ("question",):
+            if not isinstance(el.get(key), str) or not el[key].strip():
+                _err(errors, path, f"checkpoint_question.{key} 필수")
+        if type(el.get("number")) is not int or el["number"] < 1:
+            _err(errors, path, "문항 number는 양의 정수")
+        options = el.get("options")
+        if not isinstance(options, list) or len(options) != 4:
+            _err(errors, path, "점검문제 선택지는 정확히 4개")
+        else:
+            texts = []
+            for option in options:
+                if not isinstance(option, dict) or any(not isinstance(option.get(k), str) or not option[k].strip() for k in ("text", "feedback")):
+                    _err(errors, path, "각 선택지 text와 feedback 필수")
+                else:
+                    texts.append(option["text"].strip())
+            if len(set(texts)) != len(texts):
+                _err(errors, path, "점검문제 선택지 중복")
+        if el.get("correct") not in ("A", "B", "C", "D"):
+            _err(errors, path, "점검문제 correct는 A·B·C·D 중 하나")
     elif kind == "supplement":
         if not isinstance(el.get("title"), str) or not el["title"].strip():
             _err(errors, path, "supplement.title 필수")
@@ -287,12 +308,23 @@ def validate(page):
     if role == "concept" and walkthrough:
         _err(errors, "walkthrough", "개념 교시는 따라 하기 단계로 렌더하지 않는다")
     review = page.get("review", [])
-    if not walkthrough and len(review) != 3:
+    if not walkthrough and "checkpoint_count" not in page and len(review) != 3:
         _err(errors, "review", f"되새김 질문은 정확히 3개 ({len(review)}개)")
 
     sections = page.get("sections", [])
     if not sections:
         _err(errors, "sections", "섹션이 없다")
+    if "checkpoint_count" in page:
+        count = page["checkpoint_count"]
+        quiz = [(si, el) for si, sec in enumerate(sections) for el in sec.get("body", []) if el.get("kind") == "checkpoint_question"]
+        if type(count) is not int or count < 1:
+            _err(errors, "checkpoint_count", "양의 정수여야 한다")
+        elif len(quiz) != count or [el.get("number") for _, el in quiz] != list(range(1, count + 1)):
+            _err(errors, "checkpoint_count", "요청한 문항 수와 1부터 연속된 번호를 맞춘다")
+        if any(si != len(sections)-1 for si, _ in quiz):
+            _err(errors, "checkpoint_count", "점검문제는 마지막 절에 모은다")
+        if review or page.get("require_final_challenge"):
+            _err(errors, "checkpoint_count", "점검문제로 교체할 때 이전 되새김·마지막 도전 요구를 제거한다")
     task_count = 0
     challenge_seen = False
     for si, sec in enumerate(sections):

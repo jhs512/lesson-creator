@@ -62,3 +62,33 @@ class RoleTests(unittest.TestCase):
    result=subprocess.run(cmd,capture_output=True,text=True)
    self.assertEqual(result.returncode,1);self.assertIn('언어 지정 없음',result.stdout)
 if __name__=='__main__':unittest.main()
+
+class CheckpointTests(unittest.TestCase):
+ def page(self):
+  p=sample();p['review']=[];p['checkpoint_count']=10
+  p['sections'][-1]['body']=[{'kind':'checkpoint_question','number':i,'question':'이름의 역할은?', 'correct':'B','options':[{'text':str(j),'feedback':'판단 근거 '+str(j)} for j in range(4)]} for i in range(1,11)]
+  return p
+ def test_count_and_number_gate(self):
+  p=self.page();self.assertEqual(validate(p),[])
+  p['sections'][-1]['body'].pop();self.assertTrue(any('문항 수' in e for e in validate(p)))
+ def test_options_answer_and_feedback_gate(self):
+  for key,value in [('correct','E'),('options',[{'text':'같음','feedback':'근거'}]*4)]:
+   p=self.page();p['sections'][-1]['body'][0][key]=value;self.assertTrue(validate(p))
+  p=self.page();del p['sections'][-1]['body'][0]['options'][0]['feedback'];self.assertTrue(validate(p))
+ def test_answer_toggle_nested_under_question(self):
+  from html.parser import HTMLParser
+  class Details(HTMLParser):
+   def __init__(self):super().__init__();self.depth=0;self.answers=0
+   def handle_starttag(self,tag,attrs):
+    if tag=='details':self.depth+=1
+   def handle_endtag(self,tag):
+    if tag=='details':self.depth-=1
+   def handle_data(self,data):
+    if '정답·해설 보기' in data:
+     assert self.depth==2;self.answers+=1
+  md=render(self.page());parser=Details();parser.feed(md)
+  self.assertEqual(parser.answers,10);self.assertEqual(parser.depth,0);self.assertNotIn('되새김 문제',md)
+ def test_choices_cannot_introduce_required_terms(self):
+  p=self.page();p['learning_terms']=[{'term':'새용어','introduced_by':'새용어 설명'}]
+  p['sections'][-1]['body'][0]['options'][0]['text']='새용어'
+  self.assertTrue(check_page(p)[1])
