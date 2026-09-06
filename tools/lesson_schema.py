@@ -23,6 +23,7 @@ Page (type: "lesson" | "material")
     sections: [Section]                    # 과제는 섹션 body 안 task 요소
     extra_tasks?: [ExtraTask] (기존 역할 미지정 교시는 1개 이상)    # "추가 과제 — 빨리 끝났다면" 토글
     hard_problem?: ExtraTask               # "도전 문제" 토글 (2과목 규격)
+    require_final_challenge?: bool         # 사용자가 요청한 마지막 challenge 누락 방지
     closing?: str                          # 다음 시간 예고 한 줄
     review: [str] (정확히 3개)
     fixtures?: {filename: content}         # 하니스가 실행 전 만들어 줄 파일들
@@ -279,6 +280,8 @@ def validate(page):
         _err(errors, "toc", f"미니 목차는 3~6개 ({len(toc)}개)")
     walkthrough = bool(page.get("walkthrough"))
     role = page.get("lesson_role")
+    if "require_final_challenge" in page and not isinstance(page["require_final_challenge"], bool):
+        _err(errors, "require_final_challenge", "true 또는 false여야 한다")
     if role is not None and role not in LESSON_ROLES:
         _err(errors, "lesson_role", f"수업 유형은 {sorted(LESSON_ROLES)} 중 하나")
     if role == "concept" and walkthrough:
@@ -303,8 +306,8 @@ def validate(page):
             _validate_element(errors, epath, el)
             if el.get("kind") == "task":
                 task_count += 1
-                if role == "concept" and el.get("task_type") != "predict":
-                    _err(errors, epath, "개념 교시의 필수 활동은 이해 확인(predict)으로 작성하고 실행·구성 과제는 실습 교시로 옮긴다")
+                if role == "concept" and el.get("task_type") not in ("predict", "challenge"):
+                    _err(errors, epath, "개념 교시는 이해 확인(predict)과 개념을 연결하는 도전(challenge)을 사용하고 실행·구성 과제는 실습 교시로 옮긴다")
                 if challenge_seen:
                     _err(errors, epath, "challenge 뒤에 또 과제가 있다 — 도전이 마지막이어야 한다")
                 if el.get("task_type") == "challenge":
@@ -315,6 +318,8 @@ def validate(page):
         _err(errors, "tasks", "마지막 과제(challenge형·직접 해보는 문제)가 없다")
     if role == "integrated_practice" and not challenge_seen:
         _err(errors, "tasks", "종합실습에는 스스로 연결해 완성하는 challenge 과제가 필요하다")
+    if page.get("require_final_challenge") and not challenge_seen:
+        _err(errors, "tasks", "요청된 마지막 도전문제(challenge)가 없다 — 되새김 질문으로 대신하지 않는다")
     if role == "guided_practice" and task_count == 0:
         _err(errors, "tasks", "따라 하는 실습 교시에는 실제 수행 과제가 필요하다")
 

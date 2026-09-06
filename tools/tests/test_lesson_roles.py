@@ -22,6 +22,18 @@ class RoleTests(unittest.TestCase):
  def test_concept_rejects_required_execution(self):
   p=sample();p['sections'][0]['body'].append({'kind':'task','task_type':'action','instruction':'구성한다.'})
   self.assertTrue(any('개념 교시' in e for e in validate(p)))
+ def test_requested_concept_challenge_cannot_be_replaced_by_review_questions(self):
+  p=sample();p['require_final_challenge']=True
+  self.assertTrue(any('요청된 마지막 도전문제' in e for e in validate(p)))
+  c=challenge();c['instruction']='주어진 사례의 통신 경로를 설명한다.'
+  c['requirements']=['주소와 역할을 연결한다.'];c['goal_output']='경로 설명과 근거'
+  c['answer']={'element':{'kind':'paragraph','text':'주소를 받은 뒤 웹 서버로 새 요청을 보낸다.'}}
+  p['sections'][-1]['body'].append(c);self.assertEqual(validate(p),[])
+  p['sections'][-1]['body'].append({'kind':'task','task_type':'predict','instruction':'또 다른 질문','answer':{'element':{'kind':'paragraph','text':'답'}}})
+  self.assertTrue(any('도전이 마지막' in e for e in validate(p)))
+ def test_final_challenge_requirement_must_be_boolean(self):
+  p=sample();p['require_final_challenge']='false'
+  self.assertTrue(any('true 또는 false' in e for e in validate(p)))
  def test_legacy_coding_gate_remains(self):
   p=sample();del p['lesson_role'];self.assertTrue(any('4~7' in e for e in validate(p)))
  def test_integrated_project_needs_one_coherent_challenge(self):
