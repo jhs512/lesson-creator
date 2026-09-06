@@ -33,6 +33,9 @@ def check_structure(page):
     def inspect_prose(text, path):
         if re.search(r"[①-⑳].*[①-⑳]", text):
             review.append((path, "문장 안에 순서 번호가 나열됨 — numbered_list로 항목을 나눌지 검수"))
+        if (re.search(r"구름|번개|지그재그|봉투\s*모양|아이콘\s*모양", text)
+                and re.search(r"표시|기호|뜻|의미|나타내", text)):
+            review.append((path, "그림 기호 자체의 설명이 있음 — 눈으로 알 수 있는 묘사인지, 기술 이해에 필요한 설명인지 검수"))
         for index, paragraph in enumerate(re.split(r"\n\s*\n", text)):
             normalized = re.sub(r"\s+", " ", paragraph.replace("`", "")).strip()
             # Short transitions often repeat usefully. This is a locator for

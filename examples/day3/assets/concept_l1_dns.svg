@@ -61,5 +61,5 @@
 <polyline points="1258.3,762.4 1237.895,741.83" fill="none" stroke="#008461" stroke-width="1" stroke-linejoin="round"/>
 <text x="150.00" y="869.60" font-family="NanumGothic, sans-serif" font-size="30" fill="#1573bb">질문 패킷의 목적지 = DNS 서버</text>
 <text x="990.00" y="869.60" font-family="NanumGothic, sans-serif" font-size="30" fill="#008461">응답 패킷의 목적지 = 내 PC</text>
-<text x="50.00" y="989.08" font-family="NanumGothic, sans-serif" font-size="24" fill="#697885">구름·지그재그 선은 여러 중간 망과 연결을 생략한 표시다. 웹페이지는 아직 받지 않았다.</text>
+<text x="50.00" y="989.08" font-family="NanumGothic, sans-serif" font-size="24" fill="#697885">DNS로 주소를 알아낸 다음, 그 주소로 웹 통신을 시작한다.</text>
 </svg>

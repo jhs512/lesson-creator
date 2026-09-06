@@ -29,6 +29,16 @@ def page(*body):
 
 
 class StructureTests(unittest.TestCase):
+    def test_obvious_diagram_legend_is_reviewed_without_failing(self):
+        p = page(prose("인터넷 구름과 번개, 지그재그 선은 중간 연결을 줄여 그린 기호다."))
+        passed, failed, review = check_structure(p)
+        self.assertEqual(failed, [])
+        self.assertTrue(any("그림 기호 자체" in reason for _, reason in review))
+
+    def test_packet_destination_explanation_is_not_diagram_legend(self):
+        p = page(prose("DNS 응답 패킷의 목적지는 PC이고, 응답 안의 A 값은 후속 웹 통신의 목적지로 사용된다."))
+        self.assertFalse(any("그림 기호 자체" in reason for _, reason in check_structure(p)[2]))
+
     def test_supplement_survives_markdown_and_html(self):
         p = page(prose("이름에 맞는 주소를 찾는다."), supplement(prose("추가 비교 설명이다.")))
         self.assertEqual(validate(p), [])

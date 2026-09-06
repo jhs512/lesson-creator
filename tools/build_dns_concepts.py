@@ -53,7 +53,7 @@ def create(out, font):
     d.envelope(1200,725,GREEN,1.1)
     d.text(150,842,'질문 패킷의 목적지 = DNS 서버',30,BLUE)
     d.text(990,842,'응답 패킷의 목적지 = 내 PC',30,GREEN)
-    d.footer('구름·지그재그 선은 여러 중간 망과 연결을 생략한 표시다. 웹페이지는 아직 받지 않았다.')
+    d.footer('DNS로 주소를 알아낸 다음, 그 주소로 웹 통신을 시작한다.')
     d.save()
 
     d=canvas('concept_l1_web','주소를 받은 뒤: 웹 서버로 보내는 새 통신','DNS가 알려준 IP를 목적지로 사용한다 · HTTPS의 기본 예')
@@ -94,11 +94,11 @@ def create(out, font):
     d.footer('루트와 .com의 담당 서버는 다음 담당 서버를 안내한다. 웹 서버의 위치와는 다른 관리 구조다.')
     d.save()
 
-    d=canvas('concept_l2_lookup','리졸버가 안내를 받아 다시 질문한다','캐시에 답이나 담당 서버 정보가 없는 경우를 단순화했다',h=1180)
+    d=canvas('concept_l2_lookup','부탁받은 DNS 서버가 주소를 찾아온다','아직 저장된 주소나 담당자 안내가 없는 경우',h=1180)
     d.pc(170,580,'내 PC','naver.com 조회',.95)
     d.server(615,580,s=1.1)
-    d.text(585,780,'재귀 리졸버',29,INK,True)
-    d.text(585,825,'대신 찾아주는 DNS 서버',26,GREY,True)
+    d.text(585,780,'부탁받은 DNS 서버',29,INK,True)
+    d.text(585,825,'내 PC 대신 주소를 찾는다',26,GREY,True)
     for y,name,info in [(240,'루트 서버','.com 담당 서버 안내'),(580,'.com TLD 서버','naver.com 담당 서버 안내'),(930,'권한 네임서버','담당 이름의 원본 답')]:
         d.server(1500,y,name,info,.95)
     arrow(d,[(280,540),(550,540)],'1 질문',335,490)
@@ -107,7 +107,7 @@ def create(out, font):
         source_y=480 if y<500 else 580 if y<700 else 680
         arrow(d,[(700,source_y),(left,source_y),(left,y),(1405,y)],q,905,y-44,BLUE)
         arrow(d,[(1405,y+80),(left+45,y+80),(left+45,source_y+30),(700,source_y+30)],a,905,y+88,GREEN,True)
-    d.footer('모든 오른쪽 서버에 질문을 보내는 주체는 같은 재귀 리졸버다. 각 선은 여러 망을 거치는 논리 통신이다.')
+    d.footer('부탁받은 DNS 서버가 안내를 따라 다음 담당자에게 질문하고, 구한 주소를 내 PC에 돌려준다.')
     d.save()
 
     d=canvas('concept_l3_records','레코드는 이름에 붙여 둔 정보다','질문할 정보의 종류에 따라 답의 의미가 달라진다')

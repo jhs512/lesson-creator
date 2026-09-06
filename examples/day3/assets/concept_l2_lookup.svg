@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1180" viewBox="0 0 1800 1180">
 <rect width="100%" height="100%" fill="white"/>
-<text x="50.00" y="64.80" font-family="NanumGothic, sans-serif" font-size="40" fill="#1a2834">리졸버가 안내를 받아 다시 질문한다</text>
-<text x="52.00" y="105.08" font-family="NanumGothic, sans-serif" font-size="24" fill="#697885">캐시에 답이나 담당 서버 정보가 없는 경우를 단순화했다</text>
+<text x="50.00" y="64.80" font-family="NanumGothic, sans-serif" font-size="40" fill="#1a2834">부탁받은 DNS 서버가 주소를 찾아온다</text>
+<text x="52.00" y="105.08" font-family="NanumGothic, sans-serif" font-size="24" fill="#697885">아직 저장된 주소나 담당자 안내가 없는 경우</text>
 <polyline points="50,129 1750,129" fill="none" stroke="#b8c5cd" stroke-width="1" stroke-linejoin="round"/>
 <polygon points="111.1,527.75 206.1,527.75 220.35,540.1 220.35,606.6 111.1,606.6" fill="#b9c3c8" stroke="#54646f" stroke-width="2"/>
 <polygon points="206.1,527.75 220.35,540.1 220.35,606.6 206.1,597.1" fill="#81929c" stroke="#54646f" stroke-width="2"/>
@@ -27,8 +27,8 @@
 <polyline points="589.7,610.8 589.7,616.3" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
 <polyline points="599.6,610.8 599.6,616.3" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
 <polyline points="609.5,610.8 609.5,616.3" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
-<text x="512.80" y="806.68" font-family="NanumGothic, sans-serif" font-size="29" fill="#1a2834">재귀 리졸버</text>
-<text x="450.34" y="848.92" font-family="NanumGothic, sans-serif" font-size="26" fill="#697885">대신 찾아주는 DNS 서버</text>
+<text x="466.12" y="806.68" font-family="NanumGothic, sans-serif" font-size="29" fill="#1a2834">부탁받은 DNS 서버</text>
+<text x="444.23" y="848.92" font-family="NanumGothic, sans-serif" font-size="26" fill="#697885">내 PC 대신 주소를 찾는다</text>
 <polygon points="1455.35,178.25 1518.05,178.25 1543.7,199.15 1481.0,199.15" fill="#f3efe1" stroke="#726f65" stroke-width="2"/>
 <polygon points="1518.05,178.25 1543.7,199.15 1543.7,296.05 1518.05,277.05" fill="#b4ad9b" stroke="#726f65" stroke-width="2"/>
 <polygon points="1455.35,178.25 1518.05,178.25 1518.05,277.05 1455.35,277.05" fill="#ded9c8" stroke="#726f65" stroke-width="2"/>
@@ -100,5 +100,5 @@
 <polygon points="700,710 714.9189035521364,701.8497658437285 714.9189035521364,718.1502341562715" fill="#008461" stroke="#008461" stroke-width="1"/>
 <rect x="900" y="985" width="143.015625" height="37" rx="2" fill="white" stroke="white" stroke-width="1"/>
 <text x="905.00" y="1012.84" font-family="NanumGothic, sans-serif" font-size="27" fill="#008461">7 주소 응답</text>
-<text x="50.00" y="1149.08" font-family="NanumGothic, sans-serif" font-size="24" fill="#697885">모든 오른쪽 서버에 질문을 보내는 주체는 같은 재귀 리졸버다. 각 선은 여러 망을 거치는 논리 통신이다.</text>
+<text x="50.00" y="1149.08" font-family="NanumGothic, sans-serif" font-size="24" fill="#697885">부탁받은 DNS 서버가 안내를 따라 다음 담당자에게 질문하고, 구한 주소를 내 PC에 돌려준다.</text>
 </svg>
