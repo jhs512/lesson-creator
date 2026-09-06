@@ -87,7 +87,42 @@
         },
         {
           "kind": "paragraph",
-          "text": "MX는 ‘이 도메인으로 오는 메일은 어느 서버가 받는가’를 알려준다. 예를 들어 someone@example.com으로 메일을 보낸다고 하자. 보내는 메일 서버가 example.com의 MX를 조회해 mail.example.com이라는 이름을 얻었다면, 이어서 그 이름의 IP 주소를 확인한다. 주소가 192.0.2.25라면 그 IP의 메일 서버에 연결해 메일을 전달한다."
+          "text": "MX는 ‘이 도메인으로 오는 메일은 어느 서버가 받는가’를 알려준다. 예를 들어 minsu@example.com으로 메일을 보낼 때, 보내는 메일 서버는 @ 뒤의 example.com을 대상으로 MX를 조회한다. DNS 답에서 읽을 핵심 항목은 다음과 같다. 설명용 예시이며 우선순위 숫자와 메일 서버 이름을 함께 받는다."
+        },
+        {
+          "kind": "table",
+          "headers": [
+            "조회한 도메인",
+            "종류",
+            "우선순위",
+            "메일을 받을 서버"
+          ],
+          "rows": [
+            [
+              "example.com",
+              "MX",
+              "10",
+              "mail1.example.com"
+            ],
+            [
+              "example.com",
+              "MX",
+              "20",
+              "mail2.example.com"
+            ]
+          ]
+        },
+        {
+          "kind": "numbered_list",
+          "items": [
+            "숫자가 작은 10의 mail1.example.com을 먼저 선택한다.",
+            "mail1.example.com의 IP 주소를 확인한다. 예를 들어 192.0.2.25라는 답을 얻었다면 그 IP로 연결해 메일을 전달한다.",
+            "첫 서버에 연결할 수 없으면 우선순위 20의 mail2.example.com을 시도한다. 이때도 접속할 IP 주소가 필요하다."
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "text": "MX에 적힌 10과 20은 서버 IP나 포트 번호가 아니라 시도 순서를 정하는 값이다. DNS는 메일을 받을 곳을 알려주고, 실제 메일 전달은 보내는 메일 서버가 그곳에 연결해 수행한다."
         },
         {
           "kind": "paragraph",
