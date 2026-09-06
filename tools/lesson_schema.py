@@ -86,6 +86,7 @@ learning_terms 활성 페이지의 모든 표시 image에는 text_content가 필
 text_content는 화면에 중복 출력하지 않으며 이미지의 표시 순서에서 검사한다.
 """
 import ast
+import ipaddress
 import json
 import re
 import sys
@@ -314,6 +315,31 @@ def validate(page):
     sections = page.get("sections", [])
     if not sections:
         _err(errors, "sections", "섹션이 없다")
+    if page.get("lesson_format") == "two_flow_50":
+        expected = [("explain", 1), ("read", 1), ("explain", 2), ("read", 2), ("quiz", 0)]
+        if [(s.get("phase"), s.get("flow")) for s in sections] != expected:
+            _err(errors, "lesson_format", "두 흐름의 설명·읽기·설명·읽기·점검 순서가 필요하다")
+        if page.get("session_minutes") != 50 or any(type(s.get("minutes")) is not int or s["minutes"] != 10 for s in sections):
+            _err(errors, "session_minutes", "각 10분, 총 50분이어야 한다")
+        if page.get("checkpoint_count") != 10:
+            _err(errors, "checkpoint_count", "two_flow_50의 마지막 10분은 점검문제 10개")
+    if page.get("public_ip_examples"):
+        # Check visible authored content, including image transcription, not external URLs.
+        def strings(value):
+            if isinstance(value, str):
+                yield value
+            elif isinstance(value, list):
+                for item in value: yield from strings(item)
+            elif isinstance(value, dict):
+                for key, item in value.items():
+                    if key not in ("src", "url", "capture"): yield from strings(item)
+        for value in strings(sections):
+            for literal in re.findall(r"(?<![\d.])(?:\d{1,3}\.){3}\d{1,3}(?![\d.])", value):
+                try:
+                    if not ipaddress.ip_address(literal).is_global:
+                        _err(errors, "public_ip_examples", f"공인 IP 예시가 아닌 주소: {literal}")
+                except ValueError:
+                    _err(errors, "public_ip_examples", f"유효하지 않은 IP: {literal}")
     if "checkpoint_count" in page:
         count = page["checkpoint_count"]
         quiz = [(si, el) for si, sec in enumerate(sections) for el in sec.get("body", []) if el.get("kind") == "checkpoint_question"]

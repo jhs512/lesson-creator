@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1060" viewBox="0 0 1800 1060">
 <rect width="100%" height="100%" fill="white"/>
 <text x="50.00" y="64.80" font-family="NanumGothic, sans-serif" font-size="40" fill="#1a2834">답이 달라지면 다음 접속 대상도 달라질 수 있다</text>
-<text x="52.00" y="105.08" font-family="NanumGothic, sans-serif" font-size="24" fill="#697885">주소는 설명용 값 · 변경이 정상인지 공격인지는 추가 근거로 판단한다</text>
+<text x="52.00" y="105.08" font-family="NanumGothic, sans-serif" font-size="24" fill="#697885">공인 주소를 사용한 가정 사례 · 변경이 정상인지 공격인지는 추가 근거로 판단한다</text>
 <polyline points="50,129 1750,129" fill="none" stroke="#b8c5cd" stroke-width="1" stroke-linejoin="round"/>
 <text x="65.00" y="215.36" font-family="NanumGothic, sans-serif" font-size="33" fill="#008461">정상 기준</text>
 <polygon points="156.64,297.1 234.64,297.1 246.34,307.24 246.34,361.84 156.64,361.84" fill="#b9c3c8" stroke="#54646f" stroke-width="2"/>
@@ -31,15 +31,15 @@
 <polyline points="1476.7,366.6 1476.7,371.35" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
 <polyline points="1485.25,366.6 1485.25,371.35" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
 <text x="1418.98" y="436.09" font-family="NanumGothic, sans-serif" font-size="27" fill="#1a2834">원래 웹 서버</text>
-<text x="1430.77" y="468.51" font-family="NanumGothic, sans-serif" font-size="23" fill="#697885">192.0.2.10</text>
+<text x="1402.89" y="468.51" font-family="NanumGothic, sans-serif" font-size="23" fill="#697885">104.16.132.229</text>
 <polyline points="315,340 570,340" fill="none" stroke="#008461" stroke-width="5" stroke-linejoin="round"/>
 <polygon points="570,340 555.0810964478636,348.15023415627144 555.0810964478636,331.84976584372856" fill="#008461" stroke="#008461" stroke-width="1"/>
 <rect x="325" y="279" width="202.8046875" height="37" rx="2" fill="white" stroke="white" stroke-width="1"/>
 <text x="330.00" y="306.84" font-family="NanumGothic, sans-serif" font-size="27" fill="#008461">받은 주소로 접속</text>
 <polyline points="1020,340 1395,340" fill="none" stroke="#008461" stroke-width="5" stroke-linejoin="round"/>
 <polygon points="1395,340 1380.0810964478637,348.15023415627144 1380.0810964478637,331.84976584372856" fill="#008461" stroke="#008461" stroke-width="1"/>
-<rect x="1065" y="279" width="149.0546875" height="37" rx="2" fill="white" stroke="white" stroke-width="1"/>
-<text x="1070.00" y="306.84" font-family="NanumGothic, sans-serif" font-size="27" fill="#008461">192.0.2.10</text>
+<rect x="1065" y="279" width="214.4921875" height="37" rx="2" fill="white" stroke="white" stroke-width="1"/>
+<text x="1070.00" y="306.84" font-family="NanumGothic, sans-serif" font-size="27" fill="#008461">104.16.132.229</text>
 <text x="65.00" y="615.36" font-family="NanumGothic, sans-serif" font-size="33" fill="#c63c39">예상과 다른 응답</text>
 <polygon points="156.64,697.1 234.64,697.1 246.34,707.24 246.34,761.84 156.64,761.84" fill="#b9c3c8" stroke="#54646f" stroke-width="2"/>
 <polygon points="234.64,697.1 246.34,707.24 246.34,761.84 234.64,754.04" fill="#81929c" stroke="#54646f" stroke-width="2"/>
@@ -68,14 +68,14 @@
 <polyline points="1476.7,766.6 1476.7,771.35" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
 <polyline points="1485.25,766.6 1485.25,771.35" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
 <text x="1418.98" y="836.09" font-family="NanumGothic, sans-serif" font-size="27" fill="#1a2834">다른 웹 서버</text>
-<text x="1430.77" y="868.51" font-family="NanumGothic, sans-serif" font-size="23" fill="#697885">192.0.2.20</text>
+<text x="1402.89" y="868.51" font-family="NanumGothic, sans-serif" font-size="23" fill="#697885">104.16.133.229</text>
 <polyline points="315,740 570,740" fill="none" stroke="#c63c39" stroke-width="5" stroke-linejoin="round"/>
 <polygon points="570,740 555.0810964478636,748.1502341562715 555.0810964478636,731.8497658437285" fill="#c63c39" stroke="#c63c39" stroke-width="1"/>
 <rect x="325" y="679" width="202.8046875" height="37" rx="2" fill="white" stroke="white" stroke-width="1"/>
 <text x="330.00" y="706.84" font-family="NanumGothic, sans-serif" font-size="27" fill="#c63c39">받은 주소로 접속</text>
 <polyline points="1020,740 1395,740" fill="none" stroke="#c63c39" stroke-width="5" stroke-linejoin="round"/>
 <polygon points="1395,740 1380.0810964478637,748.1502341562715 1380.0810964478637,731.8497658437285" fill="#c63c39" stroke="#c63c39" stroke-width="1"/>
-<rect x="1065" y="679" width="149.0546875" height="37" rx="2" fill="white" stroke="white" stroke-width="1"/>
-<text x="1070.00" y="706.84" font-family="NanumGothic, sans-serif" font-size="27" fill="#c63c39">192.0.2.20</text>
+<rect x="1065" y="679" width="214.4921875" height="37" rx="2" fill="white" stroke="white" stroke-width="1"/>
+<text x="1070.00" y="706.84" font-family="NanumGothic, sans-serif" font-size="27" fill="#c63c39">104.16.133.229</text>
 <text x="50.00" y="1029.08" font-family="NanumGothic, sans-serif" font-size="24" fill="#697885">정상 이전 · 원본 설정 오류 · 오래된 캐시 · 거짓 응답을 구분한다. 주소 변화만으로 공격을 확정하지 않는다.</text>
 </svg>

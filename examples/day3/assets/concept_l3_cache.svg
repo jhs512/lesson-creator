@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1210" viewBox="0 0 1800 1210">
 <rect width="100%" height="100%" fill="white"/>
 <text x="50.00" y="64.80" font-family="NanumGothic, sans-serif" font-size="40" fill="#1a2834">원본을 바꿔도 저장된 답은 잠시 남는다</text>
-<text x="52.00" y="105.08" font-family="NanumGothic, sans-serif" font-size="24" fill="#697885">10:00에 받은 답의 TTL은 300초 · 주소는 설명용 값</text>
+<text x="52.00" y="105.08" font-family="NanumGothic, sans-serif" font-size="24" fill="#697885">10:00에 받은 답의 TTL은 300초 · 공인 주소를 사용한 가정 사례</text>
 <polyline points="50,129 1750,129" fill="none" stroke="#b8c5cd" stroke-width="1" stroke-linejoin="round"/>
 <text x="70.00" y="237.60" font-family="NanumGothic, sans-serif" font-size="30" fill="#1573bb">10:00</text>
 <polygon points="240.94,245.35 303.94,245.35 313.39,253.54 313.39,297.64 240.94,297.64" fill="#b9c3c8" stroke="#54646f" stroke-width="2"/>
@@ -28,7 +28,8 @@
 <polyline points="824.5,301.0 824.5,304.75" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
 <polyline points="831.25,301.0 831.25,304.75" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
 <text x="767.76" y="361.09" font-family="NanumGothic, sans-serif" font-size="27" fill="#1a2834">재귀 리졸버</text>
-<text x="673.06" y="385.91" font-family="NanumGothic, sans-serif" font-size="23" fill="#697885">저장된 A: 192.0.2.10 · TTL 300</text>
+<text x="697.18" y="385.91" font-family="NanumGothic, sans-serif" font-size="23" fill="#697885">저장된 A: 104.16.132.229</text>
+<text x="792.78" y="417.19" font-family="NanumGothic, sans-serif" font-size="23" fill="#697885">TTL 300</text>
 <polygon points="1444.75,231.25 1494.25,231.25 1514.5,247.75 1465.0,247.75" fill="#f3efe1" stroke="#726f65" stroke-width="2"/>
 <polygon points="1494.25,231.25 1514.5,247.75 1514.5,324.25 1494.25,309.25" fill="#b4ad9b" stroke="#726f65" stroke-width="2"/>
 <polygon points="1444.75,231.25 1494.25,231.25 1494.25,309.25 1444.75,309.25" fill="#ded9c8" stroke="#726f65" stroke-width="2"/>
@@ -41,7 +42,7 @@
 <polyline points="1469.5,301.0 1469.5,304.75" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
 <polyline points="1476.25,301.0 1476.25,304.75" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
 <text x="1425.45" y="361.09" font-family="NanumGothic, sans-serif" font-size="27" fill="#1a2834">권한 서버</text>
-<text x="1380.87" y="385.91" font-family="NanumGothic, sans-serif" font-size="23" fill="#697885">원본 A: 192.0.2.10</text>
+<text x="1352.99" y="385.91" font-family="NanumGothic, sans-serif" font-size="23" fill="#697885">원본 A: 104.16.132.229</text>
 <polyline points="385,260 745,260" fill="none" stroke="#1573bb" stroke-width="4" stroke-linejoin="round"/>
 <polygon points="745,260 730.0810964478636,268.15023415627144 730.0810964478636,251.84976584372856" fill="#1573bb" stroke="#1573bb" stroke-width="1"/>
 <polyline points="745,325 385,325" fill="none" stroke="#008461" stroke-width="4" stroke-linejoin="round"/>
@@ -76,7 +77,8 @@
 <polyline points="824.5,641.0 824.5,644.75" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
 <polyline points="831.25,641.0 831.25,644.75" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
 <text x="767.76" y="701.09" font-family="NanumGothic, sans-serif" font-size="27" fill="#1a2834">재귀 리졸버</text>
-<text x="673.06" y="725.91" font-family="NanumGothic, sans-serif" font-size="23" fill="#697885">저장된 A: 192.0.2.10 · TTL 180</text>
+<text x="697.18" y="725.91" font-family="NanumGothic, sans-serif" font-size="23" fill="#697885">저장된 A: 104.16.132.229</text>
+<text x="792.78" y="757.19" font-family="NanumGothic, sans-serif" font-size="23" fill="#697885">TTL 180</text>
 <polygon points="1444.75,571.25 1494.25,571.25 1514.5,587.75 1465.0,587.75" fill="#f3efe1" stroke="#726f65" stroke-width="2"/>
 <polygon points="1494.25,571.25 1514.5,587.75 1514.5,664.25 1494.25,649.25" fill="#b4ad9b" stroke="#726f65" stroke-width="2"/>
 <polygon points="1444.75,571.25 1494.25,571.25 1494.25,649.25 1444.75,649.25" fill="#ded9c8" stroke="#726f65" stroke-width="2"/>
@@ -89,7 +91,7 @@
 <polyline points="1469.5,641.0 1469.5,644.75" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
 <polyline points="1476.25,641.0 1476.25,644.75" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
 <text x="1425.45" y="701.09" font-family="NanumGothic, sans-serif" font-size="27" fill="#1a2834">권한 서버</text>
-<text x="1380.87" y="725.91" font-family="NanumGothic, sans-serif" font-size="23" fill="#697885">원본 A: 192.0.2.20</text>
+<text x="1352.99" y="725.91" font-family="NanumGothic, sans-serif" font-size="23" fill="#697885">원본 A: 104.16.133.229</text>
 <polyline points="385,600 745,600" fill="none" stroke="#1573bb" stroke-width="4" stroke-linejoin="round"/>
 <polygon points="745,600 730.0810964478636,608.1502341562715 730.0810964478636,591.8497658437285" fill="#1573bb" stroke="#1573bb" stroke-width="1"/>
 <polyline points="745,665 385,665" fill="none" stroke="#008461" stroke-width="4" stroke-linejoin="round"/>
@@ -123,7 +125,8 @@
 <polyline points="824.5,981.0 824.5,984.75" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
 <polyline points="831.25,981.0 831.25,984.75" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
 <text x="767.76" y="1041.09" font-family="NanumGothic, sans-serif" font-size="27" fill="#1a2834">재귀 리졸버</text>
-<text x="683.16" y="1065.91" font-family="NanumGothic, sans-serif" font-size="23" fill="#697885">저장된 A: 192.0.2.20 · 새 TTL</text>
+<text x="697.18" y="1065.91" font-family="NanumGothic, sans-serif" font-size="23" fill="#697885">저장된 A: 104.16.133.229</text>
+<text x="802.88" y="1097.19" font-family="NanumGothic, sans-serif" font-size="23" fill="#697885">새 TTL</text>
 <polygon points="1444.75,911.25 1494.25,911.25 1514.5,927.75 1465.0,927.75" fill="#f3efe1" stroke="#726f65" stroke-width="2"/>
 <polygon points="1494.25,911.25 1514.5,927.75 1514.5,1004.25 1494.25,989.25" fill="#b4ad9b" stroke="#726f65" stroke-width="2"/>
 <polygon points="1444.75,911.25 1494.25,911.25 1494.25,989.25 1444.75,989.25" fill="#ded9c8" stroke="#726f65" stroke-width="2"/>
@@ -136,7 +139,7 @@
 <polyline points="1469.5,981.0 1469.5,984.75" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
 <polyline points="1476.25,981.0 1476.25,984.75" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
 <text x="1425.45" y="1041.09" font-family="NanumGothic, sans-serif" font-size="27" fill="#1a2834">권한 서버</text>
-<text x="1380.87" y="1065.91" font-family="NanumGothic, sans-serif" font-size="23" fill="#697885">원본 A: 192.0.2.20</text>
+<text x="1352.99" y="1065.91" font-family="NanumGothic, sans-serif" font-size="23" fill="#697885">원본 A: 104.16.133.229</text>
 <polyline points="385,940 745,940" fill="none" stroke="#1573bb" stroke-width="4" stroke-linejoin="round"/>
 <polygon points="745,940 730.0810964478636,948.1502341562715 730.0810964478636,931.8497658437285" fill="#1573bb" stroke="#1573bb" stroke-width="1"/>
 <polyline points="745,1005 385,1005" fill="none" stroke="#008461" stroke-width="4" stroke-linejoin="round"/>

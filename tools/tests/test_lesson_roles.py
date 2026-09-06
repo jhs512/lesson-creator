@@ -92,3 +92,21 @@ class CheckpointTests(unittest.TestCase):
   p=self.page();p['learning_terms']=[{'term':'새용어','introduced_by':'새용어 설명'}]
   p['sections'][-1]['body'][0]['options'][0]['text']='새용어'
   self.assertTrue(check_page(p)[1])
+
+class TwoFlowTests(unittest.TestCase):
+ def page(self):
+  p=CheckpointTests().page();p['lesson_format']='two_flow_50';p['session_minutes']=50
+  quiz=p['sections'][-1]
+  p['sections']=[{'heading':str(i),'body':[{'kind':'paragraph','text':'사례를 읽는다.'}],'phase':phase,'flow':flow,'minutes':10} for i,(phase,flow) in enumerate([('explain',1),('read',1),('explain',2),('read',2)])]+[dict(quiz,phase='quiz',flow=0,minutes=10)]
+  return p
+ def test_order_and_time_are_required(self):
+  p=self.page();self.assertEqual(validate(p),[])
+  p['sections'][1]['phase']='explain';self.assertTrue(validate(p))
+  p=self.page();p['sections'][1]['minutes']=20;self.assertTrue(validate(p))
+ def test_public_address_gate_includes_quiz_and_image_labels(self):
+  for where in ('question','image'):
+   p=self.page();p['public_ip_examples']=True
+   if where=='question':p['sections'][-1]['body'][0]['question']='192.168.0.10으로 보낸다.'
+   else:p['sections'][0]['body'].append({'kind':'image','src':'local.png','text_content':'192.0.2.10'})
+   self.assertTrue(any('공인 IP' in e for e in validate(p)))
+  p=self.page();p['public_ip_examples']=True;p['sections'][0]['body'][0]['text']='8.8.8.8에 질문한다.';self.assertEqual(validate(p),[])

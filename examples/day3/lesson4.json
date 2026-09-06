@@ -143,12 +143,12 @@
         },
         {
           "kind": "paragraph",
-          "text": "`Logical`은 장비와 케이블을 놓는 작업 화면이다. `Server-PT`는 서버 역할을 맡길 수 있는 가상 장비이고, `PC-PT`는 사용자 PC다. `Copper Straight-Through`는 이번 연결에 사용할 구리선 케이블 항목이다."
+          "text": "`Logical`은 장비와 케이블을 놓는 작업 화면이다. `Server-PT`는 서버 역할을 맡길 수 있는 가상 장비이고, `PC-PT`는 사용자 PC다. 인터페이스는 장비에서 케이블을 연결하는 통신 단자다. interface는 설정할 인터페이스를 선택하는 명령이다. Connections의 Automatically Choose Connection Type은 장비 두 개를 고르면 케이블과 사용할 포트를 자동 선택하는 도구다. 아래 표는 연결 기준이며 자동 선택 결과는 연결 뒤 확인한다."
         },
         {
           "kind": "task",
           "task_type": "action",
-          "instruction": "빈 Logical 화면에 2960 스위치, 2911 라우터, PC 네 대, Server-PT 두 대를 놓고 표의 포트대로 연결하자.",
+          "instruction": "빈 Logical 화면에 장비를 배치하고 자동 연결한 뒤, 실제 포트를 표와 비교하자.",
           "element": {
             "kind": "tool_steps",
             "tool": "Cisco Packet Tracer",
@@ -157,9 +157,14 @@
               "`Network Devices > Routers`(네트워크 장비 → 라우터)에서 `2911`을 놓고 Router0인지 확인한다.",
               "`End Devices`(PC·서버 같은 끝 장비)에서 PC-PT 네 대와 Server-PT 두 대를 놓는다.",
               "Server-PT 이름을 각각 DNSServer와 IntranetServer로 바꾼다.",
-              "`Copper Straight-Through`으로 PC0~PC3을 Fa0/1~Fa0/4, Router0 두 선을 Fa0/5~Fa0/6, 서버 두 대를 Fa0/7~Fa0/8에 연결한다."
+              "아래 Connections(연결)에서 Automatically Choose Connection Type(자동 연결)을 선택한다.",
+              "PC0을 클릭하고 Switch0을 클릭한다. 도구가 케이블과 양쪽 인터페이스를 선택한다. 자동 연결에서는 FastEthernet0 목록을 직접 고르지 않는다.",
+              "같은 방식으로 PC1·PC2·PC3과 Switch0을 각각 연결한다. 선을 하나 만들 때마다 자동 연결 도구를 다시 선택한다.",
+              "Router0과 Switch0을 연결하고, 자동 연결을 다시 선택해 두 장비 사이에 두 번째 선을 만든다. DNSServer와 IntranetServer도 각각 Switch0에 연결한다.",
+              "각 케이블 끝에 마우스를 올려 실제 포트 이름을 확인한다. 선 옆 표시가 보이지 않으면 포트 라벨 표시 설정을 켜거나 장비 연결 정보를 확인한다. PC의 FastEthernet0과 스위치의 FastEthernet0/1은 서로 다른 장비의 포트다.",
+              "앞의 표는 기준 배치다. 자동 선택 결과가 표와 다른 경우 실제 연결된 스위치 포트에 맞춰 아래 VLAN 명령의 interface range를 바꾼다. 라우터도 VLAN 10·20으로 연결된 실제 인터페이스에 각각 해당 주소를 설정한다. 번호가 같을 것이라고 추측해 명령을 붙여 넣지 않는다."
             ],
-            "note": "PC·서버와 스위치 사이의 연결 상태를 확인한다. 라우터 쪽은 다음 절에서 연결 단자를 켠 뒤 초록색 상태인지 확인한다."
+            "note": "Fa0/1·Fa0/2·Fa0/5를 VLAN 10으로 묶은 것은 PC 네 대를 1–4번에, 라우터 두 선을 5–6번에 배치한 이 교안의 기준 때문이다. 1·2·5번만 VLAN 10으로 사용할 수 있다는 규칙은 없다. PC0·PC1·VLAN 10 쪽 라우터 연결이 실제로 Fa0/1–Fa0/3이라면 interface range fa0/1 - 3으로 묶어도 된다. 반대로 Fa0/3에 PC2가 연결되어 있다면 그 명령은 PC2를 잘못된 VLAN에 넣는다. 번호의 연속성보다 연결된 장비의 역할을 먼저 확인한다. 연결 후에도 바꿀 수 있다. 선을 그대로 두고 실제 포트를 해당 VLAN으로 설정하거나, 해당 케이블만 삭제하고 다시 연결한다. 특정 포트를 지정해서 옮기려면 수동 케이블 연결에서 양쪽 포트를 선택한다. 선을 옮겨도 이전 포트의 설정이 새 포트로 따라가지는 않는다."
           }
         }
       ]
@@ -523,11 +528,6 @@
       "introduced_by": "`PC-PT`는 사용자 PC다."
     },
     {
-      "term": "Copper Straight-Through",
-      "aliases": [],
-      "introduced_by": "이번 연결에 사용할 구리선 케이블 항목이다."
-    },
-    {
       "term": "CLI",
       "aliases": [],
       "introduced_by": "`CLI` 탭을 열면 글자로 명령을 입력할 수 있다."
@@ -544,7 +544,7 @@
       "aliases": [
         "interface range"
       ],
-      "introduced_by": "설정할 연결 단자 하나 / 여러 개를 선택한다."
+      "introduced_by": "interface는 설정할 인터페이스를 선택하는 명령이다."
     },
     {
       "term": "switchport",
@@ -559,7 +559,7 @@
     {
       "term": "인터페이스",
       "aliases": [],
-      "introduced_by": "인터페이스는 장비가 망과 연결되는 지점이다."
+      "introduced_by": "인터페이스는 장비에서 케이블을 연결하는 통신 단자다."
     },
     {
       "term": "ip address",
