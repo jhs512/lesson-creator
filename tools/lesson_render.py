@@ -73,11 +73,12 @@ def render_element(el, indent=""):
     if kind == "definition":
         en = f"({el['en']})" if el.get("en") else ""
         return [indent + f"> **{esc(el['term'])}{esc(en)}** — {esc(el['text'])}"]
-    if kind == "bullets":
+    if kind in ("bullets", "numbered_list"):
         lines = []
         if el.get("intro"):
             lines.append(indent + esc(el["intro"]))
-        lines += [indent + "- " + esc(i) for i in el["items"]]
+        lines += [indent + (f"{n}. " if kind == "numbered_list" else "- ") + esc(item)
+                  for n, item in enumerate(el["items"], 1)]
         return lines
     if kind == "code":
         lines = [fence(el.get("lang", "python"), el["src"], indent)]
@@ -133,7 +134,7 @@ def render_answer_toggle(ans, summary, tail=True):
     return lines
 
 
-def render_task(t, n):
+def render_task(t, n, label="과제"):
     lines = []
     tt = t["task_type"]
     if tt == "challenge":
@@ -152,9 +153,10 @@ def render_task(t, n):
         lines.append(fence("text", t["goal_output"]))
         if t.get("after_goal"):
             lines.append(esc_block(t["after_goal"]))
-        lines += render_answer_toggle(t["answer"], "어려우면 — 정답 코드 참조", tail=True)
+        answer_is_code = t["answer"]["element"].get("kind") == "code" and t["answer"]["element"].get("lang", "python") not in ("markdown", "text")
+        lines += render_answer_toggle(t["answer"], t.get("answer_label", "어려우면 — 정답 코드 참조" if answer_is_code else "진행이 막히면 — 확인 기준과 해설"), tail=answer_is_code)
         return lines
-    lines.append(f"**과제 {n}.** {esc(t['instruction'])}")
+    lines.append(f"**{label} {n}.** {esc(t['instruction'])}")
     for s in t.get("setup_elements", []):
         lines += render_element(s)
     if t.get("element"):
@@ -247,7 +249,7 @@ def render(page):
         for el in sec["body"]:
             if el["kind"] == "task":
                 n += 1
-                lines += render_walkthrough_step(el, n) if walkthrough else render_task(el, n)
+                lines += render_walkthrough_step(el, n) if walkthrough else render_task(el, n, "이해 확인" if page.get("lesson_role") == "concept" else "과제")
             else:
                 lines += render_element(el)
 
@@ -255,11 +257,12 @@ def render(page):
         lines.append(esc_block(page["closing"]))
     if walkthrough:
         return "\n".join(lines)
-    lines.append("<details>")
-    lines.append("<summary>추가 과제 — 빨리 끝났다면</summary>")
-    for x in page["extra_tasks"]:
-        lines += render_extra(x)
-    lines.append("</details>")
+    if page.get("extra_tasks"):
+        lines.append("<details>")
+        lines.append("<summary>추가 과제 — 빨리 끝났다면</summary>")
+        for x in page["extra_tasks"]:
+            lines += render_extra(x)
+        lines.append("</details>")
     hp = page.get("hard_problem")
     if hp:
         lines.append("<details>")

@@ -18,7 +18,7 @@ def main():
         commands = [
             ['lesson_render.py', str(source), str(output/f'{name}.md')],
             ['lesson_harness.py', str(source)],
-            ['lesson_lint.py', str(output/f'{name}.md')],
+            ['lesson_lint.py', str(output/f'{name}.md'), *(['--role', page['lesson_role']] if page.get('lesson_role') else [])],
             ['render_lesson_preview.py', str(output/f'{name}.md'), str(output/f'{name}.html'), '--title', page['title']],
         ]
         for tool, *args in commands:

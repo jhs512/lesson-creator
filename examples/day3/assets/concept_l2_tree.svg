@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1020" viewBox="0 0 1800 1020">
+<rect width="100%" height="100%" fill="white"/>
+<text x="50.00" y="64.80" font-family="NanumGothic, sans-serif" font-size="40" fill="#1a2834">이름을 나누어 관리하는 계층</text>
+<text x="52.00" y="105.08" font-family="NanumGothic, sans-serif" font-size="24" fill="#697885">도메인 이름의 오른쪽에서 왼쪽으로 담당 범위를 좁힌다</text>
+<polyline points="50,129 1750,129" fill="none" stroke="#b8c5cd" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="842.4,198.0 895.2,198.0 916.8,215.6 864.0,215.6" fill="#f3efe1" stroke="#726f65" stroke-width="2"/>
+<polygon points="895.2,198.0 916.8,215.6 916.8,297.2 895.2,281.2" fill="#b4ad9b" stroke="#726f65" stroke-width="2"/>
+<polygon points="842.4,198.0 895.2,198.0 895.2,281.2 842.4,281.2" fill="#ded9c8" stroke="#726f65" stroke-width="2"/>
+<rect x="849.6" y="213.2" width="36.0" height="8.0" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="849.6" y="227.6" width="36.0" height="8.0" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="849.6" y="242.0" width="36.0" height="8.0" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<ellipse cx="855.6" cy="263.20000000000005" rx="3.6" ry="3.6" fill="#46b758" stroke="#278c3f" stroke-width="1"/>
+<polyline points="854.4,272.4 854.4,276.4" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="861.6,272.4 861.6,276.4" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="868.8,272.4 868.8,276.4" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="876.0,272.4 876.0,276.4" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<text x="846.75" y="334.84" font-family="NanumGothic, sans-serif" font-size="27" fill="#1a2834">루트 .</text>
+<text x="797.90" y="361.56" font-family="NanumGothic, sans-serif" font-size="23" fill="#697885">이름 공간의 시작</text>
+<polyline points="880,375 880,410 380,410 380,460" fill="none" stroke="#1573bb" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="340.05,469.75 396.15,469.75 419.1,488.45 363.0,488.45" fill="#f3efe1" stroke="#726f65" stroke-width="2"/>
+<polygon points="396.15,469.75 419.1,488.45 419.1,575.15 396.15,558.15" fill="#b4ad9b" stroke="#726f65" stroke-width="2"/>
+<polygon points="340.05,469.75 396.15,469.75 396.15,558.15 340.05,558.15" fill="#ded9c8" stroke="#726f65" stroke-width="2"/>
+<rect x="347.7" y="485.9" width="38.25" height="8.5" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="347.7" y="501.2" width="38.25" height="8.5" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="347.7" y="516.5" width="38.25" height="8.5" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<ellipse cx="354.075" cy="539.0250000000001" rx="3.8249999999999997" ry="3.8249999999999997" fill="#46b758" stroke="#278c3f" stroke-width="1"/>
+<polyline points="352.8,548.8 352.8,553.05" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="360.45,548.8 360.45,553.05" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="368.1,548.8 368.1,553.05" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="375.75,548.8 375.75,553.05" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<text x="348.94" y="613.59" font-family="NanumGothic, sans-serif" font-size="27" fill="#1a2834">.com</text>
+<text x="311.93" y="642.21" font-family="NanumGothic, sans-serif" font-size="23" fill="#697885">최상위 도메인</text>
+<polyline points="880,375 880,410 1370,410 1370,460" fill="none" stroke="#1573bb" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="1330.05,469.75 1386.15,469.75 1409.1,488.45 1353.0,488.45" fill="#f3efe1" stroke="#726f65" stroke-width="2"/>
+<polygon points="1386.15,469.75 1409.1,488.45 1409.1,575.15 1386.15,558.15" fill="#b4ad9b" stroke="#726f65" stroke-width="2"/>
+<polygon points="1330.05,469.75 1386.15,469.75 1386.15,558.15 1330.05,558.15" fill="#ded9c8" stroke="#726f65" stroke-width="2"/>
+<rect x="1337.7" y="485.9" width="38.25" height="8.5" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="1337.7" y="501.2" width="38.25" height="8.5" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="1337.7" y="516.5" width="38.25" height="8.5" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<ellipse cx="1344.075" cy="539.0250000000001" rx="3.8249999999999997" ry="3.8249999999999997" fill="#46b758" stroke="#278c3f" stroke-width="1"/>
+<polyline points="1342.8,548.8 1342.8,553.05" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1350.45,548.8 1350.45,553.05" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1358.1,548.8 1358.1,553.05" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1365.75,548.8 1365.75,553.05" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<text x="1353.99" y="613.59" font-family="NanumGothic, sans-serif" font-size="27" fill="#1a2834">.kr</text>
+<text x="1301.93" y="642.21" font-family="NanumGothic, sans-serif" font-size="23" fill="#697885">최상위 도메인</text>
+<polyline points="380,650 380,690 230,690 230,735" fill="none" stroke="#008461" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="192.4,748.0 245.2,748.0 266.8,765.6 214.0,765.6" fill="#f3efe1" stroke="#726f65" stroke-width="2"/>
+<polygon points="245.2,748.0 266.8,765.6 266.8,847.2 245.2,831.2" fill="#b4ad9b" stroke="#726f65" stroke-width="2"/>
+<polygon points="192.4,748.0 245.2,748.0 245.2,831.2 192.4,831.2" fill="#ded9c8" stroke="#726f65" stroke-width="2"/>
+<rect x="199.6" y="763.2" width="36.0" height="8.0" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="199.6" y="777.6" width="36.0" height="8.0" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="199.6" y="792.0" width="36.0" height="8.0" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<ellipse cx="205.6" cy="813.2" rx="3.6" ry="3.6" fill="#46b758" stroke="#278c3f" stroke-width="1"/>
+<polyline points="204.4,822.4 204.4,826.4" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="211.6,822.4 211.6,826.4" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="218.8,822.4 218.8,826.4" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="226.0,822.4 226.0,826.4" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<text x="164.60" y="884.84" font-family="NanumGothic, sans-serif" font-size="27" fill="#1a2834">naver.com</text>
+<text x="197.57" y="911.56" font-family="NanumGothic, sans-serif" font-size="23" fill="#697885">도메인</text>
+<polyline points="380,650 380,690 655,690 655,735" fill="none" stroke="#008461" stroke-width="3" stroke-linejoin="round"/>
+<polygon points="617.4,748.0 670.2,748.0 691.8,765.6 639.0,765.6" fill="#f3efe1" stroke="#726f65" stroke-width="2"/>
+<polygon points="670.2,748.0 691.8,765.6 691.8,847.2 670.2,831.2" fill="#b4ad9b" stroke="#726f65" stroke-width="2"/>
+<polygon points="617.4,748.0 670.2,748.0 670.2,831.2 617.4,831.2" fill="#ded9c8" stroke="#726f65" stroke-width="2"/>
+<rect x="624.6" y="763.2" width="36.0" height="8.0" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="624.6" y="777.6" width="36.0" height="8.0" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="624.6" y="792.0" width="36.0" height="8.0" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<ellipse cx="630.6" cy="813.2" rx="3.6" ry="3.6" fill="#46b758" stroke="#278c3f" stroke-width="1"/>
+<polyline points="629.4,822.4 629.4,826.4" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="636.6,822.4 636.6,826.4" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="643.8,822.4 643.8,826.4" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="651.0,822.4 651.0,826.4" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<text x="571.27" y="884.84" font-family="NanumGothic, sans-serif" font-size="27" fill="#1a2834">example.com</text>
+<text x="622.57" y="911.56" font-family="NanumGothic, sans-serif" font-size="23" fill="#697885">도메인</text>
+<text x="1163.10" y="773.52" font-family="NanumGothic, sans-serif" font-size="31" fill="#697885">관리 관계를 보여 주는 선이다.</text>
+<text x="1196.94" y="815.68" font-family="NanumGothic, sans-serif" font-size="31" fill="#697885">실제 패킷이 이 선을 따라</text>
+<text x="1152.87" y="857.84" font-family="NanumGothic, sans-serif" font-size="31" fill="#697885">차례로 전달된다는 뜻은 아니다.</text>
+<text x="50.00" y="989.08" font-family="NanumGothic, sans-serif" font-size="24" fill="#697885">루트와 .com의 담당 서버는 다음 담당 서버를 안내한다. 웹 서버의 위치와는 다른 관리 구조다.</text>
+</svg>

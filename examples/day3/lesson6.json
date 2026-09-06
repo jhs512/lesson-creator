@@ -1,598 +1,616 @@
 {
   "type": "lesson",
-  "title": "6교시. 종합 정리 — DNS 장애와 이상 징후 문제풀이",
-  "lead": "숫자 주소로는 웹페이지가 열리지만 이름으로는 열리지 않는다면 어디부터 확인할까? 앞에서 배운 이름 조회와 웹 접속을 구분해 보자. 이번 시간에는 관찰한 값을 근거로 원인을 좁히고, 더 확인할 내용을 보고서로 정리한다.",
+  "lesson_role": "integrated_practice",
+  "title": "6교시. 종합실습 — DNS 장애 재현부터 복구 보고서까지",
+  "lead": "이름으로 웹사이트가 열리지 않는 상황과, 이름 조회는 되는데 다른 웹사이트가 열리는 상황은 원인이 같을까? 이번 시간에는 하나의 실습망에서 정상 기준을 남기고 두 조건을 따로 재현한 뒤 복구한다. 최종 결과물은 정상으로 복구한 네트워크 파일과, 직접 관찰한 근거가 담긴 보고서다.",
   "toc": [
-    "증상으로 확인할 구간 좁히기",
-    "담당 서버와 레코드 역할 맞추기",
-    "로그의 값 변화와 반복 나누어 읽기",
-    "실험 결과로 말할 수 있는 범위 정하기",
-    "관찰과 다음 확인을 보고서로 연결하기"
+    "시작 상태와 결과물을 정하자",
+    "정상 기준을 직접 남기자",
+    "두 조건을 따로 재현하고 복구하자",
+    "관찰과 판단을 연결해 정리하자"
   ],
-  "principle": "정답은 공격 여부를 단정하는 문장이 아니라, 관찰한 증거와 다음 확인을 연결한 문장이다.",
   "sections": [
     {
-      "heading": "증상으로 확인할 구간 좁히기",
+      "heading": "시작 상태와 결과물을 정하자",
       "body": [
         {
           "kind": "paragraph",
-          "text": "직원이 공지와 업무 자료를 보는 내부 웹사이트가 오늘의 포털이다. 그림의 `IntranetServer`는 그 페이지를 보내는 서버이고 정상 주소는 `192.168.20.100`이다. `DNSServer`는 포털 이름 `portal.a-company.test`에 맞는 주소를 알려 주는 DNS 서버이며 주소는 `192.168.20.53`이다."
+          "text": "Packet Tracer는 가상 장비의 통신을 시험하는 프로그램이다. 여기서 PC0은 요청을 보내는 사용자 컴퓨터, 서버는 요청받은 기능을 제공하는 컴퓨터 역할이다. IP 주소는 통신 대상의 숫자 주소이고 DNS는 이름에 대응하는 주소 정보를 찾는 체계다. IntranetServer는 정상 내부 웹페이지를 보내는 장비, DNSServer는 이름 질문에 답하는 장비, UnexpectedServer는 비교용 다른 웹페이지를 보내는 장비에 붙인 이름이다."
         },
         {
           "kind": "paragraph",
-          "text": "그림의 `Switch0`은 같은 망의 장비를 잇는 스위치, `Router0`은 나뉜 망 사이를 잇는 라우터다. VLAN 10의 PC에서 VLAN 20의 서버로 가는 구성은 정상 실습과 같다. 이제 모든 설정을 다시 읽기보다, 질문과 답이 어느 장비까지 갔는지 찾아보자."
+          "text": "A 레코드는 이름과 IPv4 주소의 대응 정보다. IPv4는 이번에 쓰는 점으로 구분한 숫자 주소 형식이다. PC의 DNS Server 칸은 질문받을 서버를 지정하며, A 레코드 값은 그 질문에 답할 웹 서버 주소를 지정한다. HTTP는 웹 내용을 요청하고 응답하는 규칙이다. `portal.a-company.test`는 이 실습 안에서만 등록하는 시험용 이름이다."
         },
         {
           "kind": "paragraph",
-          "text": "A 레코드는 이름과 IPv4 주소의 대응 정보다. 캐시는 조회한 답을 잠시 저장하는 공간이며, NXDOMAIN은 질문한 이름이 없다는 응답이다. 시간 초과는 정해진 시간 안에 답을 받지 못했다는 뜻이다."
+          "text": "자신이 저장한 `day03_dns_response_comparison.pkt`에서 시작하자. `.pkt`는 Packet Tracer의 네트워크 구성 저장 파일이다. 다른 이름으로 저장해 원래 정상 파일을 보관한다. 시작 파일이 없다면 아래 준비 절차를 먼저 완료한다. 준비 절차로 처음부터 망을 만드는 시간은 종합실습 50분에 포함하지 않는다."
         },
         {
           "kind": "paragraph",
-          "text": "주소 조회 다음에는 TCP로 연결을 맺고 HTTP로 웹페이지를 주고받는다. TCP 포트는 서버 안에서 통신을 받을 프로그램을 구분하는 번호다. 케이블을 꽂는 장비 포트와는 쓰임이 다르다. 방화벽은 정해진 규칙에 따라 통신을 허용하거나 막는 기능이다."
+          "text": "게이트웨이는 다른 망으로 나갈 때 먼저 건너는 라우터 주소다. 서브넷 마스크(마스크)는 같은 망의 주소 범위를 구분한다. `Desktop > Command Prompt`는 명령을 입력하는 창이다. `ping`은 확인 메시지에 답이 오는지 시험하고, `nslookup`은 이름을 물어본 응답을 보여 준다. `Desktop > Web Browser`는 웹페이지를 여는 창이다. 입력 위치 표시인 `C:\\>`는 복사하지 않고 명령만 입력한다. `Services`는 서버 기능을 설정하는 메뉴다."
         },
         {
-          "kind": "paragraph",
-          "text": "이제 아래 구성도에서 이름을 물어보는 구간과 웹페이지를 받는 구간을 나누어 보자. 번호는 고장 위치를 확정한 표시가 아니라, 관찰한 증상에 따라 다음으로 확인할 곳이다."
-        },
-        {
-          "kind": "image",
-          "src": "assets/l6_diagnose.png",
-          "caption": "그림 6-1. 구성도 위의 진단 지점 — DNS까지의 경로, DNS 응답 내용, 웹 서비스 구간을 나누어 확인한다.",
-          "text_content": "장애가 의심되는 위치를 공통 구성도 위에서 좁힌다\n앞에서 사용한 장비 배치를 유지하고, 다음으로 확인할 지점을 번호로 표시했다.\nVLAN 10 · DEV\n192.168.10.0/24\nVLAN 20 · SEC    192.168.20.0/24\nPC0\n192.168.10.10 /24\n1\n2\n3\n4\n5\n6\n7\n8\n9\nSwitch0 · 2960\nRouter0 · 2911\nDNSServer\n192.168.20.53\nIntranetServer\n192.168.20.100\nFa0/1 · VLAN 10\nG0/0 · 192.168.10.1\nG0/1 · 192.168.20.1\nFa0/5\nFa0/6\nFa0/7\nFa0/8\n1–2, 5번 포트: VLAN 10\n3–4, 6–8번 포트: VLAN 20\n같은 스위치 안에서 포트를 나눈다.\n1\n2\n3\n1  시간 초과\nPC DNS 주소 · 경로\nDNS 서비스 응답 확인\n2  DNS 응답 내용\nNXDOMAIN: 이름 확인\n예상 밖 A: 원본 · 캐시 확인\n3  정상 A인데 웹 실패\nTCP 포트 · 방화벽\nHTTP 서비스 확인\n번호는 원인을 확정하는 표시가 아니다. 관찰 결과에 따라 다음으로 확인할 장비와 설정을 고르는 기준이다."
-        },
-        {
-          "kind": "paragraph",
-          "text": "앞에서 사용한 장비 배치에 번호를 붙였다. 시간 초과라면 1번처럼 PC의 DNS 주소와 서버까지 이어지는 경로, DNS 서비스부터 확인한다. 서버가 답을 보냈다면 2번에서 그 내용을 읽는다. NXDOMAIN이면 이름의 철자와 질문한 DNS를, 예상 밖 A 값이면 원본·캐시·변경 이력을 확인한다."
-        },
-        {
-          "kind": "paragraph",
-          "text": "A 값이 정상 `.100`인데 웹이 열리지 않으면 3번 구간의 TCP 포트·방화벽·HTTP 서비스를 확인한다. `ping`은 확인용 메시지의 응답 여부를 시험하는 명령이다. 이 통신만 차단한 환경도 있으므로 ping 실패 하나만으로 서버 중단을 단정하지 않는다."
-        },
-        {
-          "kind": "task",
-          "task_type": "predict",
-          "instruction": "문제 1의 증상에서 가장 먼저 의심할 영역과 다음 명령을 고르자.",
-          "setup_elements": [
-            {
-              "kind": "table",
-              "headers": [
-                "확인",
-                "결과"
-              ],
-              "rows": [
-                [
-                  "ping 192.168.20.100",
-                  "성공"
-                ],
-                [
-                  "nslookup portal.a-company.test",
-                  "시간 초과"
-                ],
-                [
-                  "웹 브라우저에서 IP 접속",
-                  "성공"
-                ]
-              ]
-            }
+          "kind": "table",
+          "headers": [
+            "확인 대상",
+            "정상 기준"
           ],
-          "answer": {
-            "element": {
+          "rows": [
+            [
+              "PC0",
+              "IP 192.168.10.10 / 마스크 255.255.255.0 / 게이트웨이 192.168.10.1 / DNS 192.168.20.53"
+            ],
+            [
+              "DNSServer",
+              "192.168.20.53 / portal.a-company.test의 A 값 192.168.20.100"
+            ],
+            [
+              "IntranetServer",
+              "192.168.20.100 / HTTP 켜짐 / 정상 서버 문구"
+            ],
+            [
+              "UnexpectedServer",
+              "192.168.20.200 / HTTP 켜짐 / 예상하지 않은 서버 문구"
+            ]
+          ]
+        },
+        {
+          "kind": "supplement",
+          "title": "시작 파일이 없을 때 — 정상망과 비교 서버를 먼저 준비하기",
+          "body": [
+            {
               "kind": "paragraph",
-              "text": "DNS 서버 주소와 DNS 서버 도달성을 먼저 확인한다. `ipconfig /all`로 설정된 DNS 주소를 보고 `ping 192.168.20.53`과 `nslookup portal.a-company.test 192.168.20.53`으로 범위를 좁힌다."
+              "text": "Switch0은 같은 망 장비를 연결하는 스위치이고, Router0은 서로 다른 망을 연결하는 라우터다. VLAN은 한 스위치에서 나눈 통신 그룹이다. DEV와 SEC는 VLAN 10과 20에 붙인 이름이다. Fa와 G는 연결 단자 이름의 줄임표기이며 /24는 마스크 255.255.255.0을 뜻한다. 연결은 PC0·PC1을 Fa0/1·2, PC2·PC3을 Fa0/3·4, Router0의 G0/0·G0/1을 Fa0/5·6, DNS·정상 웹 서버를 Fa0/7·8에 연결한다."
             },
-            "explain": "IP 통신과 웹 서버가 살아 있다는 증거가 있으므로 DNS 조회 구간부터 본다."
-          }
-        },
-        {
-          "kind": "paragraph",
-          "text": "첫 사례에서는 이름을 묻는 구간을 먼저 확인하기로 했다. 이제 같은 이름을 서로 다른 주소의 서버에 물어본 두 결과를 비교한다."
-        },
-        {
-          "kind": "task",
-          "task_type": "action",
-          "instruction": "문제 2의 두 `nslookup` 결과를 비교해 잘못된 설정 한 곳을 찾자.",
-          "setup_elements": [
+            {
+              "kind": "paragraph",
+              "text": "PC0·PC1은 192.168.10.10·20, 게이트웨이는 192.168.10.1이다. PC2·PC3은 192.168.20.10·20, 게이트웨이는 192.168.20.1이다. DNSServer는 192.168.20.53, IntranetServer는 192.168.20.100이며 두 서버의 게이트웨이는 192.168.20.1이다. 모든 PC와 서버의 마스크는 255.255.255.0이다."
+            },
+            {
+              "kind": "paragraph",
+              "text": "정상망 또는 비교 서버가 준비되지 않았을 때 수행한다. 처음에는 기본 장비 여덟 대로 정상망을 만들고, 이어지는 절차에서 비교 서버를 추가한다. 세 서버가 모두 준비된 경우에만 이 보충을 건너뛴다."
+            },
+            {
+              "kind": "paragraph",
+              "text": "Packet Tracer에서 `Logical`은 장비를 놓는 작업 화면이다. `Realtime`은 통신을 자동으로 진행하는 모드이며 화면 오른쪽 아래에서 선택한다. PC-PT 네 대, 2960 스위치 한 대, 2911 라우터 한 대, Server-PT 두 대를 사용한다."
+            },
+            {
+              "kind": "tool_steps",
+              "tool": "Cisco Packet Tracer",
+              "steps": [
+                "`Network Devices > Switches`(네트워크 장비 → 스위치)에서 `2960-24TT`를 놓고 Switch0인지 확인한다.",
+                "`Network Devices > Routers`(네트워크 장비 → 라우터)에서 `2911`을 놓고 Router0인지 확인한다.",
+                "`End Devices`(PC·서버 같은 끝 장비)에서 PC-PT 네 대와 Server-PT 두 대를 놓는다.",
+                "Server-PT 이름을 각각 DNSServer와 IntranetServer로 바꾼다.",
+                "`Copper Straight-Through`으로 PC0~PC3을 Fa0/1~Fa0/4, Router0 두 선을 Fa0/5~Fa0/6, 서버 두 대를 Fa0/7~Fa0/8에 연결한다."
+              ],
+              "note": "PC·서버와 스위치 사이의 연결 상태를 확인한다. 라우터 쪽은 다음 절에서 연결 단자를 켠 뒤 초록색 상태인지 확인한다."
+            },
+            {
+              "kind": "paragraph",
+              "text": "스위치와 라우터에서 `CLI` 탭을 열어 명령을 입력한다. 왼쪽의 `Switch>`·`Router(config)#` 같은 입력 위치 표시는 입력하지 않는다. `enable`과 `configure terminal`은 관리 설정으로 들어가는 명령이고, `interface`는 설정할 연결 단자를 고른다. `switchport`는 스위치 포트의 VLAN을 정하고 `ip address`는 라우터 단자의 주소와 마스크를 정한다. `no shutdown`은 단자를 켜며, `end`는 설정을 마친다."
+            },
+            {
+              "kind": "command",
+              "shell": "terminal",
+              "src": "Switch> enable\nSwitch# configure terminal\nSwitch(config)# vlan 10\nSwitch(config-vlan)# name DEV\nSwitch(config-vlan)# exit\nSwitch(config)# vlan 20\nSwitch(config-vlan)# name SEC\nSwitch(config-vlan)# exit\nSwitch(config)# interface range fastethernet 0/1 - 2\nSwitch(config-if-range)# switchport mode access\nSwitch(config-if-range)# switchport access vlan 10\nSwitch(config-if-range)# exit\nSwitch(config)# interface fastethernet 0/5\nSwitch(config-if)# switchport mode access\nSwitch(config-if)# switchport access vlan 10\nSwitch(config-if)# exit\nSwitch(config)# interface range fastethernet 0/3 - 4\nSwitch(config-if-range)# switchport mode access\nSwitch(config-if-range)# switchport access vlan 20\nSwitch(config-if-range)# exit\nSwitch(config)# interface range fastethernet 0/6 - 8\nSwitch(config-if-range)# switchport mode access\nSwitch(config-if-range)# switchport access vlan 20\nSwitch(config-if-range)# end\nSwitch# show vlan brief",
+              "output": "10   DEV   active   Fa0/1, Fa0/2, Fa0/5\n20   SEC   active   Fa0/3, Fa0/4, Fa0/6, Fa0/7, Fa0/8",
+              "output_label": "결과 요약 — 실제 CLI에서는 기본 VLAN 줄도 함께 표시된다.",
+              "verified": "example"
+            },
+            {
+              "kind": "command",
+              "shell": "terminal",
+              "src": "Router> enable\nRouter# configure terminal\nRouter(config)# interface gigabitethernet 0/0\nRouter(config-if)# ip address 192.168.10.1 255.255.255.0\nRouter(config-if)# no shutdown\nRouter(config-if)# exit\nRouter(config)# interface gigabitethernet 0/1\nRouter(config-if)# ip address 192.168.20.1 255.255.255.0\nRouter(config-if)# no shutdown\nRouter(config-if)# end\nRouter# show ip interface brief",
+              "output": "GigabitEthernet0/0   192.168.10.1   up   up\nGigabitEthernet0/1   192.168.20.1   up   up",
+              "output_label": "결과 요약 — `up up`은 연결 단자와 통신 상태가 모두 동작 중이라는 뜻이다.",
+              "verified": "example"
+            },
+            {
+              "kind": "paragraph",
+              "text": "`Desktop > IP Configuration`은 장비 주소를 넣는 창이고 `Static`은 직접 입력하는 선택이다. 마스크는 모두 255.255.255.0이다. 위 표의 장비별 주소를 다음 순서로 넣는다."
+            },
+            {
+              "kind": "tool_steps",
+              "tool": "Packet Tracer IP Configuration",
+              "steps": [
+                "각 장비에서 `Desktop > IP Configuration > Static`을 연다.",
+                "PC0·PC1에는 192.168.10.10·20, 마스크 255.255.255.0, 게이트웨이 192.168.10.1을 입력한다.",
+                "PC2·PC3에는 192.168.20.10·20, 마스크 255.255.255.0, 게이트웨이 192.168.20.1을 입력한다.",
+                "DNSServer에는 192.168.20.53, IntranetServer에는 192.168.20.100을 입력한다.",
+                "두 서버의 마스크는 255.255.255.0, 게이트웨이는 192.168.20.1로 설정한다."
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "text": "PC0의 `Desktop > Command Prompt`(명령 입력 창)에서 숫자 주소를 시험한다. `ping`은 확인용 메시지에 답이 돌아오는지 보는 명령이다."
+            },
             {
               "kind": "command",
               "shell": "cmd",
-              "src": "C:\\> nslookup portal.a-company.test 192.168.20.53\nAddress: 192.168.20.100\n\nC:\\> nslookup portal.a-company.test 192.168.20.100\nDNS request timed out."
-            }
-          ],
-          "answer": {
-            "element": {
+              "src": "C:\\> ping 192.168.20.53\nC:\\> ping 192.168.20.100",
+              "output": "192.168.20.53: Sent = 4, Received = 4, Lost = 0\n192.168.20.100: Sent = 4, Received = 4, Lost = 0",
+              "output_label": "결과 요약 — 첫 ping이 늦으면 같은 명령을 한 번 더 실행한다.",
+              "verified": "example"
+            },
+            {
+              "kind": "definition",
+              "term": "A 레코드",
+              "text": "DNS에 저장하는 이름과 IPv4 주소의 대응 정보다. 이 실습의 접속 이름 `portal.a-company.test`에 정상 포털 주소 `192.168.20.100`을 등록했다. 화면의 A 값은 바로 이 주소를 뜻한다.",
+              "en": "A record"
+            },
+            {
               "kind": "paragraph",
-              "text": "`.53`은 DNS 서버이므로 정상 응답한다. `.100`은 웹 서버이므로 DNS 질문 대상으로 지정한 것이 잘못이다. PC의 DNS Server 칸은 `.53`이어야 한다."
-            }
-          }
-        }
-      ]
-    },
-    {
-      "heading": "담당 서버와 레코드 역할 맞추기",
-      "body": [
-        {
-          "kind": "paragraph",
-          "text": "Root는 큰 이름 분류의 담당 서버를, TLD는 그 아래 이름의 담당 서버를 안내한다. 권한 서버는 자신이 맡은 이름의 원본 정보를 보관한다. A는 IPv4 주소, MX는 메일을 받을 서버 정보를 나타내는 레코드 종류다."
-        },
-        {
-          "kind": "paragraph",
-          "text": "다음 문제는 안내하는 서버와 최종 정보를 가진 서버를 분리해 보는 문제다."
-        },
-        {
-          "kind": "task",
-          "task_type": "action",
-          "instruction": "문제 3의 다섯 항목을 알맞게 연결한 뒤 정답 표로 확인하자.",
-          "setup_elements": [
+              "text": "HTTP는 브라우저의 웹페이지 요청과 서버의 응답에 쓰는 통신 규칙이다. `Services > HTTP`는 이 기능을 켜는 메뉴다. `index.html`은 서버가 첫 화면으로 보낼 문서다. HTML은 웹페이지의 글과 구조를 표시하는 문서 형식이다. `Services > DNS`는 이름에 대응하는 주소를 설정하는 메뉴이고 `On`은 켠다는 뜻이다."
+            },
             {
-              "kind": "table",
-              "headers": [
-                "항목",
-                "선택지"
+              "kind": "tool_steps",
+              "tool": "Cisco Packet Tracer",
+              "steps": [
+                "DNSServer를 열고 `Services > DNS`로 이동한다.",
+                "DNS Service를 `On`으로 바꾼다.",
+                "Name(질문할 이름)에 `portal.a-company.test`, Address(그 이름에 대응하는 주소)에 `192.168.20.100`을 입력한다.",
+                "`Add`(추가)를 눌러 레코드 목록에 한 줄이 생겼는지 확인한다."
               ],
-              "rows": [
-                [
-                  "Root",
-                  "최종 A / TLD 안내 / 메일 서버"
-                ],
-                [
-                  "TLD",
-                  "권한 서버 안내 / 캐시 삭제"
-                ],
-                [
-                  "권한 서버",
-                  "원본 레코드 / 라우팅"
-                ],
-                [
-                  "MX",
-                  "메일 수신 서버 / IPv4"
-                ],
-                [
-                  "A",
-                  "IPv4 / 별명"
-                ]
-              ]
-            }
-          ],
-          "answer": {
-            "element": {
-              "kind": "table",
-              "headers": [
-                "항목",
-                "정답"
+              "note": "Name은 서비스 이름이고 Address는 접속할 IntranetServer의 주소다."
+            },
+            {
+              "kind": "paragraph",
+              "text": "PC0의 DNS Server 칸에는 이름을 물어볼 192.168.20.53을 입력한다. `nslookup`은 그 이름에 어떤 주소가 나오는지 확인하는 명령이다."
+            },
+            {
+              "kind": "tool_steps",
+              "tool": "Cisco Packet Tracer",
+              "steps": [
+                "PC0의 `Desktop > IP Configuration`에서 DNS Server에 `192.168.20.53`을 입력한다.",
+                "`Desktop > Command Prompt`에서 `nslookup portal.a-company.test`를 실행해 `192.168.20.100`이 나오는지 확인한다."
               ],
-              "rows": [
-                [
-                  "Root",
-                  "TLD 안내"
-                ],
-                [
-                  "TLD",
-                  "권한 서버 안내"
-                ],
-                [
-                  "권한 서버",
-                  "원본 레코드"
-                ],
-                [
-                  "MX",
-                  "메일 수신 서버"
-                ],
-                [
-                  "A",
-                  "IPv4 주소"
-                ]
+              "note": "이름 조회가 실패하면 PC0의 DNS Server 주소와 DNSServer의 A 레코드를 다시 비교한다."
+            },
+            {
+              "kind": "code",
+              "lang": "html",
+              "intent": "normal",
+              "src": "<html><body>A사 내부 포털 - 정상 서버</body></html>"
+            },
+            {
+              "kind": "tool_steps",
+              "tool": "Packet Tracer Server-PT HTTP",
+              "steps": [
+                "IntranetServer에서 `Services > HTTP`를 연다.",
+                "HTTP를 `On`으로 확인한다.",
+                "`index.html`의 편집기를 열고 기존 내용을 위의 HTML 문서 전체로 바꾼다.",
+                "`Save`(저장)를 누른다."
               ]
             },
-            "explain": "안내 역할과 최종 데이터를 가진 역할을 나누면 계층과 레코드를 쉽게 구분할 수 있다."
-          }
-        }
-      ]
-    },
-    {
-      "heading": "로그의 값 변화와 반복 나누어 읽기",
-      "body": [
-        {
-          "kind": "paragraph",
-          "text": "개별 값의 변화와 짧은 시간에 반복되는 패턴을 따로 표시한 뒤 함께 해석해 보자."
-        },
-        {
-          "kind": "paragraph",
-          "text": "로그는 동작을 기록한 자료다. 아래 각 줄은 `시각 | 질문한 이름 | 답으로 받은 IP | TTL(초) | 응답 코드` 순서다. TTL은 저장한 답을 사용할 수 있는 남은 시간이며, `-`는 응답 IP가 없다는 표시다. NOERROR는 DNS 처리 오류가 없다는 뜻으로, 주소가 업무상 올바른지까지 보장하지 않는다."
-        },
-        {
-          "kind": "paragraph",
-          "text": "아래 코드는 주어진 예시 기록을 표기 순서대로 출력한다. 실제 DNS에서 수집하는 코드는 아니며, 출력에서 같은 열끼리 비교해 관찰 근거를 찾는다."
-        },
-        {
-          "kind": "task",
-          "task_type": "experiment",
-          "instruction": "문제 4의 로그를 실행해 출력하고 이상 징후를 세 묶음으로 나누자.",
-          "element": {
-            "kind": "code",
-            "lang": "python",
-            "src": "rows = [\n    ('10:00', 'portal.a-company.test', '192.168.20.100', 300, 'NOERROR'),\n    ('10:05', 'portal.a-company.test', '192.168.20.200', 86400, 'NOERROR'),\n    ('10:06', 'x1.a-company.test', '-', 0, 'NXDOMAIN'),\n    ('10:06', 'x2.a-company.test', '-', 0, 'NXDOMAIN'),\n    ('10:06', 'x3.a-company.test', '-', 0, 'NXDOMAIN'),\n]\nfor row in rows:\n    print(' | '.join(map(str, row)))\n",
-            "intent": "normal",
-            "output": "10:00 | portal.a-company.test | 192.168.20.100 | 300 | NOERROR\n10:05 | portal.a-company.test | 192.168.20.200 | 86400 | NOERROR\n10:06 | x1.a-company.test | - | 0 | NXDOMAIN\n10:06 | x2.a-company.test | - | 0 | NXDOMAIN\n10:06 | x3.a-company.test | - | 0 | NXDOMAIN",
-            "verified": "measured"
-          },
-          "observe": [
             {
-              "point": "응답 IP",
-              "expected": "portal 응답이 .100에서 .200으로 바뀐다."
+              "kind": "paragraph",
+              "text": "`Web Browser`는 웹페이지를 여는 도구다. `http://`로 시작하는 아래 이름을 입력해 정상 포털 문구를 확인한다."
             },
             {
-              "point": "TTL",
-              "expected": "300에서 86400으로 급증한다."
+              "kind": "tool_steps",
+              "tool": "Cisco Packet Tracer",
+              "steps": [
+                "`Desktop > Web Browser`를 열고 주소창에 `http://portal.a-company.test`를 입력한다.",
+                "`A사 내부 포털 - 정상 서버` 문구가 보이면 `File > Save As`(다른 이름으로 저장)에서 `day03_dns_normal.pkt`로 저장한다."
+              ],
+              "note": "이름 조회가 .100을 반환했는지 먼저 확인하고, 페이지가 열리지 않으면 IntranetServer의 HTTP 상태와 저장한 문구를 확인한다."
             },
             {
-              "point": "응답 코드",
-              "expected": "10:06에 NXDOMAIN이 반복된다."
+              "kind": "paragraph",
+              "text": "정상 파일을 만들었으면 이 보충을 계속 읽고 비교 서버를 추가한다."
+            },
+            {
+              "kind": "paragraph",
+              "text": "Server-PT 한 대를 추가해 UnexpectedServer를 만들고 VLAN 20에 연결하자."
+            },
+            {
+              "kind": "tool_steps",
+              "tool": "Cisco Packet Tracer",
+              "steps": [
+                "`End Devices`(PC·서버 같은 끝 장비)에서 Server-PT 한 대를 놓고 이름을 UnexpectedServer로 바꾼다.",
+                "서버의 연결 단자 FastEthernet0과 Switch0 Fa0/9를 `Copper Straight-Through`(구리선 케이블)으로 연결한다.",
+                "`Desktop > IP Configuration`(IP 설정 창)에서 IP 192.168.20.200, 마스크 255.255.255.0, 게이트웨이 192.168.20.1을 입력한다.",
+                "Switch0의 `CLI`(글자로 명령을 입력하는 탭)에서 Fa0/9를 한 그룹에 속하는 access 포트로 만들고 VLAN 20에 배정한다. 아래 왼쪽 입력 위치 표시를 제외하고 명령만 입력한다."
+              ]
+            },
+            {
+              "kind": "command",
+              "shell": "terminal",
+              "src": "Switch> enable\nSwitch# configure terminal\nSwitch(config)# interface fastethernet 0/9\nSwitch(config-if)# switchport mode access\nSwitch(config-if)# switchport access vlan 20\nSwitch(config-if)# end\nSwitch# show vlan brief",
+              "output": "20   SEC   active   Fa0/3, Fa0/4, Fa0/6, Fa0/7, Fa0/8, Fa0/9",
+              "output_label": "결과 요약 — VLAN 20 줄에서 Fa0/9를 확인한다.",
+              "verified": "example"
+            },
+            {
+              "kind": "paragraph",
+              "text": "HTTP는 브라우저의 웹페이지 요청과 서버의 응답에 쓰는 통신 규칙이다. `Services > HTTP`는 이 기능을 켜는 메뉴다. `index.html`은 서버가 첫 화면으로 보낼 문서다. HTML은 웹페이지의 글과 구조를 표시하는 문서 형식이다. 파일 내용을 아래 완성 문서 전체로 바꾸어 정상 포털과 구분하자."
+            },
+            {
+              "kind": "paragraph",
+              "text": "UnexpectedServer의 HTTP 페이지에 예상 밖 서버 표시를 넣자."
+            },
+            {
+              "kind": "code",
+              "lang": "html",
+              "intent": "normal",
+              "src": "<html><body>예상하지 않은 서버</body></html>"
+            },
+            {
+              "kind": "tool_steps",
+              "tool": "Packet Tracer Server-PT HTTP",
+              "steps": [
+                "UnexpectedServer에서 `Services > HTTP`를 연다.",
+                "HTTP가 `On`(켜짐)인지 확인한다.",
+                "`index.html`의 편집기를 열고 기존 내용을 위의 HTML 문서 전체로 바꾼다.",
+                "`Save`(저장)를 누른다."
+              ]
+            },
+            {
+              "kind": "paragraph",
+              "text": "준비를 마치면 아래 정상 기준을 실제로 확인한 뒤 본 실습을 시작한다."
             }
           ]
+        },
+        {
+          "kind": "paragraph",
+          "text": "보고서는 `day03_dns_report.md`로 저장한다. `.md`는 제목과 목록을 글자로 적는 Markdown 문서 형식이다. 편집기에 아래 틀을 복사하고 실험 중 얻은 값과 근거를 채운다. 사진 파일명도 해당 관찰 옆에 적는다."
+        },
+        {
+          "kind": "code",
+          "lang": "markdown",
+          "src": "# Day 3 DNS 종합실습 보고서\n\n## 환경과 정상 기준\n- 실행한 Packet Tracer 버전:\n- 사용한 파일과 PC:\n- 정상 DNS 응답 / 웹페이지 문구 / 증거 파일:\n\n## 실험 A — 질문할 DNS 서버 설정\n- 바꾸기 전과 후의 값:\n- 예상한 결과와 이유:\n- 실제 ping / nslookup / 숫자 주소 웹 접속 결과:\n- 관찰로 말할 수 있는 원인:\n- 복구한 값 / 재조회 / 정상 페이지 / 증거 파일:\n\n## 실험 B — 이름에 대응하는 A 값\n- 바꾸기 전과 후의 값:\n- 예상한 결과와 이유:\n- 실제 DNS 응답의 A 값:\n- 후속 HTTP 목적지 / 페이지 문구 / 증거 파일:\n- 복구한 값 / 새 DNS 응답 / 정상 페이지:\n\n## 판단의 범위\n- 두 실험의 차이:\n- 실제로 확인하지 못한 항목:\n- 운영 환경이라면 추가로 확인할 기록:\n\n## 최종 결과물\n- 정상으로 복구한 .pkt 파일:\n- 보고서와 증거 파일 목록:\n",
+          "intent": "normal"
         }
       ]
     },
     {
-      "heading": "실험 결과로 말할 수 있는 범위 정하기",
+      "heading": "정상 기준을 직접 남기자",
       "body": [
         {
           "kind": "paragraph",
-          "text": "응답 주소가 바뀌면 접속 대상도 달라지는지 실험했다. 이제 그 결과가 어떤 사실의 근거가 되는지 판단한다."
+          "text": "문제가 생긴 뒤의 값만 보면 무엇이 달라졌는지 알기 어렵다. 먼저 정상 기준을 남기자. `Services > DNS`는 DNS 기능과 레코드를 설정하는 메뉴이며 `Off`는 끄는 선택이다. IntranetServer의 DNS 기능은 Off인지 확인하고, DNSServer의 DNS 기능은 켜 둔다. 두 웹 서버의 HTTP도 켜져 있어야 한다."
         },
         {
-          "kind": "task",
-          "task_type": "predict",
-          "instruction": "문제 5의 관찰로 말할 수 있는 사실과 아직 확인하지 못한 일을 나누어 보자.",
-          "setup_elements": [
-            {
-              "kind": "table",
-              "headers": [
-                "바꾼 설정",
-                "관찰 결과"
-              ],
-              "rows": [
-                [
-                  "관리 화면에서 A 레코드 .100 → .200",
-                  "새 DNS 응답 .200"
-                ],
-                [
-                  "같은 포털 이름으로 다시 접속",
-                  "후속 HTTP 목적지 .200, 다른 서버 문구 표시"
-                ]
-              ]
-            }
+          "kind": "definition",
+          "term": "캐시",
+          "text": "앞에서 받은 답을 잠시 기억하는 저장 공간이다. 새 주소 질문을 관찰하기 전에 PC0의 `Command Prompt`에서 `ipconfig /flushdns`로 기억한 답을 지운다. 지원하지 않으면 PC0을 껐다 켜고 IP·마스크·게이트웨이·DNS 설정을 다시 확인한다."
+        },
+        {
+          "kind": "paragraph",
+          "text": "패킷은 통신 데이터를 나눈 묶음이다. `Event List`는 통신 동작을 시간순으로 보여 주는 목록이며, `PDU Details`는 선택한 데이터 묶음의 주소와 내용을 여는 화면이다. `Capture/Forward`는 다음 동작으로 진행하는 버튼이다. DNS 응답 안의 A 값과 뒤이은 HTTP 패킷의 목적지 IP를 비교한다."
+        },
+        {
+          "kind": "definition",
+          "term": "Simulation",
+          "text": "통신을 한 단계씩 진행해 관찰하는 모드다. `Realtime`은 통신을 자동으로 진행하는 모드다. 명령으로 정상·복구를 확인할 때는 Realtime을 사용하고, 패킷을 따라갈 때는 Simulation을 사용한다."
+        },
+        {
+          "kind": "numbered_list",
+          "items": [
+            "Realtime 모드에서 PC0의 IP·마스크·게이트웨이·DNS 설정을 정상 기준 표와 비교한다.",
+            "PC0에서 두 서버 주소로 ping을 실행한다. 첫 시도만 실패하면 한 번 더 확인하고, 계속 실패하면 배선·주소·라우터 상태부터 해결한다.",
+            "캐시를 비운 뒤 nslookup으로 이름이 .100을 반환하는지 확인한다.",
+            "Web Browser에서 http://portal.a-company.test를 열어 정상 서버 문구를 캡처한다.",
+            "정상 상태를 day03_dns_integrated.pkt로 다른 이름 저장하고, 보고서의 정상 기준을 채운다."
+          ]
+        },
+        {
+          "kind": "command",
+          "shell": "cmd",
+          "src": "ping 192.168.20.53\nping 192.168.20.100\nnslookup portal.a-company.test"
+        },
+        {
+          "kind": "paragraph",
+          "text": "ping 응답은 기본적인 IP 통신을 확인한다. DNS의 주소 응답이나 HTTP 서비스 정상까지 보장하지는 않는다. 세 확인을 분리해 기록하는 것이 이 실습의 출발점이다."
+        }
+      ]
+    },
+    {
+      "heading": "두 조건을 따로 재현하고 복구하자",
+      "body": [
+        {
+          "kind": "paragraph",
+          "text": "먼저 어떤 검사를 하면 두 원인을 구분할 수 있을지 보고서에 적는다. 아래는 바꿀 조건과 해야 할 확인이다. 전체 클릭 순서를 그대로 베끼기보다 앞에서 사용한 화면과 명령을 골라 검사 순서를 스스로 정하자."
+        },
+        {
+          "kind": "table",
+          "headers": [
+            "실험",
+            "바꿀 한 곳",
+            "유지할 조건",
+            "직접 얻을 근거"
           ],
-          "answer": {
-            "element": {
-              "kind": "paragraph",
-              "text": "A 레코드의 응답 주소를 바꾸면 후속 접속 대상이 달라질 수 있음을 확인했다. 관리자가 원본을 직접 바꾼 실험이므로, 거짓 응답 주입이나 캐시 포이즈닝이 일어났다는 증거는 없다."
-            },
-            "explain": "직접 바꾼 설정과 관찰한 결과를 먼저 쓰고, 실제 공격 여부는 별도의 기록과 근거로 판단한다."
-          }
-        }
-      ]
-    },
-    {
-      "heading": "관찰과 다음 확인을 보고서로 연결하기",
-      "body": [
-        {
-          "kind": "paragraph",
-          "text": "이 그림은 조사할 자료가 어느 장비에 있는지 정리한 개념도다. 권한 DNS 서버는 원본 정보를 보관하고, 재귀 리졸버는 PC 대신 주소를 찾아 받은 답을 캐시에 잠시 저장한다. 질의 출발지는 이름을 물어본 PC를 뜻한다. 비인가 변경은 허가받지 않은 변경이며, 변경 승인 이력은 담당자가 변경을 허락한 기록이다."
+          "rows": [
+            [
+              "A: 질문 대상 오류",
+              "PC0의 Desktop > IP Configuration에서 DNS Server .53 → .100",
+              "A 레코드 .100, 정상 웹 서버의 DNS Off·HTTP On",
+              "이름 조회 결과, .100 ping 결과, http://192.168.20.100 접속 결과"
+            ],
+            [
+              "B: 응답 주소 변경",
+              "DNSServer의 portal.a-company.test A 값 .100 → .200",
+              "PC0 DNS .53, 두 웹 서버의 HTTP On",
+              "새 DNS 응답의 A 값, 후속 HTTP 목적지, 같은 시도의 화면 문구"
+            ]
+          ]
         },
         {
           "kind": "paragraph",
-          "text": "`day03_dns_analysis.md`는 이번에 작성할 보고서 파일 이름이다. `.md`는 글자로 제목과 목록을 표시하는 Markdown 문서 형식이며, 메모장 같은 편집기에 아래 틀을 복사해 내용을 채우고 이 이름으로 저장하면 된다."
+          "text": "A에서는 값을 바꾼 뒤 PC0 캐시를 비우고 확인한다. DNS 질문이 실제로 어느 IP로 갔는지도 설명해 보자. 관찰을 마치면 PC0 DNS를 .53으로 되돌리고 새 조회 .100과 정상 문구까지 확인한다. 이 복구를 마친 뒤에만 B를 시작한다."
         },
         {
-          "kind": "image",
-          "src": "assets/l6_evidence.png",
-          "caption": "그림 6-2. 장비별 증거를 보고서로 모으기 — 원본, 캐시, 질의 출발지를 함께 대조한다.",
-          "text_content": "DNS 서버 · 캐시 · PC 기록을 모아 판단한다\n관찰한 값이 어디서 나왔는지 먼저 표시한 뒤, 가능한 원인과 다음 확인을 연결한다.\n권한 DNS 서버\n원본 A · 변경 이력\n재귀 리졸버\n캐시 A · 남은 TTL\n질의한 PC\n질의 시간 · 출발지\nday03_dns_analysis.md\n관찰: A .100 → .200 / TTL 300 → 86400\n해석: 서버 이전 · 비인가 변경 등 가능성\n다음 확인: 원본 · 캐시 상태 · 승인 기록 · 질의 출발지\nNXDOMAIN 3건은 관찰한 반복 기록이다. 평소 질의량과 비교해야 급증 여부를 판단할 수 있다."
+          "kind": "numbered_list",
+          "items": [
+            "B에서 A 레코드를 .200으로 바꾼 뒤 PC0의 캐시를 비운다.",
+            "Simulation으로 바꾸고 Reset Simulation으로 이전 이벤트 목록을 비운다. 이 버튼은 PC의 DNS 캐시를 지우는 버튼이 아니다.",
+            "Edit Filters에서 DNS·TCP·HTTP를 표시하도록 선택한다. TCP는 웹 데이터를 순서대로 전달하는 연결 방식이다.",
+            "같은 이름 http://portal.a-company.test로 접속하고 Capture/Forward로 응답이 PC0에 도착할 때까지 진행한다.",
+            "Event List에서 DNS 응답의 A 값과 후속 HTTP 목적지 IP를 각각 캡처하고 브라우저 문구를 같은 관찰에 연결한다.",
+            "Realtime으로 돌아와 A 값을 .100으로 복구한다. 캐시를 비우고 새 조회 .100과 정상 페이지를 확인한 뒤 파일을 저장한다."
+          ]
         },
         {
           "kind": "paragraph",
-          "text": "왼쪽 권한 DNS에서는 원본 A와 변경 이력을, 가운데 리졸버에서는 캐시의 A와 남은 TTL을, 오른쪽 PC에서는 질의 시간과 출발지를 확인한다. 한 장비의 값만으로 다른 장비의 상태까지 같다고 가정하지 않는다."
-        },
-        {
-          "kind": "paragraph",
-          "text": "보고서에는 관찰한 값 → 가능한 의미 → 다음 확인 순서로 적는다. `.100 → .200`은 관찰 사실이지만 정상 이전인지 비인가 변경인지는 승인 이력이 필요하다. TTL `86400`은 24시간이므로 이전 `300`초보다 사본이 오래 남을 수 있다. NXDOMAIN 3건은 평소 질의량과 비교해야 급증인지 판단할 수 있다. 앞의 시간 초과 사례와 응답 변경 사례는 별도 관찰이며, 한 사건에서 동시에 측정한 것처럼 합치지 않는다."
+          "text": "DNS 응답 패킷 자체의 목적지는 답을 기다리는 PC0이다. 웹 서버 주소는 응답 내용 속 A 값이며, 다음 웹 통신에서 목적지로 사용된다. B의 캡처 두 장에서 이 두 위치를 혼동하지 않았는지 확인한다."
         },
         {
           "kind": "task",
           "task_type": "challenge",
-          "title": "DNS 분석 보고서 작성",
-          "instruction": "문제 6. `day03_dns_analysis.md`에 아래의 서로 다른 사례를 구분해 장애 범위, 이상 징후, 다음 확인을 갖춘 보고서를 완성해 보자.",
+          "title": "두 장애를 구분하고 정상 상태로 복구하기",
+          "instruction": "아래 두 실험을 같은 파일에서 순서대로 수행하자. 실행 전 예상과 검사 순서를 먼저 적고, 정상 → A → 정상 → B → 정상의 각 상태에서 증거를 남겨 하나의 보고서를 완성한다.",
           "requirements": [
-            "IP 접속 성공과 이름 조회 실패를 구분한다.",
-            "정상 IP .100과 관찰 IP .200을 비교한다.",
-            "TTL 급증과 NXDOMAIN 반복을 기록한다.",
-            "공격을 확정하지 않고 확인할 다음 자료를 적는다.",
-            "서로 다른 사례와 설명용 로그를 한 사건에서 동시에 측정한 것처럼 쓰지 않는다."
+            "실험 A를 시작하기 전에 정상 DNS 응답과 웹페이지를 실제로 확인한다.",
+            "한 실험에서는 설정 한 곳만 바꾼다. A를 정상으로 복구한 뒤 B를 시작한다.",
+            "예상값과 실제 관찰값을 구분한다. 실패한 확인은 실패 상태와 조사한 내용을 그대로 남긴다.",
+            "B에서는 새 DNS 응답의 A 값, 후속 HTTP의 목적지, 화면 문구를 같은 시도의 증거로 묶는다.",
+            "복구는 설정 화면뿐 아니라 새 이름 조회와 정상 페이지로 확인한다.",
+            "실행한 Packet Tracer 버전, 실제 캡처와 저장 파일을 보고서에 기록한다."
           ],
-          "element": {
-            "kind": "code",
-            "lang": "markdown",
-            "src": "# Day 3 DNS 분석 보고서\n\n## 증상\n<!-- <<<<<<<<<<<< 수정 시작 <<<<<<<<<<<< -->\n# [여기를 채우기] 서로 다른 사례 A와 B의 증상을 나누어 적는다.\n<!-- >>>>>>>>>>>> 수정 끝 >>>>>>>>>>>> -->\n\n## DNS 조회 결과\n- 정상 기준: portal.a-company.test → 192.168.20.100\n<!-- <<<<<<<<<<<< 수정 시작 <<<<<<<<<<<< -->\n# [여기를 채우기] 사례 B의 응답·접속 주소와 설명용 로그의 TTL·NXDOMAIN을 구분한다.\n<!-- >>>>>>>>>>>> 수정 끝 >>>>>>>>>>>> -->\n\n## 판단과 다음 확인\n<!-- <<<<<<<<<<<< 수정 시작 <<<<<<<<<<<< -->\n# [여기를 채우기] NXDOMAIN 패턴과 확인할 자료를 적는다.\n<!-- >>>>>>>>>>>> 수정 끝 >>>>>>>>>>>> -->\n",
-            "intent": "normal"
-          },
-          "goal_output": "# Day 3 DNS 분석 보고서\n\n## 증상\n- 사례 A: IP 접속은 성공하지만 이름 조회는 시간 초과다.\n- 사례 B: DNS 응답과 후속 HTTP 목적지가 예상 밖 주소 .200이다.\n\n## DNS 조회 결과\n- 정상 기준: portal.a-company.test → 192.168.20.100\n- 사례 B: 응답 주소와 후속 HTTP 목적지는 192.168.20.200이다.\n- 설명용 로그: TTL 300 → 86400, 10:06에 NXDOMAIN 3건이 나타난다.\n\n## 판단과 다음 확인\n- 사례 A: PC의 DNS 설정과 DNS 서버까지의 통신·서비스 상태를 확인한다.\n- 사례 B: 원본 A 레코드와 변경 승인 이력을 대조한다.\n- 설명용 로그: 질의 출발지, 평소 질의량, TTL 정책과 비교한다.\n- 서로 다른 자료를 한 사건에서 동시에 측정한 사실로 합치지 않는다.\n- 현재 증거만으로 캐시 포이즈닝 공격을 확정하지 않는다.",
+          "goal_label": "완료 판정",
+          "goal_output": "정상 기준 기록 → 실험 A 관찰 → 정상 복구 확인 → 실험 B 관찰 → 최종 정상 복구 확인\n최종 결과물: day03_dns_integrated.pkt + day03_dns_report.md + 직접 캡처한 증거 이미지",
+          "answer_label": "진행이 막히면 — 예상 결과와 진단 근거",
           "answer": {
             "element": {
-              "kind": "code",
-              "lang": "markdown",
-              "src": "# Day 3 DNS 분석 보고서\n\n## 증상\n<!-- <<<<<<<<<<<< 수정 시작 <<<<<<<<<<<< -->\n- 사례 A: IP 접속은 성공하지만 이름 조회는 시간 초과다.\n- 사례 B: DNS 응답과 후속 HTTP 목적지가 예상 밖 주소 .200이다.\n<!-- >>>>>>>>>>>> 수정 끝 >>>>>>>>>>>> -->\n\n## DNS 조회 결과\n- 정상 기준: portal.a-company.test → 192.168.20.100\n<!-- <<<<<<<<<<<< 수정 시작 <<<<<<<<<<<< -->\n- 사례 B: 응답 주소와 후속 HTTP 목적지는 192.168.20.200이다.\n- 설명용 로그: TTL 300 → 86400, 10:06에 NXDOMAIN 3건이 나타난다.\n<!-- >>>>>>>>>>>> 수정 끝 >>>>>>>>>>>> -->\n\n## 판단과 다음 확인\n<!-- <<<<<<<<<<<< 수정 시작 <<<<<<<<<<<< -->\n- 사례 A: PC의 DNS 설정과 DNS 서버까지의 통신·서비스 상태를 확인한다.\n- 사례 B: 원본 A 레코드와 변경 승인 이력을 대조한다.\n- 설명용 로그: 질의 출발지, 평소 질의량, TTL 정책과 비교한다.\n- 서로 다른 자료를 한 사건에서 동시에 측정한 사실로 합치지 않는다.\n- 현재 증거만으로 캐시 포이즈닝 공격을 확정하지 않는다.\n<!-- >>>>>>>>>>>> 수정 끝 >>>>>>>>>>>> -->\n",
-              "intent": "normal"
-            },
-            "hint": "관찰 사실, 가능한 의미, 다음 확인의 세 층으로 나누어 쓰자.",
-            "explain": "파일명은 `day03_dns_analysis.md`이다. 공격 단정 대신 확인 가능한 증거와 조사 순서를 남기는 보고서다. 사례 A·B와 로그 예시는 구분해 기록하며, 추가 자료가 없는 부분은 확인 계획으로 남긴다."
-          },
-          "goal_label": "완성할 보고서 예시",
-          "start_label": "시작 틀 — 편집기에 복사한 뒤 설명에 맞게 글을 채운다.",
-          "setup_elements": [
-            {
               "kind": "table",
               "headers": [
-                "자료",
-                "주어진 관찰"
+                "상태",
+                "예상 결과",
+                "이유와 다음 확인"
               ],
               "rows": [
                 [
-                  "사례 A: 이름 조회 실패",
-                  "192.168.20.100으로 ping과 웹 접속 성공, portal.a-company.test 조회는 시간 초과"
+                  "정상",
+                  "이름 조회의 A 값 .100, 정상 포털 문구",
+                  "DNS 질문 대상 .53과 웹 접속 대상 .100이 알맞다."
                 ],
                 [
-                  "사례 B: 응답 변경",
-                  "정상 기준 .100, 응답 .200, 뒤이은 HTTP 목적지도 .200"
+                  "A: PC0의 DNS 주소를 .100으로 변경",
+                  "이름 조회에서 답을 받지 못함; .100으로 ping·HTTP 접속은 가능",
+                  "DNS 기능을 끈 웹 서버로 DNS 질문을 보냈기 때문이다. 구체적인 오류 문구는 환경별로 기록한다."
                 ],
                 [
-                  "설명용 로그",
-                  "10:00 TTL=300 → 10:05 TTL=86400, 10:06에 x1·x2·x3 이름의 NXDOMAIN 3건"
+                  "A 복구",
+                  "PC0 DNS .53, 새 조회 .100, 정상 문구",
+                  "질문 대상만 복구한 뒤 새 응답으로 확인한다."
                 ],
                 [
-                  "아직 없는 자료",
-                  "변경 승인 이력, 원본 레코드 수정 이력, 질의 출발지, 평소 질의량"
+                  "B: A 레코드를 .200으로 변경",
+                  "새 DNS 응답 A .200, 뒤의 HTTP 목적지 .200, 다른 서버 문구",
+                  "질문받는 DNS 서버는 그대로이고 이름이 알려 주는 목적지가 달라졌다."
+                ],
+                [
+                  "B 복구",
+                  "A 값 .100, 새 조회 .100, 정상 문구",
+                  "PC 캐시와 이전 화면을 구분하고 새로운 통신으로 복구를 확인한다."
                 ]
               ]
-            }
-          ]
+            },
+            "explain": "이 표는 예상 결과이며 실행 증거가 아니다. 실제 값이 다르면 표에 맞춰 보고서를 고치지 말고, 새 DNS 응답 여부·모드 진행·입력값·서비스 상태를 확인한다. 관리 화면에서 직접 바꾼 실험이므로 거짓 응답을 주입하거나 캐시 포이즈닝 공격을 재현했다는 결론을 내리지 않는다."
+          }
         }
       ]
     },
     {
-      "heading": "챙겨 가기 — 한눈 정리",
+      "heading": "관찰과 판단을 연결해 정리하자",
       "body": [
+        {
+          "kind": "paragraph",
+          "text": "보고서의 관찰에는 직접 본 값과 화면을 적고, 판단에는 그 값으로 설명할 수 있는 원인을 적는다. A의 이름 조회 실패와 B의 다른 서버 접속을 한 번에 일어난 같은 증상처럼 합치지 않는다."
+        },
         {
           "kind": "table",
           "headers": [
-            "판단 축",
-            "확인할 값",
-            "보고서 문장"
+            "검토 항목",
+            "완료 기준"
           ],
           "rows": [
             [
-              "연결",
-              "IP 성공 / 이름 실패",
-              "DNS 조회 구간부터 확인"
+              "증거",
+              "버전, 바꾼 값, 실제 응답, 화면과 캡처 파일이 서로 대응한다."
             ],
             [
-              "계층",
-              "Root / TLD / 권한 서버",
-              "안내와 최종 답 구분"
+              "원인 구분",
+              "A는 질문할 서버 설정, B는 응답 내용의 목적지 정보가 바뀌었다고 설명한다."
             ],
             [
-              "레코드",
-              "A / MX / NS 등",
-              "질문의 형식 확인"
+              "복구",
+              "최종 PC0 DNS .53 / A .100 / 새 조회 .100 / 정상 페이지가 함께 확인된다."
             ],
             [
-              "보안",
-              "응답 IP / TTL / NXDOMAIN",
-              "변화와 반복 패턴 기록"
+              "판단 범위",
+              "직접 바꾼 설정의 영향을 관찰했으며 실제 공격 여부는 별도 근거가 필요하다고 적는다."
             ]
           ]
+        },
+        {
+          "kind": "paragraph",
+          "text": "캐시 포이즈닝은 거짓 DNS 답이 캐시에 들어가 다시 쓰이는 공격이다. 이번 실험의 A 레코드 수정은 관리자가 원본 설정을 직접 바꾼 것이다. 실제 운영에서 비슷한 증상을 만났다면 원본 변경 기록, 승인된 변경 여부, 질의한 장비, 조회 대행 서버에 남은 답 등을 추가로 대조해야 한다."
+        },
+        {
+          "kind": "paragraph",
+          "text": "보고서와 직접 만든 캡처를 같은 폴더에 모으고, 정상 상태로 복구한 `day03_dns_integrated.pkt`를 함께 저장한다. 다른 학생에게 관찰과 판단이 구분되는지 읽어 달라고 한 뒤, 빠진 근거가 있으면 보완하자."
         }
       ]
     }
   ],
-  "extra_tasks": [
-    {
-      "title": "옆 사람의 보고서 교차 검토",
-      "text": "근거 없는 공격 단정이 있는지 서로 한 줄씩 확인하자.",
-      "element": {
-        "kind": "table",
-        "headers": [
-          "검토",
-          "기준"
-        ],
-        "rows": [
-          [
-            "관찰",
-            "실제 값이 적혀 있음"
-          ],
-          [
-            "판단",
-            "가능성과 확정을 구분함"
-          ],
-          [
-            "조치",
-            "다음 확인 대상이 구체적임"
-          ]
-        ]
-      }
-    }
-  ],
-  "hard_problem": {
-    "title": "정상 변경과 공격 의심 비교",
-    "text": "동일한 IP 변경을 두고 승인 기록 유무에 따라 판단 문장을 다르게 써 보자.",
-    "element": {
-      "kind": "table",
-      "headers": [
-        "승인 기록",
-        "판단"
-      ],
-      "rows": [
-        [
-          "있음",
-          "정상 변경 가능성 우선 확인"
-        ],
-        [
-          "없음",
-          "비인가 변경 가능성 조사"
-        ]
-      ]
-    },
-    "answer": {
-      "element": {
-        "kind": "code",
-        "lang": "text",
-        "src": "승인 기록이 있으면 계획된 서버 이전인지 검증한다. 기록이 없으면 권한 서버 수정 이력과 계정 활동을 조사하되, 추가 증거 전에는 공격을 확정하지 않는다.",
-        "intent": "normal"
-      }
-    }
-  },
-  "closing": "오늘 만든 정상·변경 토폴로지와 `day03_dns_analysis.md`를 함께 보면 이름 조회부터 보안 판단까지 한 흐름이 완성된다.",
+  "extra_tasks": [],
   "review": [
-    "IP 접속 성공과 이름 조회 실패가 함께 나타나면 어디부터 확인하는가?",
-    "잘못된 DNS 응답이 웹 접속 목적지를 바꾸는 순서를 설명할 수 있는가?",
-    "DNS 로그만으로 공격을 확정하지 않고 추가로 확인해야 하는 자료는 무엇인가?"
+    "이름 조회 실패와 잘못된 주소 응답을 어떤 근거로 구분했는가?",
+    "DNS 응답 속 주소와 후속 HTTP 목적지는 어떻게 연결되었는가?",
+    "복구를 설정 화면만으로 확인하지 않은 이유는 무엇인가?"
   ],
   "learning_terms": [
     {
+      "term": "Packet Tracer",
+      "aliases": [],
+      "introduced_by": "Packet Tracer는 가상 장비의 통신을 시험하는 프로그램이다. 여기서 PC0은 요청을 보내는 사용자 컴퓨터, 서버는 요청받은 기능을 제공하는 컴퓨터 역할이다. IP 주소는 통신 대상의 숫자 주소이고 DNS는 이름에 대응하는 주소 정보를 찾는 체계다. IntranetServer는 정상 내부 웹페이지를 보내는 장비, DNSServer는 이름 질문에 답하는 장비, UnexpectedServer는 비교용 다른 웹페이지를 보내는 장비에 붙인 이름이다."
+    },
+    {
+      "term": "PC0",
+      "aliases": [],
+      "introduced_by": "Packet Tracer는 가상 장비의 통신을 시험하는 프로그램이다. 여기서 PC0은 요청을 보내는 사용자 컴퓨터, 서버는 요청받은 기능을 제공하는 컴퓨터 역할이다. IP 주소는 통신 대상의 숫자 주소이고 DNS는 이름에 대응하는 주소 정보를 찾는 체계다. IntranetServer는 정상 내부 웹페이지를 보내는 장비, DNSServer는 이름 질문에 답하는 장비, UnexpectedServer는 비교용 다른 웹페이지를 보내는 장비에 붙인 이름이다."
+    },
+    {
+      "term": "서버",
+      "aliases": [],
+      "introduced_by": "Packet Tracer는 가상 장비의 통신을 시험하는 프로그램이다. 여기서 PC0은 요청을 보내는 사용자 컴퓨터, 서버는 요청받은 기능을 제공하는 컴퓨터 역할이다. IP 주소는 통신 대상의 숫자 주소이고 DNS는 이름에 대응하는 주소 정보를 찾는 체계다. IntranetServer는 정상 내부 웹페이지를 보내는 장비, DNSServer는 이름 질문에 답하는 장비, UnexpectedServer는 비교용 다른 웹페이지를 보내는 장비에 붙인 이름이다."
+    },
+    {
+      "term": "IP 주소",
+      "aliases": [
+        "IP"
+      ],
+      "introduced_by": "Packet Tracer는 가상 장비의 통신을 시험하는 프로그램이다. 여기서 PC0은 요청을 보내는 사용자 컴퓨터, 서버는 요청받은 기능을 제공하는 컴퓨터 역할이다. IP 주소는 통신 대상의 숫자 주소이고 DNS는 이름에 대응하는 주소 정보를 찾는 체계다. IntranetServer는 정상 내부 웹페이지를 보내는 장비, DNSServer는 이름 질문에 답하는 장비, UnexpectedServer는 비교용 다른 웹페이지를 보내는 장비에 붙인 이름이다."
+    },
+    {
+      "term": "DNS",
+      "aliases": [],
+      "introduced_by": "Packet Tracer는 가상 장비의 통신을 시험하는 프로그램이다. 여기서 PC0은 요청을 보내는 사용자 컴퓨터, 서버는 요청받은 기능을 제공하는 컴퓨터 역할이다. IP 주소는 통신 대상의 숫자 주소이고 DNS는 이름에 대응하는 주소 정보를 찾는 체계다. IntranetServer는 정상 내부 웹페이지를 보내는 장비, DNSServer는 이름 질문에 답하는 장비, UnexpectedServer는 비교용 다른 웹페이지를 보내는 장비에 붙인 이름이다."
+    },
+    {
       "term": "IntranetServer",
       "aliases": [],
-      "introduced_by": "`IntranetServer`는 그 페이지를 보내는 서버"
+      "introduced_by": "Packet Tracer는 가상 장비의 통신을 시험하는 프로그램이다. 여기서 PC0은 요청을 보내는 사용자 컴퓨터, 서버는 요청받은 기능을 제공하는 컴퓨터 역할이다. IP 주소는 통신 대상의 숫자 주소이고 DNS는 이름에 대응하는 주소 정보를 찾는 체계다. IntranetServer는 정상 내부 웹페이지를 보내는 장비, DNSServer는 이름 질문에 답하는 장비, UnexpectedServer는 비교용 다른 웹페이지를 보내는 장비에 붙인 이름이다."
     },
     {
       "term": "DNSServer",
-      "aliases": [
-        "DNS 서버"
-      ],
-      "introduced_by": "`DNSServer`는 포털 이름 `portal.a-company.test`에 맞는 주소를 알려 주는 DNS 서버"
+      "aliases": [],
+      "introduced_by": "Packet Tracer는 가상 장비의 통신을 시험하는 프로그램이다. 여기서 PC0은 요청을 보내는 사용자 컴퓨터, 서버는 요청받은 기능을 제공하는 컴퓨터 역할이다. IP 주소는 통신 대상의 숫자 주소이고 DNS는 이름에 대응하는 주소 정보를 찾는 체계다. IntranetServer는 정상 내부 웹페이지를 보내는 장비, DNSServer는 이름 질문에 답하는 장비, UnexpectedServer는 비교용 다른 웹페이지를 보내는 장비에 붙인 이름이다."
+    },
+    {
+      "term": "UnexpectedServer",
+      "aliases": [],
+      "introduced_by": "Packet Tracer는 가상 장비의 통신을 시험하는 프로그램이다. 여기서 PC0은 요청을 보내는 사용자 컴퓨터, 서버는 요청받은 기능을 제공하는 컴퓨터 역할이다. IP 주소는 통신 대상의 숫자 주소이고 DNS는 이름에 대응하는 주소 정보를 찾는 체계다. IntranetServer는 정상 내부 웹페이지를 보내는 장비, DNSServer는 이름 질문에 답하는 장비, UnexpectedServer는 비교용 다른 웹페이지를 보내는 장비에 붙인 이름이다."
     },
     {
       "term": "A 레코드",
       "aliases": [
-        "A 응답",
-        "A 값"
+        "A record"
       ],
-      "introduced_by": "A 레코드는 이름과 IPv4 주소의 대응 정보다."
+      "introduced_by": "A 레코드는 이름과 IPv4 주소의 대응 정보다. IPv4는 이번에 쓰는 점으로 구분한 숫자 주소 형식이다. PC의 DNS Server 칸은 질문받을 서버를 지정하며, A 레코드 값은 그 질문에 답할 웹 서버 주소를 지정한다. HTTP는 웹 내용을 요청하고 응답하는 규칙이다. `portal.a-company.test`는 이 실습 안에서만 등록하는 시험용 이름이다."
     },
     {
-      "term": "캐시",
+      "term": "IPv4",
       "aliases": [],
-      "introduced_by": "캐시는 조회한 답을 잠시 저장하는 공간"
+      "introduced_by": "A 레코드는 이름과 IPv4 주소의 대응 정보다. IPv4는 이번에 쓰는 점으로 구분한 숫자 주소 형식이다. PC의 DNS Server 칸은 질문받을 서버를 지정하며, A 레코드 값은 그 질문에 답할 웹 서버 주소를 지정한다. HTTP는 웹 내용을 요청하고 응답하는 규칙이다. `portal.a-company.test`는 이 실습 안에서만 등록하는 시험용 이름이다."
     },
     {
-      "term": "NXDOMAIN",
+      "term": "DNS Server",
       "aliases": [],
-      "introduced_by": "NXDOMAIN은 질문한 이름이 없다는 응답이다."
-    },
-    {
-      "term": "시간 초과",
-      "aliases": [],
-      "introduced_by": "시간 초과는 정해진 시간 안에 답을 받지 못했다는 뜻이다."
-    },
-    {
-      "term": "TCP",
-      "aliases": [],
-      "introduced_by": "TCP로 연결을 맺고 HTTP로 웹페이지를 주고받는다."
+      "introduced_by": "A 레코드는 이름과 IPv4 주소의 대응 정보다. IPv4는 이번에 쓰는 점으로 구분한 숫자 주소 형식이다. PC의 DNS Server 칸은 질문받을 서버를 지정하며, A 레코드 값은 그 질문에 답할 웹 서버 주소를 지정한다. HTTP는 웹 내용을 요청하고 응답하는 규칙이다. `portal.a-company.test`는 이 실습 안에서만 등록하는 시험용 이름이다."
     },
     {
       "term": "HTTP",
       "aliases": [],
-      "introduced_by": "TCP로 연결을 맺고 HTTP로 웹페이지를 주고받는다."
+      "introduced_by": "A 레코드는 이름과 IPv4 주소의 대응 정보다. IPv4는 이번에 쓰는 점으로 구분한 숫자 주소 형식이다. PC의 DNS Server 칸은 질문받을 서버를 지정하며, A 레코드 값은 그 질문에 답할 웹 서버 주소를 지정한다. HTTP는 웹 내용을 요청하고 응답하는 규칙이다. `portal.a-company.test`는 이 실습 안에서만 등록하는 시험용 이름이다."
     },
     {
-      "term": "TCP 포트",
+      "term": "portal.a-company.test",
       "aliases": [],
-      "introduced_by": "서버 안에서 통신을 받을 프로그램을 구분하는 번호다."
+      "introduced_by": "A 레코드는 이름과 IPv4 주소의 대응 정보다. IPv4는 이번에 쓰는 점으로 구분한 숫자 주소 형식이다. PC의 DNS Server 칸은 질문받을 서버를 지정하며, A 레코드 값은 그 질문에 답할 웹 서버 주소를 지정한다. HTTP는 웹 내용을 요청하고 응답하는 규칙이다. `portal.a-company.test`는 이 실습 안에서만 등록하는 시험용 이름이다."
     },
     {
-      "term": "방화벽",
+      "term": "Services",
       "aliases": [],
-      "introduced_by": "방화벽은 정해진 규칙에 따라 통신을 허용하거나 막는 기능이다."
+      "introduced_by": "게이트웨이는 다른 망으로 나갈 때 먼저 건너는 라우터 주소다. 서브넷 마스크(마스크)는 같은 망의 주소 범위를 구분한다. `Desktop > Command Prompt`는 명령을 입력하는 창이다. `ping`은 확인 메시지에 답이 오는지 시험하고, `nslookup`은 이름을 물어본 응답을 보여 준다. `Desktop > Web Browser`는 웹페이지를 여는 창이다. 입력 위치 표시인 `C:\\>`는 복사하지 않고 명령만 입력한다. `Services`는 서버 기능을 설정하는 메뉴다."
+    },
+    {
+      "term": "index.html",
+      "aliases": [],
+      "introduced_by": "`index.html`은 서버가 첫 화면으로 보낼 문서"
+    },
+    {
+      "term": "Command Prompt",
+      "aliases": [],
+      "introduced_by": "게이트웨이는 다른 망으로 나갈 때 먼저 건너는 라우터 주소다. 서브넷 마스크(마스크)는 같은 망의 주소 범위를 구분한다. `Desktop > Command Prompt`는 명령을 입력하는 창이다. `ping`은 확인 메시지에 답이 오는지 시험하고, `nslookup`은 이름을 물어본 응답을 보여 준다. `Desktop > Web Browser`는 웹페이지를 여는 창이다. 입력 위치 표시인 `C:\\>`는 복사하지 않고 명령만 입력한다. `Services`는 서버 기능을 설정하는 메뉴다."
+    },
+    {
+      "term": "HTML",
+      "aliases": [],
+      "introduced_by": "HTML은 웹페이지의 글과 구조를 표시하는 문서 형식이다."
+    },
+    {
+      "term": "게이트웨이",
+      "aliases": [
+        "Gateway"
+      ],
+      "introduced_by": "게이트웨이는 다른 망으로 나갈 때 먼저 건너는 라우터 주소다. 서브넷 마스크(마스크)는 같은 망의 주소 범위를 구분한다. `Desktop > Command Prompt`는 명령을 입력하는 창이다. `ping`은 확인 메시지에 답이 오는지 시험하고, `nslookup`은 이름을 물어본 응답을 보여 준다. `Desktop > Web Browser`는 웹페이지를 여는 창이다. 입력 위치 표시인 `C:\\>`는 복사하지 않고 명령만 입력한다. `Services`는 서버 기능을 설정하는 메뉴다."
+    },
+    {
+      "term": "서브넷 마스크",
+      "aliases": [],
+      "introduced_by": "게이트웨이는 다른 망으로 나갈 때 먼저 건너는 라우터 주소다. 서브넷 마스크(마스크)는 같은 망의 주소 범위를 구분한다. `Desktop > Command Prompt`는 명령을 입력하는 창이다. `ping`은 확인 메시지에 답이 오는지 시험하고, `nslookup`은 이름을 물어본 응답을 보여 준다. `Desktop > Web Browser`는 웹페이지를 여는 창이다. 입력 위치 표시인 `C:\\>`는 복사하지 않고 명령만 입력한다. `Services`는 서버 기능을 설정하는 메뉴다."
     },
     {
       "term": "ping",
       "aliases": [],
-      "introduced_by": "`ping`은 확인용 메시지의 응답 여부를 시험하는 명령이다."
+      "introduced_by": "게이트웨이는 다른 망으로 나갈 때 먼저 건너는 라우터 주소다. 서브넷 마스크(마스크)는 같은 망의 주소 범위를 구분한다. `Desktop > Command Prompt`는 명령을 입력하는 창이다. `ping`은 확인 메시지에 답이 오는지 시험하고, `nslookup`은 이름을 물어본 응답을 보여 준다. `Desktop > Web Browser`는 웹페이지를 여는 창이다. 입력 위치 표시인 `C:\\>`는 복사하지 않고 명령만 입력한다. `Services`는 서버 기능을 설정하는 메뉴다."
     },
     {
-      "term": "Root",
+      "term": "nslookup",
+      "aliases": [],
+      "introduced_by": "게이트웨이는 다른 망으로 나갈 때 먼저 건너는 라우터 주소다. 서브넷 마스크(마스크)는 같은 망의 주소 범위를 구분한다. `Desktop > Command Prompt`는 명령을 입력하는 창이다. `ping`은 확인 메시지에 답이 오는지 시험하고, `nslookup`은 이름을 물어본 응답을 보여 준다. `Desktop > Web Browser`는 웹페이지를 여는 창이다. 입력 위치 표시인 `C:\\>`는 복사하지 않고 명령만 입력한다. `Services`는 서버 기능을 설정하는 메뉴다."
+    },
+    {
+      "term": "Web Browser",
+      "aliases": [],
+      "introduced_by": "게이트웨이는 다른 망으로 나갈 때 먼저 건너는 라우터 주소다. 서브넷 마스크(마스크)는 같은 망의 주소 범위를 구분한다. `Desktop > Command Prompt`는 명령을 입력하는 창이다. `ping`은 확인 메시지에 답이 오는지 시험하고, `nslookup`은 이름을 물어본 응답을 보여 준다. `Desktop > Web Browser`는 웹페이지를 여는 창이다. 입력 위치 표시인 `C:\\>`는 복사하지 않고 명령만 입력한다. `Services`는 서버 기능을 설정하는 메뉴다."
+    },
+    {
+      "term": "캐시",
+      "aliases": [],
+      "introduced_by": "앞에서 받은 답을 잠시 기억하는 저장 공간이다. 새 주소 질문을 관찰하기 전에 PC0의 `Command Prompt`에서 `ipconfig /flushdns`로 기억한 답을 지운다. 지원하지 않으면 PC0을 껐다 켜고 IP·마스크·게이트웨이·DNS 설정을 다시 확인한다."
+    },
+    {
+      "term": "Simulation",
       "aliases": [
-        "TLD"
+        "시뮬레이션"
       ],
-      "introduced_by": "Root는 큰 이름 분류의 담당 서버를, TLD는 그 아래 이름의 담당 서버를 안내한다."
+      "introduced_by": "통신을 한 단계씩 진행해 관찰하는 모드다. `Realtime`은 통신을 자동으로 진행하는 모드다. 명령으로 정상·복구를 확인할 때는 Realtime을 사용하고, 패킷을 따라갈 때는 Simulation을 사용한다."
     },
     {
-      "term": "권한 서버",
+      "term": "패킷",
+      "aliases": [],
+      "introduced_by": "패킷은 통신 데이터를 나눈 묶음이다. `Event List`는 통신 동작을 시간순으로 보여 주는 목록이며, `PDU Details`는 선택한 데이터 묶음의 주소와 내용을 여는 화면이다. `Capture/Forward`는 다음 동작으로 진행하는 버튼이다. DNS 응답 안의 A 값과 뒤이은 HTTP 패킷의 목적지 IP를 비교한다."
+    },
+    {
+      "term": "PDU",
       "aliases": [
-        "권한 DNS 서버"
+        "PDU Details"
       ],
-      "introduced_by": "권한 서버는 자신이 맡은 이름의 원본 정보를 보관한다."
+      "introduced_by": "패킷은 통신 데이터를 나눈 묶음이다. `Event List`는 통신 동작을 시간순으로 보여 주는 목록이며, `PDU Details`는 선택한 데이터 묶음의 주소와 내용을 여는 화면이다. `Capture/Forward`는 다음 동작으로 진행하는 버튼이다. DNS 응답 안의 A 값과 뒤이은 HTTP 패킷의 목적지 IP를 비교한다."
     },
     {
-      "term": "MX",
+      "term": "Event List",
       "aliases": [],
-      "introduced_by": "MX는 메일을 받을 서버 정보를 나타내는 레코드 종류다."
+      "introduced_by": "패킷은 통신 데이터를 나눈 묶음이다. `Event List`는 통신 동작을 시간순으로 보여 주는 목록이며, `PDU Details`는 선택한 데이터 묶음의 주소와 내용을 여는 화면이다. `Capture/Forward`는 다음 동작으로 진행하는 버튼이다. DNS 응답 안의 A 값과 뒤이은 HTTP 패킷의 목적지 IP를 비교한다."
     },
     {
-      "term": "로그",
+      "term": "Capture/Forward",
       "aliases": [],
-      "introduced_by": "로그는 동작을 기록한 자료다."
-    },
-    {
-      "term": "TTL",
-      "aliases": [],
-      "introduced_by": "TTL은 저장한 답을 사용할 수 있는 남은 시간"
-    },
-    {
-      "term": "NOERROR",
-      "aliases": [],
-      "introduced_by": "NOERROR는 DNS 처리 오류가 없다는 뜻"
-    },
-    {
-      "term": "재귀 리졸버",
-      "aliases": [
-        "리졸버"
-      ],
-      "introduced_by": "재귀 리졸버는 PC 대신 주소를 찾아 받은 답을 캐시에 잠시 저장한다."
-    },
-    {
-      "term": "질의 출발지",
-      "aliases": [],
-      "introduced_by": "질의 출발지는 이름을 물어본 PC를 뜻한다."
-    },
-    {
-      "term": "비인가 변경",
-      "aliases": [],
-      "introduced_by": "비인가 변경은 허가받지 않은 변경"
-    },
-    {
-      "term": "변경 승인 이력",
-      "aliases": [],
-      "introduced_by": "변경 승인 이력은 담당자가 변경을 허락한 기록이다."
-    },
-    {
-      "term": "Markdown",
-      "aliases": [
-        ".md"
-      ],
-      "introduced_by": "글자로 제목과 목록을 표시하는 Markdown 문서 형식"
-    },
-    {
-      "term": "스위치",
-      "aliases": [
-        "Switch0"
-      ],
-      "introduced_by": "`Switch0`은 같은 망의 장비를 잇는 스위치"
-    },
-    {
-      "term": "라우터",
-      "aliases": [
-        "Router0"
-      ],
-      "introduced_by": "`Router0`은 나뉜 망 사이를 잇는 라우터다."
+      "introduced_by": "패킷은 통신 데이터를 나눈 묶음이다. `Event List`는 통신 동작을 시간순으로 보여 주는 목록이며, `PDU Details`는 선택한 데이터 묶음의 주소와 내용을 여는 화면이다. `Capture/Forward`는 다음 동작으로 진행하는 버튼이다. DNS 응답 안의 A 값과 뒤이은 HTTP 패킷의 목적지 IP를 비교한다."
     }
   ]
 }

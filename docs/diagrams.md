@@ -45,3 +45,13 @@ diagram.save()
 ```
 
 모듈을 가져오는 것만으로 파일이나 폴더를 생성하지 않는다. `save()` 또는 실행 명령이 실제 결과를 저장한다. 생성 기능과 Notion에 이미지를 올리는 기능은 별개다.
+
+## DNS 개념 그림
+
+`tools/build_dns_concepts.py`는 1–3교시의 개념 그림 8개를 만든다. 인터넷 구름, 중간 연결, 라우터와 서버를 사용해 주소 조회·웹 통신·다음 전달 대상·이름 계층·조회 주체·레코드·캐시·응답 변화의 관계를 설명한다. 실제 서비스나 Packet Tracer의 측정 화면이 아니다.
+
+```bash
+python tools/build_dns_concepts.py --out examples/day3/assets --font /path/to/NanumGothic-Regular.ttf
+```
+
+이번 PNG는 Nanum Gothic으로 렌더했다. SVG를 다른 환경에서 같은 모양으로 보려면 같은 글꼴이 필요하다. 출처와 그림 범위는 [개념 자료 출처](concept-sources.md), 별도 실측의 준비 사항은 [촬영 계획](packet-tracer-capture-plan.md)을 참고한다.

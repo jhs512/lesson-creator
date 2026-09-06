@@ -1,0 +1,149 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1210" viewBox="0 0 1800 1210">
+<rect width="100%" height="100%" fill="white"/>
+<text x="50.00" y="64.80" font-family="NanumGothic, sans-serif" font-size="40" fill="#1a2834">원본을 바꿔도 저장된 답은 잠시 남는다</text>
+<text x="52.00" y="105.08" font-family="NanumGothic, sans-serif" font-size="24" fill="#697885">10:00에 받은 답의 TTL은 300초 · 주소는 설명용 값</text>
+<polyline points="50,129 1750,129" fill="none" stroke="#b8c5cd" stroke-width="1" stroke-linejoin="round"/>
+<text x="70.00" y="237.60" font-family="NanumGothic, sans-serif" font-size="30" fill="#1573bb">10:00</text>
+<polygon points="240.94,245.35 303.94,245.35 313.39,253.54 313.39,297.64 240.94,297.64" fill="#b9c3c8" stroke="#54646f" stroke-width="2"/>
+<polygon points="303.94,245.35 313.39,253.54 313.39,297.64 303.94,291.34" fill="#81929c" stroke="#54646f" stroke-width="2"/>
+<rect x="246.61" y="251.02" width="51.03" height="36.54" rx="2" fill="#c6e6f7" stroke="#657e90" stroke-width="2"/>
+<polygon points="248.5,253.54 293.86,253.54 248.5,285.04" fill="#edf9fe" stroke="#edf9fe" stroke-width="1"/>
+<rect x="269.92" y="297.64" width="13.86" height="11.97" rx="0" fill="#87959d" stroke="#54646f" stroke-width="2"/>
+<polygon points="250.39,310.87 306.46,310.87 322.21,322.84000000000003 239.68,322.84000000000003" fill="#d4dadd" stroke="#627380" stroke-width="2"/>
+<polyline points="255.43,314.65 302.68,314.65" fill="none" stroke="#91a1ab" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="255.43,318.43 302.68,318.43" fill="none" stroke="#91a1ab" stroke-width="1" stroke-linejoin="round"/>
+<rect x="318.43" y="263.62" width="17.01" height="48.51" rx="3" fill="#d7d9d1" stroke="#657580" stroke-width="2"/>
+<polyline points="321.58,273.07 332.29,273.07" fill="none" stroke="#7c8b94" stroke-width="2" stroke-linejoin="round"/>
+<ellipse cx="327.25" cy="299.53" rx="5.0" ry="5.0" fill="#39b657" stroke="#39b657" stroke-width="1"/>
+<text x="263.14" y="356.50" font-family="NanumGothic, sans-serif" font-size="27" fill="#1a2834">PC</text>
+<polygon points="799.75,231.25 849.25,231.25 869.5,247.75 820.0,247.75" fill="#f3efe1" stroke="#726f65" stroke-width="2"/>
+<polygon points="849.25,231.25 869.5,247.75 869.5,324.25 849.25,309.25" fill="#b4ad9b" stroke="#726f65" stroke-width="2"/>
+<polygon points="799.75,231.25 849.25,231.25 849.25,309.25 799.75,309.25" fill="#ded9c8" stroke="#726f65" stroke-width="2"/>
+<rect x="806.5" y="245.5" width="33.75" height="7.5" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="806.5" y="259.0" width="33.75" height="7.5" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="806.5" y="272.5" width="33.75" height="7.5" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<ellipse cx="812.125" cy="292.375" rx="3.375" ry="3.375" fill="#46b758" stroke="#278c3f" stroke-width="1"/>
+<polyline points="811.0,301.0 811.0,304.75" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="817.75,301.0 817.75,304.75" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="824.5,301.0 824.5,304.75" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="831.25,301.0 831.25,304.75" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<text x="767.76" y="361.09" font-family="NanumGothic, sans-serif" font-size="27" fill="#1a2834">재귀 리졸버</text>
+<text x="673.06" y="385.91" font-family="NanumGothic, sans-serif" font-size="23" fill="#697885">저장된 A: 192.0.2.10 · TTL 300</text>
+<polygon points="1444.75,231.25 1494.25,231.25 1514.5,247.75 1465.0,247.75" fill="#f3efe1" stroke="#726f65" stroke-width="2"/>
+<polygon points="1494.25,231.25 1514.5,247.75 1514.5,324.25 1494.25,309.25" fill="#b4ad9b" stroke="#726f65" stroke-width="2"/>
+<polygon points="1444.75,231.25 1494.25,231.25 1494.25,309.25 1444.75,309.25" fill="#ded9c8" stroke="#726f65" stroke-width="2"/>
+<rect x="1451.5" y="245.5" width="33.75" height="7.5" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="1451.5" y="259.0" width="33.75" height="7.5" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="1451.5" y="272.5" width="33.75" height="7.5" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<ellipse cx="1457.125" cy="292.375" rx="3.375" ry="3.375" fill="#46b758" stroke="#278c3f" stroke-width="1"/>
+<polyline points="1456.0,301.0 1456.0,304.75" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1462.75,301.0 1462.75,304.75" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1469.5,301.0 1469.5,304.75" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1476.25,301.0 1476.25,304.75" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<text x="1425.45" y="361.09" font-family="NanumGothic, sans-serif" font-size="27" fill="#1a2834">권한 서버</text>
+<text x="1380.87" y="385.91" font-family="NanumGothic, sans-serif" font-size="23" fill="#697885">원본 A: 192.0.2.10</text>
+<polyline points="385,260 745,260" fill="none" stroke="#1573bb" stroke-width="4" stroke-linejoin="round"/>
+<polygon points="745,260 730.0810964478636,268.15023415627144 730.0810964478636,251.84976584372856" fill="#1573bb" stroke="#1573bb" stroke-width="1"/>
+<polyline points="745,325 385,325" fill="none" stroke="#008461" stroke-width="4" stroke-linejoin="round"/>
+<polygon points="385,325 399.9189035521363,316.84976584372856 399.9189035521363,333.15023415627144" fill="#008461" stroke="#008461" stroke-width="1"/>
+<polyline points="940,260 1380,260" fill="none" stroke="#1573bb" stroke-width="4" stroke-linejoin="round"/>
+<polygon points="1380,260 1365.0810964478637,268.15023415627144 1365.0810964478637,251.84976584372856" fill="#1573bb" stroke="#1573bb" stroke-width="1"/>
+<polyline points="1380,325 940,325" fill="none" stroke="#008461" stroke-width="4" stroke-linejoin="round"/>
+<polygon points="940,325 954.9189035521364,316.84976584372856 954.9189035521364,333.15023415627144" fill="#008461" stroke="#008461" stroke-width="1"/>
+<polyline points="65,470 1725,470" fill="none" stroke="#dce4eb" stroke-width="1" stroke-linejoin="round"/>
+<text x="70.00" y="577.60" font-family="NanumGothic, sans-serif" font-size="30" fill="#1573bb">10:02</text>
+<polygon points="240.94,585.35 303.94,585.35 313.39,593.54 313.39,637.64 240.94,637.64" fill="#b9c3c8" stroke="#54646f" stroke-width="2"/>
+<polygon points="303.94,585.35 313.39,593.54 313.39,637.64 303.94,631.34" fill="#81929c" stroke="#54646f" stroke-width="2"/>
+<rect x="246.61" y="591.02" width="51.03" height="36.54" rx="2" fill="#c6e6f7" stroke="#657e90" stroke-width="2"/>
+<polygon points="248.5,593.54 293.86,593.54 248.5,625.04" fill="#edf9fe" stroke="#edf9fe" stroke-width="1"/>
+<rect x="269.92" y="637.64" width="13.86" height="11.97" rx="0" fill="#87959d" stroke="#54646f" stroke-width="2"/>
+<polygon points="250.39,650.87 306.46,650.87 322.21,662.84 239.68,662.84" fill="#d4dadd" stroke="#627380" stroke-width="2"/>
+<polyline points="255.43,654.65 302.68,654.65" fill="none" stroke="#91a1ab" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="255.43,658.43 302.68,658.43" fill="none" stroke="#91a1ab" stroke-width="1" stroke-linejoin="round"/>
+<rect x="318.43" y="603.62" width="17.01" height="48.51" rx="3" fill="#d7d9d1" stroke="#657580" stroke-width="2"/>
+<polyline points="321.58,613.07 332.29,613.07" fill="none" stroke="#7c8b94" stroke-width="2" stroke-linejoin="round"/>
+<ellipse cx="327.25" cy="639.53" rx="5.0" ry="5.0" fill="#39b657" stroke="#39b657" stroke-width="1"/>
+<text x="263.14" y="696.50" font-family="NanumGothic, sans-serif" font-size="27" fill="#1a2834">PC</text>
+<polygon points="799.75,571.25 849.25,571.25 869.5,587.75 820.0,587.75" fill="#f3efe1" stroke="#726f65" stroke-width="2"/>
+<polygon points="849.25,571.25 869.5,587.75 869.5,664.25 849.25,649.25" fill="#b4ad9b" stroke="#726f65" stroke-width="2"/>
+<polygon points="799.75,571.25 849.25,571.25 849.25,649.25 799.75,649.25" fill="#ded9c8" stroke="#726f65" stroke-width="2"/>
+<rect x="806.5" y="585.5" width="33.75" height="7.5" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="806.5" y="599.0" width="33.75" height="7.5" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="806.5" y="612.5" width="33.75" height="7.5" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<ellipse cx="812.125" cy="632.375" rx="3.375" ry="3.375" fill="#46b758" stroke="#278c3f" stroke-width="1"/>
+<polyline points="811.0,641.0 811.0,644.75" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="817.75,641.0 817.75,644.75" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="824.5,641.0 824.5,644.75" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="831.25,641.0 831.25,644.75" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<text x="767.76" y="701.09" font-family="NanumGothic, sans-serif" font-size="27" fill="#1a2834">재귀 리졸버</text>
+<text x="673.06" y="725.91" font-family="NanumGothic, sans-serif" font-size="23" fill="#697885">저장된 A: 192.0.2.10 · TTL 180</text>
+<polygon points="1444.75,571.25 1494.25,571.25 1514.5,587.75 1465.0,587.75" fill="#f3efe1" stroke="#726f65" stroke-width="2"/>
+<polygon points="1494.25,571.25 1514.5,587.75 1514.5,664.25 1494.25,649.25" fill="#b4ad9b" stroke="#726f65" stroke-width="2"/>
+<polygon points="1444.75,571.25 1494.25,571.25 1494.25,649.25 1444.75,649.25" fill="#ded9c8" stroke="#726f65" stroke-width="2"/>
+<rect x="1451.5" y="585.5" width="33.75" height="7.5" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="1451.5" y="599.0" width="33.75" height="7.5" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="1451.5" y="612.5" width="33.75" height="7.5" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<ellipse cx="1457.125" cy="632.375" rx="3.375" ry="3.375" fill="#46b758" stroke="#278c3f" stroke-width="1"/>
+<polyline points="1456.0,641.0 1456.0,644.75" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1462.75,641.0 1462.75,644.75" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1469.5,641.0 1469.5,644.75" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1476.25,641.0 1476.25,644.75" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<text x="1425.45" y="701.09" font-family="NanumGothic, sans-serif" font-size="27" fill="#1a2834">권한 서버</text>
+<text x="1380.87" y="725.91" font-family="NanumGothic, sans-serif" font-size="23" fill="#697885">원본 A: 192.0.2.20</text>
+<polyline points="385,600 745,600" fill="none" stroke="#1573bb" stroke-width="4" stroke-linejoin="round"/>
+<polygon points="745,600 730.0810964478636,608.1502341562715 730.0810964478636,591.8497658437285" fill="#1573bb" stroke="#1573bb" stroke-width="1"/>
+<polyline points="745,665 385,665" fill="none" stroke="#008461" stroke-width="4" stroke-linejoin="round"/>
+<polygon points="385,665 399.9189035521363,656.8497658437285 399.9189035521363,673.1502341562715" fill="#008461" stroke="#008461" stroke-width="1"/>
+<polyline points="940,620 1380,620" fill="none" stroke="#697885" stroke-width="3" stroke-linejoin="round" stroke-dasharray="12 8"/>
+<rect x="1045" y="572" width="202.8046875" height="37" rx="2" fill="white" stroke="white" stroke-width="1"/>
+<text x="1050.00" y="599.84" font-family="NanumGothic, sans-serif" font-size="27" fill="#697885">원본 재조회 없음</text>
+<polyline points="65,810 1725,810" fill="none" stroke="#dce4eb" stroke-width="1" stroke-linejoin="round"/>
+<text x="70.00" y="917.60" font-family="NanumGothic, sans-serif" font-size="30" fill="#1573bb">10:05 이후 새 질문</text>
+<polygon points="240.94,925.35 303.94,925.35 313.39,933.54 313.39,977.64 240.94,977.64" fill="#b9c3c8" stroke="#54646f" stroke-width="2"/>
+<polygon points="303.94,925.35 313.39,933.54 313.39,977.64 303.94,971.34" fill="#81929c" stroke="#54646f" stroke-width="2"/>
+<rect x="246.61" y="931.02" width="51.03" height="36.54" rx="2" fill="#c6e6f7" stroke="#657e90" stroke-width="2"/>
+<polygon points="248.5,933.54 293.86,933.54 248.5,965.04" fill="#edf9fe" stroke="#edf9fe" stroke-width="1"/>
+<rect x="269.92" y="977.64" width="13.86" height="11.97" rx="0" fill="#87959d" stroke="#54646f" stroke-width="2"/>
+<polygon points="250.39,990.87 306.46,990.87 322.21,1002.84 239.68,1002.84" fill="#d4dadd" stroke="#627380" stroke-width="2"/>
+<polyline points="255.43,994.65 302.68,994.65" fill="none" stroke="#91a1ab" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="255.43,998.43 302.68,998.43" fill="none" stroke="#91a1ab" stroke-width="1" stroke-linejoin="round"/>
+<rect x="318.43" y="943.62" width="17.01" height="48.51" rx="3" fill="#d7d9d1" stroke="#657580" stroke-width="2"/>
+<polyline points="321.58,953.07 332.29,953.07" fill="none" stroke="#7c8b94" stroke-width="2" stroke-linejoin="round"/>
+<ellipse cx="327.25" cy="979.53" rx="5.0" ry="5.0" fill="#39b657" stroke="#39b657" stroke-width="1"/>
+<text x="263.14" y="1036.50" font-family="NanumGothic, sans-serif" font-size="27" fill="#1a2834">PC</text>
+<polygon points="799.75,911.25 849.25,911.25 869.5,927.75 820.0,927.75" fill="#f3efe1" stroke="#726f65" stroke-width="2"/>
+<polygon points="849.25,911.25 869.5,927.75 869.5,1004.25 849.25,989.25" fill="#b4ad9b" stroke="#726f65" stroke-width="2"/>
+<polygon points="799.75,911.25 849.25,911.25 849.25,989.25 799.75,989.25" fill="#ded9c8" stroke="#726f65" stroke-width="2"/>
+<rect x="806.5" y="925.5" width="33.75" height="7.5" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="806.5" y="939.0" width="33.75" height="7.5" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="806.5" y="952.5" width="33.75" height="7.5" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<ellipse cx="812.125" cy="972.375" rx="3.375" ry="3.375" fill="#46b758" stroke="#278c3f" stroke-width="1"/>
+<polyline points="811.0,981.0 811.0,984.75" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="817.75,981.0 817.75,984.75" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="824.5,981.0 824.5,984.75" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="831.25,981.0 831.25,984.75" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<text x="767.76" y="1041.09" font-family="NanumGothic, sans-serif" font-size="27" fill="#1a2834">재귀 리졸버</text>
+<text x="683.16" y="1065.91" font-family="NanumGothic, sans-serif" font-size="23" fill="#697885">저장된 A: 192.0.2.20 · 새 TTL</text>
+<polygon points="1444.75,911.25 1494.25,911.25 1514.5,927.75 1465.0,927.75" fill="#f3efe1" stroke="#726f65" stroke-width="2"/>
+<polygon points="1494.25,911.25 1514.5,927.75 1514.5,1004.25 1494.25,989.25" fill="#b4ad9b" stroke="#726f65" stroke-width="2"/>
+<polygon points="1444.75,911.25 1494.25,911.25 1494.25,989.25 1444.75,989.25" fill="#ded9c8" stroke="#726f65" stroke-width="2"/>
+<rect x="1451.5" y="925.5" width="33.75" height="7.5" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="1451.5" y="939.0" width="33.75" height="7.5" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="1451.5" y="952.5" width="33.75" height="7.5" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<ellipse cx="1457.125" cy="972.375" rx="3.375" ry="3.375" fill="#46b758" stroke="#278c3f" stroke-width="1"/>
+<polyline points="1456.0,981.0 1456.0,984.75" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1462.75,981.0 1462.75,984.75" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1469.5,981.0 1469.5,984.75" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1476.25,981.0 1476.25,984.75" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<text x="1425.45" y="1041.09" font-family="NanumGothic, sans-serif" font-size="27" fill="#1a2834">권한 서버</text>
+<text x="1380.87" y="1065.91" font-family="NanumGothic, sans-serif" font-size="23" fill="#697885">원본 A: 192.0.2.20</text>
+<polyline points="385,940 745,940" fill="none" stroke="#1573bb" stroke-width="4" stroke-linejoin="round"/>
+<polygon points="745,940 730.0810964478636,948.1502341562715 730.0810964478636,931.8497658437285" fill="#1573bb" stroke="#1573bb" stroke-width="1"/>
+<polyline points="745,1005 385,1005" fill="none" stroke="#008461" stroke-width="4" stroke-linejoin="round"/>
+<polygon points="385,1005 399.9189035521363,996.8497658437285 399.9189035521363,1013.1502341562715" fill="#008461" stroke="#008461" stroke-width="1"/>
+<polyline points="940,940 1380,940" fill="none" stroke="#1573bb" stroke-width="4" stroke-linejoin="round"/>
+<polygon points="1380,940 1365.0810964478637,948.1502341562715 1365.0810964478637,931.8497658437285" fill="#1573bb" stroke="#1573bb" stroke-width="1"/>
+<polyline points="1380,1005 940,1005" fill="none" stroke="#008461" stroke-width="4" stroke-linejoin="round"/>
+<polygon points="940,1005 954.9189035521364,996.8497658437285 954.9189035521364,1013.1502341562715" fill="#008461" stroke="#008461" stroke-width="1"/>
+<text x="50.00" y="1179.08" font-family="NanumGothic, sans-serif" font-size="24" fill="#697885">TTL 만료는 다음 조회에서 새 답을 구할 계기다. 모든 PC에 새 주소를 동시에 보내는 기능은 아니다.</text>
+</svg>

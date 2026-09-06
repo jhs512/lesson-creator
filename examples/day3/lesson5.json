@@ -2,7 +2,7 @@
   "type": "lesson",
   "walkthrough": true,
   "title": "5교시. 더 해보기 — DNS 응답 변화와 접속 경로 추적",
-  "lead": "직원이 공지와 업무 자료를 보는 웹사이트인 내부 포털을 앞에서 만들었다. 이번에는 같은 포털 이름으로 접속했는데 다른 웹페이지가 열리는 상황을 만들어 보자. 이름에 대한 답이 바뀌면 PC의 접속 대상이 어떻게 달라지는지 따라간다.",
+  "lead": "이름에 대한 답을 받은 뒤 그 주소로 새 웹 통신을 한다는 원리를 실제 통신 기록에서 확인해 보자. 직원용 웹사이트인 내부 포털을 정상 상태로 연 다음, DNS가 알려 주는 주소 한 곳만 바꾸어 같은 이름이 어느 접속 대상으로 이어지는지 비교한다.",
   "toc": [
     "시작 상태를 확인하고 비교 서버 추가하기",
     "정상 응답과 후속 접속 관찰하기",
@@ -133,8 +133,9 @@
         {
           "kind": "image",
           "src": "assets/l5_topology.png",
-          "caption": "확장 DNS 토폴로지 — 기존 정상 구성에 Fa0/9의 UnexpectedServer .200을 추가한다.",
-          "text_content": "응답 변화 실습 구성 · 예상 밖 서버 한 대 추가\n실습 구성도 · 검은 선 = 연결   /   점선 경계 = VLAN\nVLAN 10 · DEV\n192.168.10.0/24\nVLAN 20 · SEC    192.168.20.0/24\nPC0\n192.168.10.10 /24\nPC1\n192.168.10.20 /24\nPC2\n192.168.20.10 /24\nPC3\n192.168.20.20 /24\n1\n2\n3\n4\n5\n6\n7\n8\n9\nSwitch0 · 2960\nRouter0 · 2911\nDNSServer\n192.168.20.53\nIntranetServer\n192.168.20.100\nUnexpectedServer\n192.168.20.200\nFa0/1 · VLAN 10\nFa0/2\nG0/0 · 192.168.10.1\nG0/1 · 192.168.20.1\nFa0/5\nFa0/6\nFa0/7\nFa0/8\nFa0/3\nFa0/4\nFa0/9\n1–2, 5번 포트: VLAN 10\n3–4, 6–9번 포트: VLAN 20\n같은 스위치 안에서 포트를 나눈다.\n모든 장비의 마스크는 255.255.255.0이다. Router0의 두 선은 각 VLAN의 access 포트에 연결한다."
+          "caption": "설명용 구성도 · 확장 DNS 토폴로지 — 기존 정상 구성에 Fa0/9의 UnexpectedServer .200을 추가한다.",
+          "text_content": "응답 변화 실습 구성 · 예상 밖 서버 한 대 추가\n실습 구성도 · 검은 선 = 연결   /   점선 경계 = VLAN\nVLAN 10 · DEV\n192.168.10.0/24\nVLAN 20 · SEC    192.168.20.0/24\nPC0\n192.168.10.10 /24\nPC1\n192.168.10.20 /24\nPC2\n192.168.20.10 /24\nPC3\n192.168.20.20 /24\n1\n2\n3\n4\n5\n6\n7\n8\n9\nSwitch0 · 2960\nRouter0 · 2911\nDNSServer\n192.168.20.53\nIntranetServer\n192.168.20.100\nUnexpectedServer\n192.168.20.200\nFa0/1 · VLAN 10\nFa0/2\nG0/0 · 192.168.10.1\nG0/1 · 192.168.20.1\nFa0/5\nFa0/6\nFa0/7\nFa0/8\nFa0/3\nFa0/4\nFa0/9\n1–2, 5번 포트: VLAN 10\n3–4, 6–9번 포트: VLAN 20\n같은 스위치 안에서 포트를 나눈다.\n모든 장비의 마스크는 255.255.255.0이다. Router0의 두 선은 각 VLAN의 access 포트에 연결한다.",
+          "image_kind": "configuration_diagram"
         },
         {
           "kind": "supplement",
@@ -150,7 +151,7 @@
             },
             {
               "kind": "tool_steps",
-              "tool": "Cisco Packet Tracer 9.0.1",
+              "tool": "Cisco Packet Tracer",
               "steps": [
                 "`Network Devices > Switches`(네트워크 장비 → 스위치)에서 `2960-24TT`를 놓고 Switch0인지 확인한다.",
                 "`Network Devices > Routers`(네트워크 장비 → 라우터)에서 `2911`을 놓고 Router0인지 확인한다.",
@@ -219,7 +220,7 @@
             },
             {
               "kind": "tool_steps",
-              "tool": "Cisco Packet Tracer 9.0.1",
+              "tool": "Cisco Packet Tracer",
               "steps": [
                 "DNSServer를 열고 `Services > DNS`로 이동한다.",
                 "DNS Service를 `On`으로 바꾼다.",
@@ -234,7 +235,7 @@
             },
             {
               "kind": "tool_steps",
-              "tool": "Cisco Packet Tracer 9.0.1",
+              "tool": "Cisco Packet Tracer",
               "steps": [
                 "PC0의 `Desktop > IP Configuration`에서 DNS Server에 `192.168.20.53`을 입력한다.",
                 "`Desktop > Command Prompt`에서 `nslookup portal.a-company.test`를 실행해 `192.168.20.100`이 나오는지 확인한다."
@@ -263,7 +264,7 @@
             },
             {
               "kind": "tool_steps",
-              "tool": "Cisco Packet Tracer 9.0.1",
+              "tool": "Cisco Packet Tracer",
               "steps": [
                 "`Desktop > Web Browser`를 열고 주소창에 `http://portal.a-company.test`를 입력한다.",
                 "`A사 내부 포털 - 정상 서버` 문구가 보이면 `File > Save As`(다른 이름으로 저장)에서 `day03_dns_normal.pkt`로 저장한다."
@@ -301,7 +302,7 @@
           "instruction": "Server-PT 한 대를 추가해 UnexpectedServer를 만들고 VLAN 20에 연결하자.",
           "element": {
             "kind": "tool_steps",
-            "tool": "Cisco Packet Tracer 9.0.1",
+            "tool": "Cisco Packet Tracer",
             "steps": [
               "`End Devices`(PC·서버 같은 끝 장비)에서 Server-PT 한 대를 놓고 이름을 UnexpectedServer로 바꾼다.",
               "서버의 연결 단자 FastEthernet0과 Switch0 Fa0/9를 `Copper Straight-Through`(구리선 케이블)으로 연결한다.",
@@ -400,7 +401,7 @@
           "instruction": "정상 A 레코드가 .100을 가리키는 상태에서 DNS와 HTTP 이벤트를 추적하자.",
           "element": {
             "kind": "tool_steps",
-            "tool": "Cisco Packet Tracer 9.0.1",
+            "tool": "Cisco Packet Tracer",
             "steps": [
               "DNSServer의 `Services > DNS`에서 portal.a-company.test가 192.168.20.100을 가리키는지 확인한다.",
               "오른쪽 아래에서 `Simulation`을 누른다.",
@@ -416,8 +417,9 @@
         {
           "kind": "image",
           "src": "assets/l5_events.png",
-          "caption": "그림 5-1. DNS 응답과 새 연결 — 응답 패킷의 목적지는 PC0이고 응답 안의 A 값이 다음 목적지가 된다.",
-          "text_content": "PDU를 열어 DNS 메시지의 A 값과 다음 목적지를 연결하기\nPacket Tracer 관찰 안내도 · DNS 응답 패킷의 목적지와 메시지 안의 웹 서버 주소를 구분한다.\nDNSServer\n192.168.20.53\nPC0\n192.168.10.10\nIntranetServer\n192.168.20.100\nDNS 응답\n새 TCP 연결 → HTTP\nDNS 응답 패킷\nIP 출발지: 192.168.20.53\nIP 목적지: 192.168.10.10\nDNS 안의 A 값: 192.168.20.100\n다음 TCP / HTTP 패킷\nIP 출발지: 192.168.10.10\nIP 목적지: 192.168.20.100\nDNS에서 받은 주소를 사용\n응답 안의 A 값 → 새 연결의 목적지\n장비 사이의 선은 논리 통신이다. 실제 VLAN 경로는 공통 구성도에서 봉투를 따라 확인한다."
+          "caption": "설명용 구성도 · 그림 5-1. DNS 응답과 새 연결 — 응답 패킷의 목적지는 PC0이고 응답 안의 A 값이 다음 목적지가 된다.",
+          "text_content": "PDU를 열어 DNS 메시지의 A 값과 다음 목적지를 연결하기\nPacket Tracer 관찰 안내도 · DNS 응답 패킷의 목적지와 메시지 안의 웹 서버 주소를 구분한다.\nDNSServer\n192.168.20.53\nPC0\n192.168.10.10\nIntranetServer\n192.168.20.100\nDNS 응답\n새 TCP 연결 → HTTP\nDNS 응답 패킷\nIP 출발지: 192.168.20.53\nIP 목적지: 192.168.10.10\nDNS 안의 A 값: 192.168.20.100\n다음 TCP / HTTP 패킷\nIP 출발지: 192.168.10.10\nIP 목적지: 192.168.20.100\nDNS에서 받은 주소를 사용\n응답 안의 A 값 → 새 연결의 목적지\n장비 사이의 선은 논리 통신이다. 실제 VLAN 경로는 공통 구성도에서 봉투를 따라 확인한다.",
+          "image_kind": "configuration_diagram"
         },
         {
           "kind": "paragraph",
@@ -494,8 +496,9 @@
         {
           "kind": "image",
           "src": "assets/l5_normal.png",
-          "caption": "그림 5-2(a). 변경 전 — 정상 A 값 .100을 받아 IntranetServer로 접속한다.",
-          "text_content": "변경 전 · 같은 구성에서 정상 포털 .100에 접속한다\n실습 구성도 · 검은 선 = 연결   /   점선 경계 = VLAN   /   봉투 = 현재 패킷   /   나머지 PC 생략\nVLAN 10 · DEV\n192.168.10.0/24\nVLAN 20 · SEC    192.168.20.0/24\nPC0\n192.168.10.10 /24\n1\n2\n3\n4\n5\n6\n7\n8\n9\nSwitch0 · 2960\nRouter0 · 2911\nDNSServer\n192.168.20.53\nIntranetServer\n192.168.20.100\nUnexpectedServer\n192.168.20.200\nFa0/1 · VLAN 10\nG0/0 · 192.168.10.1\nG0/1 · 192.168.20.1\nFa0/5\nFa0/6\nFa0/7\nFa0/8\nFa0/9\n1–2, 5번 포트: VLAN 10\n3–4, 6–9번 포트: VLAN 20\n같은 스위치 안에서 포트를 나눈다.\nTCP 연결 후 HTTP 요청 → .100\nG0/0 · 192.168.10.1\nG0/1 · 192.168.20.1\nFa0/6\n모든 장비의 마스크는 255.255.255.0이다. Router0의 두 선은 각 VLAN의 access 포트에 연결한다."
+          "caption": "설명용 구성도 · 그림 5-2(a). 변경 전 — 정상 A 값 .100을 받아 IntranetServer로 접속한다.",
+          "text_content": "변경 전 · 같은 구성에서 정상 포털 .100에 접속한다\n실습 구성도 · 검은 선 = 연결   /   점선 경계 = VLAN   /   봉투 = 현재 패킷   /   나머지 PC 생략\nVLAN 10 · DEV\n192.168.10.0/24\nVLAN 20 · SEC    192.168.20.0/24\nPC0\n192.168.10.10 /24\n1\n2\n3\n4\n5\n6\n7\n8\n9\nSwitch0 · 2960\nRouter0 · 2911\nDNSServer\n192.168.20.53\nIntranetServer\n192.168.20.100\nUnexpectedServer\n192.168.20.200\nFa0/1 · VLAN 10\nG0/0 · 192.168.10.1\nG0/1 · 192.168.20.1\nFa0/5\nFa0/6\nFa0/7\nFa0/8\nFa0/9\n1–2, 5번 포트: VLAN 10\n3–4, 6–9번 포트: VLAN 20\n같은 스위치 안에서 포트를 나눈다.\nTCP 연결 후 HTTP 요청 → .100\nG0/0 · 192.168.10.1\nG0/1 · 192.168.20.1\nFa0/6\n모든 장비의 마스크는 255.255.255.0이다. Router0의 두 선은 각 VLAN의 access 포트에 연결한다.",
+          "image_kind": "configuration_diagram"
         },
         {
           "kind": "paragraph",
@@ -511,7 +514,7 @@
           "instruction": "A 레코드를 192.168.20.200으로 바꾸고 같은 이름으로 다시 접속하자.",
           "element": {
             "kind": "tool_steps",
-            "tool": "Cisco Packet Tracer 9.0.1",
+            "tool": "Cisco Packet Tracer",
             "steps": [
               "DNSServer의 `Services > DNS`에서 기존 portal.a-company.test 레코드를 선택한다.",
               "기존 레코드를 제거하고 Name은 그대로, Address만 `192.168.20.200`으로 입력해 `Add`를 누른다.",
@@ -540,8 +543,9 @@
         {
           "kind": "image",
           "src": "assets/l5_compare.png",
-          "caption": "그림 5-2(b). 변경 후 — A 값 .200을 받아 Fa0/9의 UnexpectedServer로 접속한다.",
-          "text_content": "변경 후 · 같은 이름으로 .200 서버에 도착한다\n실습 구성도 · 검은 선 = 연결   /   점선 경계 = VLAN   /   봉투 = 현재 패킷   /   나머지 PC 생략\nVLAN 10 · DEV\n192.168.10.0/24\nVLAN 20 · SEC    192.168.20.0/24\nPC0\n192.168.10.10 /24\n1\n2\n3\n4\n5\n6\n7\n8\n9\nSwitch0 · 2960\nRouter0 · 2911\nDNSServer\n192.168.20.53\nIntranetServer\n192.168.20.100\nUnexpectedServer\n192.168.20.200\nFa0/1 · VLAN 10\nG0/0 · 192.168.10.1\nG0/1 · 192.168.20.1\nFa0/5\nFa0/6\nFa0/7\nFa0/8\nFa0/9\n1–2, 5번 포트: VLAN 10\n3–4, 6–9번 포트: VLAN 20\n같은 스위치 안에서 포트를 나눈다.\nTCP 연결 후 HTTP 요청 → .200\nG0/0 · 192.168.10.1\nG0/1 · 192.168.20.1\nFa0/6\n모든 장비의 마스크는 255.255.255.0이다. Router0의 두 선은 각 VLAN의 access 포트에 연결한다."
+          "caption": "설명용 구성도 · 그림 5-2(b). 변경 후 — A 값 .200을 받아 Fa0/9의 UnexpectedServer로 접속한다.",
+          "text_content": "변경 후 · 같은 이름으로 .200 서버에 도착한다\n실습 구성도 · 검은 선 = 연결   /   점선 경계 = VLAN   /   봉투 = 현재 패킷   /   나머지 PC 생략\nVLAN 10 · DEV\n192.168.10.0/24\nVLAN 20 · SEC    192.168.20.0/24\nPC0\n192.168.10.10 /24\n1\n2\n3\n4\n5\n6\n7\n8\n9\nSwitch0 · 2960\nRouter0 · 2911\nDNSServer\n192.168.20.53\nIntranetServer\n192.168.20.100\nUnexpectedServer\n192.168.20.200\nFa0/1 · VLAN 10\nG0/0 · 192.168.10.1\nG0/1 · 192.168.20.1\nFa0/5\nFa0/6\nFa0/7\nFa0/8\nFa0/9\n1–2, 5번 포트: VLAN 10\n3–4, 6–9번 포트: VLAN 20\n같은 스위치 안에서 포트를 나눈다.\nTCP 연결 후 HTTP 요청 → .200\nG0/0 · 192.168.10.1\nG0/1 · 192.168.20.1\nFa0/6\n모든 장비의 마스크는 255.255.255.0이다. Router0의 두 선은 각 VLAN의 access 포트에 연결한다.",
+          "image_kind": "configuration_diagram"
         },
         {
           "kind": "paragraph",
@@ -566,7 +570,7 @@
           "instruction": "정상 상태로 복구하고 응답 주소가 다시 .100인지 확인하자.",
           "element": {
             "kind": "tool_steps",
-            "tool": "Cisco Packet Tracer 9.0.1",
+            "tool": "Cisco Packet Tracer",
             "steps": [
               "오른쪽 아래의 `Realtime`을 눌러 통신이 자동으로 진행하는 모드로 돌아온다. 아래 이름 조회와 페이지 확인은 이 모드에서 한다.",
               "DNSServer의 portal.a-company.test A 레코드를 `192.168.20.100`으로 되돌린다.",
@@ -658,7 +662,7 @@
       ]
     }
   ],
-  "closing": "정상과 변경 경로를 모두 관찰했다. 마지막 시간에는 여섯 가지 증상을 풀고 DNS 분석 보고서 형태로 정리한다.",
+  "closing": "정상 상태로 복구한 비교 구성을 저장했다. 마지막 시간에는 이 환경에서 두 장애 조건을 각각 재현하고, 직접 얻은 관찰값으로 원인을 구분한 뒤 복구 보고서를 완성한다.",
   "learning_terms": [
     {
       "term": "시뮬레이션 모드",
@@ -856,5 +860,6 @@
       ],
       "introduced_by": "이름에 맞는 주소를 알려 주는 DNS 서버"
     }
-  ]
+  ],
+  "lesson_role": "guided_practice"
 }

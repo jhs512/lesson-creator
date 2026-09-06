@@ -31,6 +31,8 @@ def check_structure(page):
     seen = {}
 
     def inspect_prose(text, path):
+        if re.search(r"[①-⑳].*[①-⑳]", text):
+            review.append((path, "문장 안에 순서 번호가 나열됨 — numbered_list로 항목을 나눌지 검수"))
         for index, paragraph in enumerate(re.split(r"\n\s*\n", text)):
             normalized = re.sub(r"\s+", " ", paragraph.replace("`", "")).strip()
             # Short transitions often repeat usefully. This is a locator for
@@ -51,6 +53,8 @@ def check_structure(page):
         for bi, el in enumerate(section.get("body", [])):
             path = f"sections[{si}].body[{bi}]"
             kind = el.get("kind")
+            if page.get("lesson_role") == "concept" and kind in ("command", "tool_steps"):
+                review.append((path, "개념 교시에 실행·조작 절차가 있음 — 설명용 사례인지 실습 교시로 옮길 활동인지 검수"))
             if kind in ("paragraph", "definition"):
                 inspect_prose(el.get("text", ""), path)
                 has_basic = True

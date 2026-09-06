@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1020" viewBox="0 0 1800 1020">
+<rect width="100%" height="100%" fill="white"/>
+<text x="50.00" y="64.80" font-family="NanumGothic, sans-serif" font-size="40" fill="#1a2834">레코드는 이름에 붙여 둔 정보다</text>
+<text x="52.00" y="105.08" font-family="NanumGothic, sans-serif" font-size="24" fill="#697885">질문할 정보의 종류에 따라 답의 의미가 달라진다</text>
+<polyline points="50,129 1750,129" fill="none" stroke="#b8c5cd" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="821.25,358.75 903.75,358.75 937.5,386.25 855.0,386.25" fill="#f3efe1" stroke="#726f65" stroke-width="2"/>
+<polygon points="903.75,358.75 937.5,386.25 937.5,513.75 903.75,488.75" fill="#b4ad9b" stroke="#726f65" stroke-width="2"/>
+<polygon points="821.25,358.75 903.75,358.75 903.75,488.75 821.25,488.75" fill="#ded9c8" stroke="#726f65" stroke-width="2"/>
+<rect x="832.5" y="382.5" width="56.25" height="12.5" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="832.5" y="405.0" width="56.25" height="12.5" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="832.5" y="427.5" width="56.25" height="12.5" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<ellipse cx="841.875" cy="460.625" rx="5.625" ry="5.625" fill="#46b758" stroke="#278c3f" stroke-width="1"/>
+<polyline points="840.0,475.0 840.0,481.25" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="851.25,475.0 851.25,481.25" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="862.5,475.0 862.5,481.25" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="873.75,475.0 873.75,481.25" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<text x="800.07" y="558.59" font-family="NanumGothic, sans-serif" font-size="27" fill="#1a2834">권한 네임서버</text>
+<text x="762.26" y="602.41" font-family="NanumGothic, sans-serif" font-size="23" fill="#697885">담당 이름의 레코드 보관</text>
+<polygon points="214.2,245.5 304.2,245.5 317.7,257.2 317.7,320.2 214.2,320.2" fill="#b9c3c8" stroke="#54646f" stroke-width="2"/>
+<polygon points="304.2,245.5 317.7,257.2 317.7,320.2 304.2,311.2" fill="#81929c" stroke="#54646f" stroke-width="2"/>
+<rect x="222.3" y="253.6" width="72.9" height="52.2" rx="2" fill="#c6e6f7" stroke="#657e90" stroke-width="2"/>
+<polygon points="225.0,257.2 289.8,257.2 225.0,302.2" fill="#edf9fe" stroke="#edf9fe" stroke-width="1"/>
+<rect x="255.6" y="320.2" width="19.8" height="17.1" rx="0" fill="#87959d" stroke="#54646f" stroke-width="2"/>
+<polygon points="227.7,339.1 307.8,339.1 330.3,356.2 212.4,356.2" fill="#d4dadd" stroke="#627380" stroke-width="2"/>
+<polyline points="234.9,344.5 302.4,344.5" fill="none" stroke="#91a1ab" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="234.9,349.9 302.4,349.9" fill="none" stroke="#91a1ab" stroke-width="1" stroke-linejoin="round"/>
+<rect x="324.9" y="271.6" width="24.3" height="69.3" rx="3" fill="#d7d9d1" stroke="#657580" stroke-width="2"/>
+<polyline points="329.4,285.1 344.7,285.1" fill="none" stroke="#7c8b94" stroke-width="2" stroke-linejoin="round"/>
+<ellipse cx="337.5" cy="322.9" rx="5.0" ry="5.0" fill="#39b657" stroke="#39b657" stroke-width="1"/>
+<text x="209.44" y="393.64" font-family="NanumGothic, sans-serif" font-size="27" fill="#1a2834">A · AAAA</text>
+<text x="191.48" y="424.16" font-family="NanumGothic, sans-serif" font-size="23" fill="#697885">IPv4 · IPv6 주소</text>
+<polygon points="1427.7,236.5 1487.1,236.5 1511.4,256.3 1452.0,256.3" fill="#f3efe1" stroke="#726f65" stroke-width="2"/>
+<polygon points="1487.1,236.5 1511.4,256.3 1511.4,348.1 1487.1,330.1" fill="#b4ad9b" stroke="#726f65" stroke-width="2"/>
+<polygon points="1427.7,236.5 1487.1,236.5 1487.1,330.1 1427.7,330.1" fill="#ded9c8" stroke="#726f65" stroke-width="2"/>
+<rect x="1435.8" y="253.6" width="40.5" height="9.0" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="1435.8" y="269.8" width="40.5" height="9.0" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="1435.8" y="286.0" width="40.5" height="9.0" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<ellipse cx="1442.55" cy="309.85" rx="4.05" ry="4.05" fill="#46b758" stroke="#278c3f" stroke-width="1"/>
+<polyline points="1441.2,320.2 1441.2,324.7" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1449.3,320.2 1449.3,324.7" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1457.4,320.2 1457.4,324.7" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1465.5,320.2 1465.5,324.7" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<text x="1447.93" y="387.34" font-family="NanumGothic, sans-serif" font-size="27" fill="#1a2834">MX</text>
+<text x="1373.88" y="417.86" font-family="NanumGothic, sans-serif" font-size="23" fill="#697885">메일 수신 서버 이름</text>
+<polygon points="1427.7,726.5 1487.1,726.5 1511.4,746.3 1452.0,746.3" fill="#f3efe1" stroke="#726f65" stroke-width="2"/>
+<polygon points="1487.1,726.5 1511.4,746.3 1511.4,838.1 1487.1,820.1" fill="#b4ad9b" stroke="#726f65" stroke-width="2"/>
+<polygon points="1427.7,726.5 1487.1,726.5 1487.1,820.1 1427.7,820.1" fill="#ded9c8" stroke="#726f65" stroke-width="2"/>
+<rect x="1435.8" y="743.6" width="40.5" height="9.0" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="1435.8" y="759.8" width="40.5" height="9.0" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="1435.8" y="776.0" width="40.5" height="9.0" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<ellipse cx="1442.55" cy="799.8499999999999" rx="4.05" ry="4.05" fill="#46b758" stroke="#278c3f" stroke-width="1"/>
+<polyline points="1441.2,810.2 1441.2,814.7" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1449.3,810.2 1449.3,814.7" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1457.4,810.2 1457.4,814.7" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1465.5,810.2 1465.5,814.7" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<text x="1452.82" y="877.34" font-family="NanumGothic, sans-serif" font-size="27" fill="#1a2834">NS</text>
+<text x="1377.09" y="907.86" font-family="NanumGothic, sans-serif" font-size="23" fill="#697885">담당 네임서버 이름</text>
+<rect x="110" y="715" width="440" height="105" rx="14" fill="#f0f7fd" stroke="#1573bb" stroke-width="2"/>
+<text x="273.10" y="763.52" font-family="NanumGothic, sans-serif" font-size="31" fill="#1573bb">CNAME</text>
+<text x="222.42" y="806.68" font-family="NanumGothic, sans-serif" font-size="29" fill="#1a2834">별명 → 다른 이름</text>
+<polyline points="795,405 425,295" fill="none" stroke="#1573bb" stroke-width="4" stroke-linejoin="round"/>
+<polygon points="425,295 441.62288586299496,291.4391481937826 436.9777370380918,307.0637396957297" fill="#1573bb" stroke="#1573bb" stroke-width="1"/>
+<polyline points="980,405 1365,295" fill="none" stroke="#1573bb" stroke-width="4" stroke-linejoin="round"/>
+<polygon points="1365,295 1352.8941584821157,306.9351833309703 1348.4160754420386,291.2618926906999" fill="#1573bb" stroke="#1573bb" stroke-width="1"/>
+<polyline points="980,515 1365,755" fill="none" stroke="#1573bb" stroke-width="4" stroke-linejoin="round"/>
+<polygon points="1365,755 1348.0280281022779,754.0242080637107 1356.6511050501283,740.191355459867" fill="#1573bb" stroke="#1573bb" stroke-width="1"/>
+<polyline points="795,515 550,755" fill="none" stroke="#1573bb" stroke-width="4" stroke-linejoin="round"/>
+<polygon points="550,755 554.9540772655854,738.7378624268945 566.3608162887673,750.3822418463927" fill="#1573bb" stroke="#1573bb" stroke-width="1"/>
+<text x="50.00" y="989.08" font-family="NanumGothic, sans-serif" font-size="24" fill="#697885">선은 레코드 값이 가리키는 대상을 나타낸다. DNS 서버가 웹·메일 내용을 가져오는 경로가 아니다.</text>
+</svg>

@@ -125,7 +125,7 @@ def _visible_units(page):
         elif kind == "definition":
             en = "(" + el["en"] + ")" if el.get("en") else ""
             yield unit(path, el.get("term", "") + en + " — " + el.get("text", ""))
-        elif kind == "bullets":
+        elif kind in ("bullets", "numbered_list"):
             if el.get("intro"):
                 yield unit(path + ".intro", el["intro"])
             for i, text in enumerate(el.get("items", [])):

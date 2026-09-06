@@ -4,10 +4,10 @@
 
 ## 원본과 검사
 
-1. **JSON 초안**: `tools/lesson_schema.py`의 문서와 `examples/day3/lesson1.json` 등을 참고한다. `code`, `command`, `tool_steps`, `image`, 관찰 과제를 지원한다. 새 용어는 `learning_terms`, 이미지의 실제 글자는 `text_content`로 기록한다.
+1. **JSON 초안**: `tools/lesson_schema.py`의 문서와 `examples/day3/lesson1.json` 등을 참고한다. `lesson_role`로 교시의 역할을 선언한다. `numbered_list`, `code`, `command`, `tool_steps`, `image`, 관찰 과제를 지원한다. 새 용어는 `learning_terms`, 이미지의 실제 글자는 `text_content`로 기록한다.
 2. **스키마 검증·렌더**: `python3 tools/lesson_render.py path/to/lesson.json path/to/lesson.md`를 실행한다. 구조 오류를 고친다. 과제 번호·토글·파일명 서식은 렌더러에 맡긴다.
 3. **하네스**: `python3 tools/lesson_harness.py path/to/lesson.json`을 실행한다. FAIL을 해결하고 모든 SKIP과 REVIEW의 이유를 검토한다. REVIEW는 목차 불일치·동일한 긴 설명의 반복·기본 설명보다 앞선 보충을 가리키는 검토 위치다. 수정하거나 반복·배치가 필요한 이유를 남긴다.
-4. **린트**: `python3 tools/lesson_lint.py path/to/lesson.md`를 실행한다. ERROR를 해결하고 WARN은 교과·수업 형식에 맞춰 판정한 이유를 남긴다.
+4. **린트**: `python3 tools/lesson_lint.py path/to/lesson.md --role concept`처럼 원본에 선언한 역할을 전달한다. 기존에 역할이 없는 교안은 이전 명령을 사용한다. ERROR를 해결하고 WARN은 교과·수업 형식에 맞춰 판정한 이유를 남긴다.
 5. **읽기·시각 검수**: 렌더된 교안과 이미지를 `tools/judge_checklist.md`로 리뷰한다. 내용이 많으면 작성자와 다른 검수자를 활용한다. 용어 누락·정의 속 미설명 용어·선행 지식·상태 전환·과제 완결성·그림의 정확성을 확인한다.
 
 하네스는 대상 Python 코드를 실행해 출력을 대조한다. 실습 입력 파일은 `fixtures`로 제공한다. `verified=measured`는 실제 실행으로 확인한 출력에 쓰고, 재현하지 못한 네트워크·Windows·실기기·LLM 출력은 `verified=example`과 예시임을 밝히는 `output_label`을 쓴다. 자동 실행되지 않은 명령·GUI 절차를 실측 검증했다고 보고하지 않는다. 실제 환경에서 확인할 수 있는 항목은 확인하고 결과를 별도로 기록한다.

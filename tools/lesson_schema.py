@@ -14,12 +14,14 @@ command(터미널/cmd 명령), tool_steps(GUI 도구 절차), image(도식), bul
 Page (type: "lesson" | "material")
   lesson:
     title: "N교시. …"
+    lesson_role?: "concept"|"guided_practice"|"integrated_practice"
+                                          # 생략하면 기존 실습 교시 규칙 유지
     lead: str                              # 리드 한 줄
     toc: [str]  (3~6개)
     preview: {intro?: str, element: Element}?   # 미리보기 (intro 생략 시 표준 문구)
     principle?: str                        # 미리보기 뒤 한 줄 원칙
     sections: [Section]                    # 과제는 섹션 body 안 task 요소
-    extra_tasks: [ExtraTask] (1개 이상)    # "추가 과제 — 빨리 끝났다면" 토글
+    extra_tasks?: [ExtraTask] (기존 역할 미지정 교시는 1개 이상)    # "추가 과제 — 빨리 끝났다면" 토글
     hard_problem?: ExtraTask               # "도전 문제" 토글 (2과목 규격)
     closing?: str                          # 다음 시간 예고 한 줄
     review: [str] (정확히 3개)
@@ -38,6 +40,7 @@ Element (kind로 구분):
   supplement  {title, body: [Element]}                # 기본 설명 뒤의 선택 보충. 중첩·과제는 불가
   definition  {term, en?, text}                       # > **term(en)** — text
   bullets     {items: [str], intro?: str}
+  numbered_list {items: [str], intro?: str}           # 순서를 한 항목씩 표시하는 실제 번호 목록
   code        {lang, src, output?, output_label?,
                intent: "normal"|"preview"|"reinterpret"|"intentional_error"|"continuation",
                verified: "measured"|"example",        # output이 있으면 필수
@@ -45,8 +48,10 @@ Element (kind로 구분):
   command     {shell: "cmd"|"powershell"|"terminal", src, output?, output_label?,
                verified: "measured"|"example"}        # 네트워크·서버 교시용
   tool_steps  {tool: str, steps: [str], note?: str}   # GUI 도구 절차 (Wireshark 등)
-  image       {src, caption?, text_content?: str}     # file-upload://… 도식
+  image       {src, caption?, text_content?: str, image_kind?, capture?}     # file-upload://… 도식
                                                       # text_content는 실제 그림의 레이블
+                                                      # image_kind: concept_diagram|configuration_diagram|screenshot
+                                                      # screenshot의 capture: {application, version, scenario, evidence}
   table       {headers: [str], rows: [[str]]}
   task        {task_type: "predict"|"experiment"|"action"|"challenge",
                instruction: str,
@@ -54,7 +59,7 @@ Element (kind로 구분):
                observe?: [{point, expected}],         # experiment면 필수, expected 필수
                requirements?: [str],                  # challenge용
                setup_elements?: [Element],            # challenge 준비물(설정 파일 등)
-               start_label?: str,                    # challenge 코드 시작 틀 안내 문구
+               start_label?: str, answer_label?: str, # challenge 시작 틀·도움말 토글 안내
                goal_output?: str, goal_label?: str,   # challenge면 goal_output 필수
                answer?: {element: Element, hint?: str, explain?: str},
                no_answer_reason?: str}                # predict인데 정답 토글이 없으면 사유 필수
@@ -87,7 +92,8 @@ INTENTS = {"normal", "preview", "reinterpret", "intentional_error", "continuatio
 SHELLS = {"cmd", "powershell", "terminal"}
 TASK_TYPES = {"predict", "experiment", "action", "challenge"}
 ELEMENT_KINDS = {"paragraph", "definition", "bullets", "code", "command",
-                 "tool_steps", "image", "table", "task", "supplement"}
+                 "tool_steps", "image", "table", "task", "supplement", "numbered_list"}
+LESSON_ROLES = {"concept", "guided_practice", "integrated_practice"}
 
 MARK_START = "<<<<<<<<<<<< 수정 시작 <<<<<<<<<<<<"
 MARK_END = ">>>>>>>>>>>> 수정 끝 >>>>>>>>>>>>"
@@ -140,7 +146,7 @@ def _validate_element(errors, path, el, allow_task=True):
     elif kind == "definition":
         if not el.get("term") or not el.get("text"):
             _err(errors, path, "definition은 term·text 필수")
-    elif kind == "bullets":
+    elif kind in ("bullets", "numbered_list"):
         if not el.get("items"):
             _err(errors, path, "bullets.items 비어 있음")
     elif kind == "code":
@@ -175,6 +181,12 @@ def _validate_element(errors, path, el, allow_task=True):
             _err(errors, path, "image.src 필수 (file-upload://…)")
         if "text_content" in el and (not isinstance(el["text_content"], str) or not el["text_content"].strip()):
             _err(errors, path, "image.text_content는 실제 레이블을 담은 비어 있지 않은 문자열이어야 한다")
+        if el.get("image_kind") not in (None, "concept_diagram", "configuration_diagram", "screenshot"):
+            _err(errors, path, "image_kind는 concept_diagram|configuration_diagram|screenshot 중 하나")
+        if el.get("image_kind") == "screenshot":
+            capture = el.get("capture", {})
+            if not isinstance(capture, dict) or any(not capture.get(k) for k in ("application", "version", "scenario", "evidence")):
+                _err(errors, path, "실측 화면에는 capture.application·version·scenario·evidence가 필요하다 — 메타데이터만으로 실측 진위를 보장하지는 않는다")
     elif kind == "table":
         headers, rows = el.get("headers", []), el.get("rows", [])
         if not headers or not rows:
@@ -266,6 +278,11 @@ def validate(page):
     if not 3 <= len(toc) <= 6:
         _err(errors, "toc", f"미니 목차는 3~6개 ({len(toc)}개)")
     walkthrough = bool(page.get("walkthrough"))
+    role = page.get("lesson_role")
+    if role is not None and role not in LESSON_ROLES:
+        _err(errors, "lesson_role", f"수업 유형은 {sorted(LESSON_ROLES)} 중 하나")
+    if role == "concept" and walkthrough:
+        _err(errors, "walkthrough", "개념 교시는 따라 하기 단계로 렌더하지 않는다")
     review = page.get("review", [])
     if not walkthrough and len(review) != 3:
         _err(errors, "review", f"되새김 질문은 정확히 3개 ({len(review)}개)")
@@ -286,17 +303,23 @@ def validate(page):
             _validate_element(errors, epath, el)
             if el.get("kind") == "task":
                 task_count += 1
+                if role == "concept" and el.get("task_type") != "predict":
+                    _err(errors, epath, "개념 교시의 필수 활동은 이해 확인(predict)으로 작성하고 실행·구성 과제는 실습 교시로 옮긴다")
                 if challenge_seen:
                     _err(errors, epath, "challenge 뒤에 또 과제가 있다 — 도전이 마지막이어야 한다")
                 if el.get("task_type") == "challenge":
                     challenge_seen = True
-    if not walkthrough and not 4 <= task_count <= 7:
+    if role is None and not walkthrough and not 4 <= task_count <= 7:
         _err(errors, "tasks", f"교시당 과제는 체험형 여러 개 + 도전 1개, 총 4~7개 — 손 실습은 전부 번호를 단다 ({task_count}개)")
-    if not walkthrough and not challenge_seen:
+    if role is None and not walkthrough and not challenge_seen:
         _err(errors, "tasks", "마지막 과제(challenge형·직접 해보는 문제)가 없다")
+    if role == "integrated_practice" and not challenge_seen:
+        _err(errors, "tasks", "종합실습에는 스스로 연결해 완성하는 challenge 과제가 필요하다")
+    if role == "guided_practice" and task_count == 0:
+        _err(errors, "tasks", "따라 하는 실습 교시에는 실제 수행 과제가 필요하다")
 
     extra = page.get("extra_tasks", [])
-    if not walkthrough and not extra:
+    if role is None and not walkthrough and not extra:
         _err(errors, "extra_tasks", "추가 과제 토글은 1개 이상")
     for xi, x in enumerate(extra):
         if not x.get("title") or not x.get("text"):

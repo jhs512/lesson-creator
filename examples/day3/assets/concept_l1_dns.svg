@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1020" viewBox="0 0 1800 1020">
+<rect width="100%" height="100%" fill="white"/>
+<text x="50.00" y="64.80" font-family="NanumGothic, sans-serif" font-size="40" fill="#1a2834">이름을 묻는 통신: DNS 질문과 응답</text>
+<text x="52.00" y="105.08" font-family="NanumGothic, sans-serif" font-size="24" fill="#697885">naver.com 접속의 개념도 · 주소를 아직 모르는 상황</text>
+<polyline points="50,129 1750,129" fill="none" stroke="#b8c5cd" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="113.0,315.0 213.0,315.0 228.0,328.0 228.0,398.0 113.0,398.0" fill="#b9c3c8" stroke="#54646f" stroke-width="2"/>
+<polygon points="213.0,315.0 228.0,328.0 228.0,398.0 213.0,388.0" fill="#81929c" stroke="#54646f" stroke-width="2"/>
+<rect x="122.0" y="324.0" width="81.0" height="58.0" rx="2" fill="#c6e6f7" stroke="#657e90" stroke-width="2"/>
+<polygon points="125.0,328.0 197.0,328.0 125.0,378.0" fill="#edf9fe" stroke="#edf9fe" stroke-width="1"/>
+<rect x="159.0" y="398.0" width="22.0" height="19.0" rx="0" fill="#87959d" stroke="#54646f" stroke-width="2"/>
+<polygon points="128.0,419.0 217.0,419.0 242.0,438.0 111.0,438.0" fill="#d4dadd" stroke="#627380" stroke-width="2"/>
+<polyline points="136.0,425.0 211.0,425.0" fill="none" stroke="#91a1ab" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="136.0,431.0 211.0,431.0" fill="none" stroke="#91a1ab" stroke-width="1" stroke-linejoin="round"/>
+<rect x="236.0" y="344.0" width="27.0" height="77.0" rx="3" fill="#d7d9d1" stroke="#657580" stroke-width="2"/>
+<polyline points="241.0,359.0 258.0,359.0" fill="none" stroke="#7c8b94" stroke-width="2" stroke-linejoin="round"/>
+<ellipse cx="250.0" cy="401.0" rx="5.0" ry="5.0" fill="#39b657" stroke="#39b657" stroke-width="1"/>
+<text x="141.67" y="476.84" font-family="NanumGothic, sans-serif" font-size="27" fill="#1a2834">내 PC</text>
+<rect x="399.8" y="355.18" width="140.4" height="44.46" rx="0" fill="#048ab5" stroke="#067393" stroke-width="2"/>
+<ellipse cx="470.0" cy="398.86" rx="70.2" ry="22.62" fill="#067c9e" stroke="#067393" stroke-width="2"/>
+<rect x="401.36" y="357.52" width="137.28" height="39.78" rx="0" fill="#048ab5" stroke="#048ab5" stroke-width="1"/>
+<ellipse cx="470.0" cy="360.25" rx="70.2" ry="26.91" fill="#35b8d7" stroke="#067393" stroke-width="2"/>
+<polyline points="428.65999999999997,362.2 502.76,348.94" fill="none" stroke="white" stroke-width="5" stroke-linejoin="round"/>
+<polygon points="502.76,348.94 489.51003398692905,359.590746483344 486.63871867818455,343.5451609344778" fill="white" stroke="white" stroke-width="1"/>
+<polyline points="505.1,363.76 434.9,348.94" fill="none" stroke="white" stroke-width="5" stroke-linejoin="round"/>
+<polygon points="434.9,348.94 451.18066562850146,344.0471555621571 447.81366780777097,359.99609260772263" fill="white" stroke="white" stroke-width="1"/>
+<text x="373.74" y="322.08" font-family="NanumGothic, sans-serif" font-size="31" fill="#1a2834">집·회사 라우터</text>
+<polygon points="805.6,456.0 789.953564453125,454.9189453125 776.109765625,451.8515625 764.099365234375,447.0615234375 753.953125,440.8125 745.701806640625,433.3681640625 739.376171875,424.9921875 735.006982421875,415.9482421875 732.625,406.5 732.260986328125,396.9111328125 733.945703125,387.4453125 737.709912109375,378.3662109375 743.584375,369.9375 751.599853515625,362.4228515625 761.787109375,356.0859375 774.176904296875,351.1904296875 788.8,348.0 788.8,348.0 785.324951171875,337.8076171875 784.230859375,327.9984375 785.339306640625,318.6744140625 788.471875,309.9375 793.450146484375,301.8896484375 800.095703125,294.6328125 808.230126953125,288.2689453125 817.675,282.9 828.251904296875,278.6279296875 839.782421875,275.5546875 852.088134765625,273.7822265625 864.990625,273.4125 878.311474609375,274.5474609375 891.872265625,277.2890625 905.494580078125,281.7392578125 919.0,288.0 919.0,288.0 930.023974609375,278.2529296875 942.419921875,270.5484375 955.886376953125,264.7916015625 970.121875,260.8875 984.824951171875,258.7412109375 999.694140625,258.2578125 1014.427978515625,259.3423828125 1028.725,261.9 1042.283740234375,265.8357421875 1054.802734375,271.0546875 1065.980517578125,277.4619140625 1075.515625,284.9625 1083.106591796875,293.4615234375 1088.451953125,302.8640625 1091.250244140625,313.0751953125 1091.2,324.0 1091.2,324.0 1106.013818359375,325.1361328125 1118.951171875,328.3640625 1130.005908203125,333.4130859375 1139.171875,340.0125 1146.442919921875,347.8916015625 1151.812890625,356.7796875 1155.275634765625,366.4060546875 1156.825,376.5 1156.454833984375,386.7908203125 1154.1589843749998,397.0078125 1149.931298828125,406.8802734375 1143.765625,416.1375 1135.655810546875,424.5087890625 1125.595703125,431.7234375 1113.579150390625,437.5107421875 1099.6,441.6 1099.6,441.6 1089.93056640625,446.5078125 1078.35390625,450.48749999999995 1065.02998046875,453.6234375 1050.11875,456.0 1033.78017578125,457.70156249999997 1016.17421875,458.8125 997.4608398437499,459.4171875 977.8,459.6 957.35166015625,459.4453125 936.27578125,459.0375 914.73232421875,458.4609375 892.88125,457.79999999999995 870.88251953125,457.1390625 848.89609375,456.5625 827.08193359375,456.1546875 805.6,456.0" fill="#e6f5fc" stroke="#8cbed1" stroke-width="2"/>
+<text x="900.49" y="393.32" font-family="NanumGothic, sans-serif" font-size="31" fill="#1573bb">인터넷</text>
+<polygon points="940.0,278.4 919.0,314.4 948.4,314.4 931.6,338.4 977.8,297.6 948.4,297.6" fill="#efb640" stroke="#cf9a27" stroke-width="1"/>
+<polygon points="1405.95,295.25 1481.85,295.25 1512.9,320.55 1437.0,320.55" fill="#f3efe1" stroke="#726f65" stroke-width="2"/>
+<polygon points="1481.85,295.25 1512.9,320.55 1512.9,437.85 1481.85,414.85" fill="#b4ad9b" stroke="#726f65" stroke-width="2"/>
+<polygon points="1405.95,295.25 1481.85,295.25 1481.85,414.85 1405.95,414.85" fill="#ded9c8" stroke="#726f65" stroke-width="2"/>
+<rect x="1416.3" y="317.1" width="51.74999999999999" height="11.5" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="1416.3" y="337.8" width="51.74999999999999" height="11.5" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="1416.3" y="358.5" width="51.74999999999999" height="11.5" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<ellipse cx="1424.925" cy="388.975" rx="5.175" ry="5.175" fill="#46b758" stroke="#278c3f" stroke-width="1"/>
+<polyline points="1423.2,402.2 1423.2,407.95" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1433.55,402.2 1433.55,407.95" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1443.9,402.2 1443.9,407.95" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1454.25,402.2 1454.25,407.95" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<text x="1361.99" y="481.09" font-family="NanumGothic, sans-serif" font-size="27" fill="#1a2834">조회할 DNS 서버</text>
+<text x="1342.26" y="521.11" font-family="NanumGothic, sans-serif" font-size="23" fill="#697885">주소 찾기를 부탁받는 곳</text>
+<polyline points="260,370 390,370" fill="none" stroke="#697885" stroke-width="3" stroke-linejoin="round"/>
+<polyline points="550,370 620,343 660,395 715,370" fill="none" stroke="#697885" stroke-width="3" stroke-linejoin="round"/>
+<polyline points="1145,370 1220,345 1270,390 1395,370" fill="none" stroke="#697885" stroke-width="3" stroke-linejoin="round"/>
+<polyline points="180,610 1455,610" fill="none" stroke="#1573bb" stroke-width="5" stroke-linejoin="round"/>
+<polygon points="1455,610 1440.0810964478637,618.1502341562715 1440.0810964478637,601.8497658437285" fill="#1573bb" stroke="#1573bb" stroke-width="1"/>
+<rect x="505" y="553" width="444.5" height="37" rx="2" fill="white" stroke="white" stroke-width="1"/>
+<text x="510.00" y="580.84" font-family="NanumGothic, sans-serif" font-size="27" fill="#1573bb">질문: naver.com에 연결할 IP 주소는?</text>
+<rect x="440" y="590" width="58.300000000000004" height="37.400000000000006" rx="2" fill="#fffef8" stroke="#1573bb" stroke-width="2"/>
+<polyline points="440,590 469.15,610.944 498.3,590" fill="none" stroke="#1573bb" stroke-width="2" stroke-linejoin="round"/>
+<polyline points="440,627.4 460.405,606.83" fill="none" stroke="#1573bb" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="498.3,627.4 477.895,606.83" fill="none" stroke="#1573bb" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1455,745 180,745" fill="none" stroke="#008461" stroke-width="5" stroke-linejoin="round"/>
+<polygon points="180,745 194.91890355213633,736.8497658437285 194.91890355213633,753.1502341562715" fill="#008461" stroke="#008461" stroke-width="1"/>
+<rect x="535" y="687" width="349.75" height="37" rx="2" fill="white" stroke="white" stroke-width="1"/>
+<text x="540.00" y="714.84" font-family="NanumGothic, sans-serif" font-size="27" fill="#008461">응답: 이름에 대응하는 IP 주소</text>
+<rect x="1200" y="725" width="58.300000000000004" height="37.400000000000006" rx="2" fill="#fffef8" stroke="#008461" stroke-width="2"/>
+<polyline points="1200,725 1229.15,745.944 1258.3,725" fill="none" stroke="#008461" stroke-width="2" stroke-linejoin="round"/>
+<polyline points="1200,762.4 1220.405,741.83" fill="none" stroke="#008461" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1258.3,762.4 1237.895,741.83" fill="none" stroke="#008461" stroke-width="1" stroke-linejoin="round"/>
+<text x="150.00" y="869.60" font-family="NanumGothic, sans-serif" font-size="30" fill="#1573bb">질문 패킷의 목적지 = DNS 서버</text>
+<text x="990.00" y="869.60" font-family="NanumGothic, sans-serif" font-size="30" fill="#008461">응답 패킷의 목적지 = 내 PC</text>
+<text x="50.00" y="989.08" font-family="NanumGothic, sans-serif" font-size="24" fill="#697885">구름·지그재그 선은 여러 중간 망과 연결을 생략한 표시다. 웹페이지는 아직 받지 않았다.</text>
+</svg>

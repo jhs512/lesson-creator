@@ -109,10 +109,13 @@ def collect_defined_names(tree):
 
 
 def main():
-    if len(sys.argv) < 2:
-        print(__doc__)
-        sys.exit(2)
-    path = sys.argv[1]
+    import argparse
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("path")
+    parser.add_argument("--type", choices=("lesson", "cover", "material"), default="lesson")
+    parser.add_argument("--role", choices=("concept", "guided_practice", "integrated_practice"))
+    args = parser.parse_args()
+    path = args.path
     with open(path, encoding="utf-8") as f:
         text = f.read()
     lines = text.split("\n")
@@ -227,7 +230,7 @@ def main():
     has_takeaway = "챙겨 가기" in text
     if (has_takeaway or REVIEW_HEADER in text) and not re.search(r'<image\b|!\[[^\]]*\]\(', text):
         warns.append((0, "시각 설명 이미지 없음 — 핵심 동작의 흐름도·구성도·시간축 필요 여부를 검토"))
-    if REVIEW_HEADER in text:  # 완성 교시 페이지로 판단될 때만 템포 경고
+    if REVIEW_HEADER in text and args.role is None:  # 기존 코딩 교시의 템포 기준
         if n_tasks and n_tasks < 4:
             warns.append((0, f"과제 {n_tasks}개 — 템포 기준(체험형 여러 개+도전, 4개 이상)에 미달"))
         if task_heads and "도전" not in task_heads[-1][1]:
@@ -238,7 +241,7 @@ def main():
             warns.append((0, f"함정·에러 시연 {traps}개 — 교시당 2개 이상 권장"))
         if not has_takeaway:
             warns.append((0, "챙겨 가기 표 없음"))
-    print(f"METRIC 과제 {n_tasks}개 / 코드 블록 {code_blocks}개 / 함정 {traps}개 / 챙겨가기 {'있음' if has_takeaway else '없음'}")
+    print(f"METRIC 유형 {args.role or 'legacy'} / 과제 {n_tasks}개 / 코드 블록 {code_blocks}개 / 함정 {traps}개 / 챙겨가기 {'있음' if has_takeaway else '없음'}")
 
     # ── 결과 출력 ──
     for lineno, msg in sorted(errors):

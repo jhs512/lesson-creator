@@ -14,13 +14,14 @@
 | `tools/lesson_term_flow.py` | 본문·표·명령·버튼·그림·과제에서 설명보다 먼저 사용한 등록 용어를 검사 |
 | `tools/lesson_lint.py` | 문체·깨진 서식·금지 표기·저장 변형 등을 검사 |
 | [읽기 검수 기준](tools/judge_checklist.md) | 설명의 쉬움, 선수 지식, 학습 흐름과 시각 자료의 적합성을 검토 |
+| `tools/build_dns_concepts.py` | 인터넷 구름·라우터·서버를 이용한 개념 그림 8개 생성 |
 | `tools/build_network_diagrams.py` | PC·스위치·라우터·서버·케이블·패킷을 그려 SVG와 PNG 생성 |
 | `tools/render_lesson_preview.py` | 교안을 브라우저에서 볼 수 있는 HTML로 변환 |
-| [DNS 교안 예제](examples/day3/README.md) | 교시 6개, 용어 검사 항목 170개, 그림 19종의 사용 예 |
+| [DNS 교안 예제](examples/day3/README.md) | 개념 3교시·따라 하는 실습 2교시·종합실습 1교시의 사용 예 |
 
 이미지 생성 도구는 이 저장소에 **실제 코드로 포함되어 있다**. 외부 AI 이미지 API나 노션 로그인 없이 그림을 만들 수 있다. 현재 완성 예제는 DNS 수업의 장비·주소·배치를 사용한다. 다른 주제의 그림은 장비 도형과 배치 코드를 수정해 만든다. 문장을 입력하면 모든 주제의 그림을 자동으로 만드는 도구는 아니다.
 
-![DNS 응답이 달라질 때 접속 대상이 바뀌는 예](examples/day3/assets/l5_compare.png)
+![이름을 조회하는 DNS 통신의 개념](examples/day3/assets/concept_l1_dns.png)
 
 ## 먼저 실행해 보기
 
@@ -40,13 +41,13 @@ python -m unittest discover -s tools/tests -v
 
 `check_examples.py`는 교시 예제 6개를 검사하고 `build/day3/`에 Markdown과 HTML 미리보기를 만든다. `build/day3/lesson1.html`을 브라우저로 열면 그림과 정답 토글을 함께 볼 수 있다. 파일을 내려받기만 해도 [완성 PNG](examples/day3/assets/)와 수정 가능한 SVG를 확인할 수 있다.
 
-일부 예제에는 Python 코드량·에러 시연 횟수 WARN이 나온다. 이 도구가 처음에는 코딩 실강용으로 만들어졌기 때문이다. DNS 개념·관찰 교시에서는 코드 블록 수만으로 분량을 판정하지 않고 [검수 기록](docs/validation.md)에 이유를 남겼다. ERROR와 하네스 FAIL은 해결해야 한다.
+새 교안은 `lesson_role`로 개념·따라 하는 실습·종합실습을 구분한다. 개념 교시에 코드량·에러 시연·과제 개수를 강제하지 않는다. 역할을 생략한 기존 코딩 교안의 검사 기준은 유지한다. ERROR와 하네스 FAIL은 해결하고 REVIEW·WARN은 [검수 기록](docs/validation.md)에 판단을 남긴다.
 
 ## 새 교안 만들기
 
 이 저장소 전체를 작업 공간으로 열고 [스킬](.agents/skills/lesson-page/SKILL.md)을 사용한다. 스킬을 다른 위치에 복사할 때도 `tools/`와 참고 문서가 필요하다. 사용 중인 AI 도구가 스킬을 자동으로 찾지 못하면 해당 `SKILL.md`를 읽고 따르도록 지정한다.
 
-1. 독자의 배경지식, 목표, 수업 시간과 사용할 실습 도구를 정한다.
+1. 독자의 배경지식, 교시별 역할, 목표, 수업 시간과 사용할 실습 도구를 정한다.
 2. 예제 JSON을 복사해 상황·정의·그림·과제·정답을 작성한다.
 3. `learning_terms`에 핵심 용어의 실제 소개 문장과 별칭을 기록한다. 그림에는 실제 레이블을 추출한 `text_content`를 넣는다.
 4. 스키마 → 하네스 → 린터 → 읽기 검수 순서로 확인한다.
@@ -56,7 +57,7 @@ python -m unittest discover -s tools/tests -v
 ```bash
 python tools/lesson_render.py my_lesson.json my_lesson.md
 python tools/lesson_harness.py my_lesson.json
-python tools/lesson_lint.py my_lesson.md
+python tools/lesson_lint.py my_lesson.md --role concept
 python tools/render_lesson_preview.py my_lesson.md my_lesson.html --title "교안 미리보기"
 ```
 

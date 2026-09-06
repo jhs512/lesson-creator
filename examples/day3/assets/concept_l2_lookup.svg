@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1180" viewBox="0 0 1800 1180">
+<rect width="100%" height="100%" fill="white"/>
+<text x="50.00" y="64.80" font-family="NanumGothic, sans-serif" font-size="40" fill="#1a2834">리졸버가 안내를 받아 다시 질문한다</text>
+<text x="52.00" y="105.08" font-family="NanumGothic, sans-serif" font-size="24" fill="#697885">캐시에 답이나 담당 서버 정보가 없는 경우를 단순화했다</text>
+<polyline points="50,129 1750,129" fill="none" stroke="#b8c5cd" stroke-width="1" stroke-linejoin="round"/>
+<polygon points="111.1,527.75 206.1,527.75 220.35,540.1 220.35,606.6 111.1,606.6" fill="#b9c3c8" stroke="#54646f" stroke-width="2"/>
+<polygon points="206.1,527.75 220.35,540.1 220.35,606.6 206.1,597.1" fill="#81929c" stroke="#54646f" stroke-width="2"/>
+<rect x="119.65" y="536.3" width="76.95" height="55.099999999999994" rx="2" fill="#c6e6f7" stroke="#657e90" stroke-width="2"/>
+<polygon points="122.5,540.1 190.9,540.1 122.5,587.6" fill="#edf9fe" stroke="#edf9fe" stroke-width="1"/>
+<rect x="154.8" y="606.6" width="20.9" height="18.05" rx="0" fill="#87959d" stroke="#54646f" stroke-width="2"/>
+<polygon points="125.35,626.55 209.9,626.55 233.65,644.6 109.2,644.6" fill="#d4dadd" stroke="#627380" stroke-width="2"/>
+<polyline points="132.95,632.25 204.2,632.25" fill="none" stroke="#91a1ab" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="132.95,637.95 204.2,637.95" fill="none" stroke="#91a1ab" stroke-width="1" stroke-linejoin="round"/>
+<rect x="227.95" y="555.3" width="25.65" height="73.14999999999999" rx="3" fill="#d7d9d1" stroke="#657580" stroke-width="2"/>
+<polyline points="232.7,569.55 248.85,569.55" fill="none" stroke="#7c8b94" stroke-width="2" stroke-linejoin="round"/>
+<ellipse cx="241.25" cy="609.45" rx="5.0" ry="5.0" fill="#39b657" stroke="#39b657" stroke-width="1"/>
+<text x="136.67" y="682.74" font-family="NanumGothic, sans-serif" font-size="27" fill="#1a2834">내 PC</text>
+<text x="89.46" y="715.16" font-family="NanumGothic, sans-serif" font-size="23" fill="#697885">naver.com 조회</text>
+<polygon points="563.3,508.5 635.9,508.5 665.6,532.7 593.0,532.7" fill="#f3efe1" stroke="#726f65" stroke-width="2"/>
+<polygon points="635.9,508.5 665.6,532.7 665.6,644.9 635.9,622.9" fill="#b4ad9b" stroke="#726f65" stroke-width="2"/>
+<polygon points="563.3,508.5 635.9,508.5 635.9,622.9 563.3,622.9" fill="#ded9c8" stroke="#726f65" stroke-width="2"/>
+<rect x="573.2" y="529.4" width="49.50000000000001" height="11.0" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="573.2" y="549.2" width="49.50000000000001" height="11.0" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="573.2" y="569.0" width="49.50000000000001" height="11.0" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<ellipse cx="581.45" cy="598.1500000000001" rx="4.95" ry="4.95" fill="#46b758" stroke="#278c3f" stroke-width="1"/>
+<polyline points="579.8,610.8 579.8,616.3" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="589.7,610.8 589.7,616.3" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="599.6,610.8 599.6,616.3" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="609.5,610.8 609.5,616.3" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<text x="512.80" y="806.68" font-family="NanumGothic, sans-serif" font-size="29" fill="#1a2834">재귀 리졸버</text>
+<text x="450.34" y="848.92" font-family="NanumGothic, sans-serif" font-size="26" fill="#697885">대신 찾아주는 DNS 서버</text>
+<polygon points="1455.35,178.25 1518.05,178.25 1543.7,199.15 1481.0,199.15" fill="#f3efe1" stroke="#726f65" stroke-width="2"/>
+<polygon points="1518.05,178.25 1543.7,199.15 1543.7,296.05 1518.05,277.05" fill="#b4ad9b" stroke="#726f65" stroke-width="2"/>
+<polygon points="1455.35,178.25 1518.05,178.25 1518.05,277.05 1455.35,277.05" fill="#ded9c8" stroke="#726f65" stroke-width="2"/>
+<rect x="1463.9" y="196.3" width="42.75" height="9.5" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="1463.9" y="213.4" width="42.75" height="9.5" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="1463.9" y="230.5" width="42.75" height="9.5" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<ellipse cx="1471.025" cy="255.675" rx="4.2749999999999995" ry="4.2749999999999995" fill="#46b758" stroke="#278c3f" stroke-width="1"/>
+<polyline points="1469.6,266.6 1469.6,271.35" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1478.15,266.6 1478.15,271.35" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1486.7,266.6 1486.7,271.35" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1495.25,266.6 1495.25,271.35" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<text x="1445.45" y="336.09" font-family="NanumGothic, sans-serif" font-size="27" fill="#1a2834">루트 서버</text>
+<text x="1399.03" y="368.51" font-family="NanumGothic, sans-serif" font-size="23" fill="#697885">.com 담당 서버 안내</text>
+<polygon points="1455.35,518.25 1518.05,518.25 1543.7,539.15 1481.0,539.15" fill="#f3efe1" stroke="#726f65" stroke-width="2"/>
+<polygon points="1518.05,518.25 1543.7,539.15 1543.7,636.05 1518.05,617.05" fill="#b4ad9b" stroke="#726f65" stroke-width="2"/>
+<polygon points="1455.35,518.25 1518.05,518.25 1518.05,617.05 1455.35,617.05" fill="#ded9c8" stroke="#726f65" stroke-width="2"/>
+<rect x="1463.9" y="536.3" width="42.75" height="9.5" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="1463.9" y="553.4" width="42.75" height="9.5" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="1463.9" y="570.5" width="42.75" height="9.5" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<ellipse cx="1471.025" cy="595.675" rx="4.2749999999999995" ry="4.2749999999999995" fill="#46b758" stroke="#278c3f" stroke-width="1"/>
+<polyline points="1469.6,606.6 1469.6,611.35" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1478.15,606.6 1478.15,611.35" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1486.7,606.6 1486.7,611.35" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1495.25,606.6 1495.25,611.35" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<text x="1412.28" y="676.09" font-family="NanumGothic, sans-serif" font-size="27" fill="#1a2834">.com TLD 서버</text>
+<text x="1369.79" y="708.51" font-family="NanumGothic, sans-serif" font-size="23" fill="#697885">naver.com 담당 서버 안내</text>
+<polygon points="1455.35,868.25 1518.05,868.25 1543.7,889.15 1481.0,889.15" fill="#f3efe1" stroke="#726f65" stroke-width="2"/>
+<polygon points="1518.05,868.25 1543.7,889.15 1543.7,986.05 1518.05,967.05" fill="#b4ad9b" stroke="#726f65" stroke-width="2"/>
+<polygon points="1455.35,868.25 1518.05,868.25 1518.05,967.05 1455.35,967.05" fill="#ded9c8" stroke="#726f65" stroke-width="2"/>
+<rect x="1463.9" y="886.3" width="42.75" height="9.5" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="1463.9" y="903.4" width="42.75" height="9.5" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<rect x="1463.9" y="920.5" width="42.75" height="9.5" rx="2" fill="#8899a1" stroke="#637582" stroke-width="1"/>
+<ellipse cx="1471.025" cy="945.675" rx="4.2749999999999995" ry="4.2749999999999995" fill="#46b758" stroke="#278c3f" stroke-width="1"/>
+<polyline points="1469.6,956.6 1469.6,961.35" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1478.15,956.6 1478.15,961.35" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1486.7,956.6 1486.7,961.35" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<polyline points="1495.25,956.6 1495.25,961.35" fill="none" stroke="#8c887e" stroke-width="1" stroke-linejoin="round"/>
+<text x="1420.07" y="1026.09" font-family="NanumGothic, sans-serif" font-size="27" fill="#1a2834">권한 네임서버</text>
+<text x="1403.88" y="1058.51" font-family="NanumGothic, sans-serif" font-size="23" fill="#697885">담당 이름의 원본 답</text>
+<polyline points="280,540 550,540" fill="none" stroke="#1573bb" stroke-width="5" stroke-linejoin="round"/>
+<polygon points="550,540 535.0810964478636,548.1502341562715 535.0810964478636,531.8497658437285" fill="#1573bb" stroke="#1573bb" stroke-width="1"/>
+<rect x="330" y="487" width="84.6875" height="37" rx="2" fill="white" stroke="white" stroke-width="1"/>
+<text x="335.00" y="514.84" font-family="NanumGothic, sans-serif" font-size="27" fill="#1573bb">1 질문</text>
+<polyline points="550,640 280,640" fill="none" stroke="#008461" stroke-width="5" stroke-linejoin="round"/>
+<polygon points="280,640 294.9189035521363,631.8497658437285 294.9189035521363,648.1502341562715" fill="#008461" stroke="#008461" stroke-width="1"/>
+<rect x="310" y="661" width="117.6328125" height="37" rx="2" fill="white" stroke="white" stroke-width="1"/>
+<text x="315.00" y="688.84" font-family="NanumGothic, sans-serif" font-size="27" fill="#008461">8 최종 답</text>
+<polyline points="700,480 755,480 755,220 1405,220" fill="none" stroke="#1573bb" stroke-width="5" stroke-linejoin="round"/>
+<polygon points="1405,220 1390.0810964478637,228.15023415627144 1390.0810964478637,211.84976584372856" fill="#1573bb" stroke="#1573bb" stroke-width="1"/>
+<rect x="900" y="173" width="223.046875" height="37" rx="2" fill="white" stroke="white" stroke-width="1"/>
+<text x="905.00" y="200.84" font-family="NanumGothic, sans-serif" font-size="27" fill="#1573bb">2 naver.com 조회</text>
+<polyline points="1405,300 800,300 800,510 700,510" fill="none" stroke="#008461" stroke-width="5" stroke-linejoin="round" stroke-dasharray="12 8"/>
+<polygon points="700,510 714.9189035521364,501.84976584372856 714.9189035521364,518.1502341562715" fill="#008461" stroke="#008461" stroke-width="1"/>
+<rect x="900" y="305" width="271.03125" height="37" rx="2" fill="white" stroke="white" stroke-width="1"/>
+<text x="905.00" y="332.84" font-family="NanumGothic, sans-serif" font-size="27" fill="#008461">3 .com 담당 서버 안내</text>
+<polyline points="700,580 800,580 800,560 1405,560" fill="none" stroke="#1573bb" stroke-width="5" stroke-linejoin="round"/>
+<polygon points="1405,560 1390.0810964478637,568.1502341562715 1390.0810964478637,551.8497658437285" fill="#1573bb" stroke="#1573bb" stroke-width="1"/>
+<rect x="900" y="513" width="223.046875" height="37" rx="2" fill="white" stroke="white" stroke-width="1"/>
+<text x="905.00" y="540.84" font-family="NanumGothic, sans-serif" font-size="27" fill="#1573bb">4 naver.com 조회</text>
+<polyline points="1405,640 845,640 845,610 700,610" fill="none" stroke="#008461" stroke-width="5" stroke-linejoin="round" stroke-dasharray="12 8"/>
+<polygon points="700,610 714.9189035521364,601.8497658437285 714.9189035521364,618.1502341562715" fill="#008461" stroke="#008461" stroke-width="1"/>
+<rect x="900" y="645" width="281.375" height="37" rx="2" fill="white" stroke="white" stroke-width="1"/>
+<text x="905.00" y="672.84" font-family="NanumGothic, sans-serif" font-size="27" fill="#008461">5 naver.com 담당 안내</text>
+<polyline points="700,680 755,680 755,900 1405,900" fill="none" stroke="#1573bb" stroke-width="5" stroke-linejoin="round"/>
+<polygon points="1405,900 1390.0810964478637,908.1502341562715 1390.0810964478637,891.8497658437285" fill="#1573bb" stroke="#1573bb" stroke-width="1"/>
+<rect x="900" y="853" width="223.046875" height="37" rx="2" fill="white" stroke="white" stroke-width="1"/>
+<text x="905.00" y="880.84" font-family="NanumGothic, sans-serif" font-size="27" fill="#1573bb">6 naver.com 조회</text>
+<polyline points="1405,980 800,980 800,710 700,710" fill="none" stroke="#008461" stroke-width="5" stroke-linejoin="round" stroke-dasharray="12 8"/>
+<polygon points="700,710 714.9189035521364,701.8497658437285 714.9189035521364,718.1502341562715" fill="#008461" stroke="#008461" stroke-width="1"/>
+<rect x="900" y="985" width="143.015625" height="37" rx="2" fill="white" stroke="white" stroke-width="1"/>
+<text x="905.00" y="1012.84" font-family="NanumGothic, sans-serif" font-size="27" fill="#008461">7 주소 응답</text>
+<text x="50.00" y="1149.08" font-family="NanumGothic, sans-serif" font-size="24" fill="#697885">모든 오른쪽 서버에 질문을 보내는 주체는 같은 재귀 리졸버다. 각 선은 여러 망을 거치는 논리 통신이다.</text>
+</svg>

@@ -2,7 +2,7 @@
   "type": "lesson",
   "walkthrough": true,
   "title": "4교시. 따라 하기 — 정상 DNS 토폴로지 만들기",
-  "lead": "이름에 맞는 주소를 알아내고, 그 주소로 웹페이지를 받는 과정을 직접 만들어 보자. 이번 시간에는 가상 장비로 통신을 시험하는 프로그램인 Packet Tracer에서 사용자 컴퓨터인 PC와 요청에 답하는 서버를 연결해 본다.",
+  "lead": "앞에서는 이름을 조회하는 통신과 웹페이지를 받는 통신의 원리를 알아보았다. 이제 가상 장비로 네트워크 통신을 시험하는 프로그램인 Packet Tracer에서 두 통신을 직접 구성한다. 작은 내부망에서 정상 상태를 만든 뒤, 숫자 주소 확인과 이름 조회, 웹 접속을 차례로 성공시키는 것이 이번 시간의 목표다. 요청을 보내는 사용자 컴퓨터인 PC와 요청에 답하는 서버를 연결한다.",
   "toc": [
     "장비와 연결 자리 정하기",
     "두 VLAN 사이의 통신 길 만들기",
@@ -15,6 +15,10 @@
     {
       "heading": "장비와 연결 자리 정하기",
       "body": [
+        {
+          "kind": "paragraph",
+          "text": "일반 인터넷의 모든 중간 장비와 이름 관리 계층을 여기서 재현하지는 않는다. 뒤에서 등장하는 두 서버는 주소 질문과 웹페이지 요청의 역할을 나누어 관찰하기 위한 실습 구성이다. 구름으로 생략했던 통신 경로를 실제로 입력할 장비와 연결로 좁혀 살펴보자."
+        },
         {
           "kind": "paragraph",
           "text": "먼저 어떤 장비를 어디에 연결할지 정한다. 장비 연결 구조를 토폴로지라고 한다."
@@ -70,8 +74,9 @@
         {
           "kind": "image",
           "src": "assets/l4_topology.png",
-          "caption": "정상 DNS 토폴로지 — PC 네 대와 Switch0·Router0·DNS·포털 서버를 실습 포트대로 연결한다.",
-          "text_content": "정상 DNS 실습 구성 · 장비와 포트 배치\n실습 구성도 · 검은 선 = 연결   /   점선 경계 = VLAN\nVLAN 10 · DEV\n192.168.10.0/24\nVLAN 20 · SEC    192.168.20.0/24\nPC0\n192.168.10.10 /24\nPC1\n192.168.10.20 /24\nPC2\n192.168.20.10 /24\nPC3\n192.168.20.20 /24\n1\n2\n3\n4\n5\n6\n7\n8\n9\nSwitch0 · 2960\nRouter0 · 2911\nDNSServer\n192.168.20.53\nIntranetServer\n192.168.20.100\nFa0/1 · VLAN 10\nFa0/2\nG0/0 · 192.168.10.1\nG0/1 · 192.168.20.1\nFa0/5\nFa0/6\nFa0/7\nFa0/8\nFa0/3\nFa0/4\n1–2, 5번 포트: VLAN 10\n3–4, 6–8번 포트: VLAN 20\n같은 스위치 안에서 포트를 나눈다.\n모든 장비의 마스크는 255.255.255.0이다. Router0의 두 선은 각 VLAN의 access 포트에 연결한다."
+          "caption": "설명용 구성도 · 정상 DNS 토폴로지 — PC 네 대와 Switch0·Router0·DNS·포털 서버를 실습 포트대로 연결한다.",
+          "text_content": "정상 DNS 실습 구성 · 장비와 포트 배치\n실습 구성도 · 검은 선 = 연결   /   점선 경계 = VLAN\nVLAN 10 · DEV\n192.168.10.0/24\nVLAN 20 · SEC    192.168.20.0/24\nPC0\n192.168.10.10 /24\nPC1\n192.168.10.20 /24\nPC2\n192.168.20.10 /24\nPC3\n192.168.20.20 /24\n1\n2\n3\n4\n5\n6\n7\n8\n9\nSwitch0 · 2960\nRouter0 · 2911\nDNSServer\n192.168.20.53\nIntranetServer\n192.168.20.100\nFa0/1 · VLAN 10\nFa0/2\nG0/0 · 192.168.10.1\nG0/1 · 192.168.20.1\nFa0/5\nFa0/6\nFa0/7\nFa0/8\nFa0/3\nFa0/4\n1–2, 5번 포트: VLAN 10\n3–4, 6–8번 포트: VLAN 20\n같은 스위치 안에서 포트를 나눈다.\n모든 장비의 마스크는 255.255.255.0이다. Router0의 두 선은 각 VLAN의 access 포트에 연결한다.",
+          "image_kind": "configuration_diagram"
         },
         {
           "kind": "paragraph",
@@ -146,7 +151,7 @@
           "instruction": "빈 Logical 화면에 2960 스위치, 2911 라우터, PC 네 대, Server-PT 두 대를 놓고 표의 포트대로 연결하자.",
           "element": {
             "kind": "tool_steps",
-            "tool": "Cisco Packet Tracer 9.0.1",
+            "tool": "Cisco Packet Tracer",
             "steps": [
               "`Network Devices > Switches`(네트워크 장비 → 스위치)에서 `2960-24TT`를 놓고 Switch0인지 확인한다.",
               "`Network Devices > Routers`(네트워크 장비 → 라우터)에서 `2911`을 놓고 Router0인지 확인한다.",
@@ -169,8 +174,9 @@
         {
           "kind": "image",
           "src": "assets/l4_route.png",
-          "caption": "그림 4-1. VLAN 간 DNS 질의 — 같은 Switch0을 Router0 양쪽에서 사용하며 DNS 서버까지 도달한다.",
-          "text_content": "DNS 질의가 VLAN 10에서 VLAN 20으로 건너간다\n실습 구성도 · 검은 선 = 연결   /   점선 경계 = VLAN   /   봉투 = 현재 패킷   /   나머지 PC 생략\nVLAN 10 · DEV\n192.168.10.0/24\nVLAN 20 · SEC    192.168.20.0/24\nPC0\n192.168.10.10 /24\n1\n2\n3\n4\n5\n6\n7\n8\n9\nSwitch0 · 2960\nRouter0 · 2911\nDNSServer\n192.168.20.53\nIntranetServer\n192.168.20.100\nFa0/1 · VLAN 10\nG0/0 · 192.168.10.1\nG0/1 · 192.168.20.1\nFa0/5\nFa0/6\nFa0/7\nFa0/8\n1–2, 5번 포트: VLAN 10\n3–4, 6–8번 포트: VLAN 20\n같은 스위치 안에서 포트를 나눈다.\nDNS 질문: portal.a-company.test의 A?\nG0/0 · 192.168.10.1\nG0/1 · 192.168.20.1\nFa0/6\n모든 장비의 마스크는 255.255.255.0이다. Router0의 두 선은 각 VLAN의 access 포트에 연결한다."
+          "caption": "설명용 구성도 · 그림 4-1. VLAN 간 DNS 질의 — 같은 Switch0을 Router0 양쪽에서 사용하며 DNS 서버까지 도달한다.",
+          "text_content": "DNS 질의가 VLAN 10에서 VLAN 20으로 건너간다\n실습 구성도 · 검은 선 = 연결   /   점선 경계 = VLAN   /   봉투 = 현재 패킷   /   나머지 PC 생략\nVLAN 10 · DEV\n192.168.10.0/24\nVLAN 20 · SEC    192.168.20.0/24\nPC0\n192.168.10.10 /24\n1\n2\n3\n4\n5\n6\n7\n8\n9\nSwitch0 · 2960\nRouter0 · 2911\nDNSServer\n192.168.20.53\nIntranetServer\n192.168.20.100\nFa0/1 · VLAN 10\nG0/0 · 192.168.10.1\nG0/1 · 192.168.20.1\nFa0/5\nFa0/6\nFa0/7\nFa0/8\n1–2, 5번 포트: VLAN 10\n3–4, 6–8번 포트: VLAN 20\n같은 스위치 안에서 포트를 나눈다.\nDNS 질문: portal.a-company.test의 A?\nG0/0 · 192.168.10.1\nG0/1 · 192.168.20.1\nFa0/6\n모든 장비의 마스크는 255.255.255.0이다. Router0의 두 선은 각 VLAN의 access 포트에 연결한다.",
+          "image_kind": "configuration_diagram"
         },
         {
           "kind": "paragraph",
@@ -309,12 +315,16 @@
           "en": "A record"
         },
         {
+          "kind": "paragraph",
+          "text": "`.test`는 시험용으로 예약된 이름 영역이다. `portal.a-company.test`는 이 실습의 DNS 서버에만 직접 등록하는 이름이며 실제 네이버 접속 주소가 아니다. 한 서버에 레코드를 넣는 이번 구성으로 인터넷의 루트·최상위 도메인·재귀 조회 전체를 구현한 것은 아니다."
+        },
+        {
           "kind": "task",
           "task_type": "action",
           "instruction": "DNSServer에 포털 A 레코드를 만들자.",
           "element": {
             "kind": "tool_steps",
-            "tool": "Cisco Packet Tracer 9.0.1",
+            "tool": "Cisco Packet Tracer",
             "steps": [
               "DNSServer를 열고 `Services > DNS`로 이동한다.",
               "DNS Service를 `On`으로 바꾼다.",
@@ -334,7 +344,7 @@
           "instruction": "PC0에 질문받을 서버를 지정하고 이름의 응답 주소를 확인하자.",
           "element": {
             "kind": "tool_steps",
-            "tool": "Cisco Packet Tracer 9.0.1",
+            "tool": "Cisco Packet Tracer",
             "steps": [
               "PC0의 `Desktop > IP Configuration`에서 DNS Server에 `192.168.20.53`을 입력한다.",
               "`Desktop > Command Prompt`에서 `nslookup portal.a-company.test`를 실행해 `192.168.20.100`이 나오는지 확인한다."
@@ -345,8 +355,9 @@
         {
           "kind": "image",
           "src": "assets/l4_settings.png",
-          "caption": "그림 4-2. 설정 값과 장비의 대응 — 게이트웨이, 질문할 DNS, A 레코드의 웹 서버 주소를 구분한다.",
-          "text_content": "설정 칸을 입력하기 전에, 어느 장비의 주소인지 짚어 보자\n실제 화면을 단순화한 안내도 · IP와 포트는 Day 3 실습 구성 기준\nPC0\n192.168.10.10 /24\nRouter0\nDNSServer\n192.168.20.53\nIntranetServer\n192.168.20.100\nPC0 · IP Configuration\nIP Address      192.168.10.10\nSubnet Mask   255.255.255.0\nGateway         192.168.10.1\nDNS Server     192.168.20.53\n다른 망으로 건널 곳\n이름을 물어볼 곳\nA: portal.a-company.test → .100\n값과 장비의 대응을 보여 주는 선이다. 실제 배선은 공통 구성도의 Switch0을 거친다."
+          "caption": "설명용 구성도 · 그림 4-2. 설정 값과 장비의 대응 — 게이트웨이, 질문할 DNS, A 레코드의 웹 서버 주소를 구분한다.",
+          "text_content": "설정 칸을 입력하기 전에, 어느 장비의 주소인지 짚어 보자\n실제 화면을 단순화한 안내도 · IP와 포트는 Day 3 실습 구성 기준\nPC0\n192.168.10.10 /24\nRouter0\nDNSServer\n192.168.20.53\nIntranetServer\n192.168.20.100\nPC0 · IP Configuration\nIP Address      192.168.10.10\nSubnet Mask   255.255.255.0\nGateway         192.168.10.1\nDNS Server     192.168.20.53\n다른 망으로 건널 곳\n이름을 물어볼 곳\nA: portal.a-company.test → .100\n값과 장비의 대응을 보여 주는 선이다. 실제 배선은 공통 구성도의 Switch0을 거친다.",
+          "image_kind": "configuration_diagram"
         },
         {
           "kind": "paragraph",
@@ -368,6 +379,10 @@
         {
           "kind": "paragraph",
           "text": "이제 IntranetServer가 보낼 첫 화면을 만든다. 이름 조회가 성공한 상태에서 실제 페이지도 받을 수 있는지 확인하는 절이다."
+        },
+        {
+          "kind": "paragraph",
+          "text": "HTTP는 브라우저와 서버가 웹 내용을 주고받는 규칙이다. 이 실습에서는 내용을 관찰하기 쉬운 HTTP를 사용한다. 일반 웹 접속에서 설명한 HTTPS의 암호화와 인증서 확인은 이번 Packet Tracer 구성의 관찰 대상에 포함하지 않는다."
         },
         {
           "kind": "paragraph",
@@ -406,7 +421,7 @@
           "instruction": "같은 이름으로 웹페이지를 열고 정상 구성을 저장하자.",
           "element": {
             "kind": "tool_steps",
-            "tool": "Cisco Packet Tracer 9.0.1",
+            "tool": "Cisco Packet Tracer",
             "steps": [
               "`Desktop > Web Browser`를 열고 주소창에 `http://portal.a-company.test`를 입력한다.",
               "`A사 내부 포털 - 정상 서버` 문구가 보이면 `File > Save As`(다른 이름으로 저장)에서 `day03_dns_normal.pkt`로 저장한다."
@@ -466,7 +481,7 @@
     {
       "term": "Packet Tracer",
       "aliases": [],
-      "introduced_by": "가상 장비로 통신을 시험하는 프로그램인 Packet Tracer"
+      "introduced_by": "앞에서는 이름을 조회하는 통신과 웹페이지를 받는 통신의 원리를 알아보았다. 이제 가상 장비로 네트워크 통신을 시험하는 프로그램인 Packet Tracer에서 두 통신을 직접 구성한다. 작은 내부망에서 정상 상태를 만든 뒤, 숫자 주소 확인과 이름 조회, 웹 접속을 차례로 성공시키는 것이 이번 시간의 목표다. 요청을 보내는 사용자 컴퓨터인 PC와 요청에 답하는 서버를 연결한다."
     },
     {
       "term": "토폴로지",
@@ -483,7 +498,7 @@
     {
       "term": "PC",
       "aliases": [],
-      "introduced_by": "사용자 컴퓨터인 PC"
+      "introduced_by": "앞에서는 이름을 조회하는 통신과 웹페이지를 받는 통신의 원리를 알아보았다. 이제 가상 장비로 네트워크 통신을 시험하는 프로그램인 Packet Tracer에서 두 통신을 직접 구성한다. 작은 내부망에서 정상 상태를 만든 뒤, 숫자 주소 확인과 이름 조회, 웹 접속을 차례로 성공시키는 것이 이번 시간의 목표다. 요청을 보내는 사용자 컴퓨터인 PC와 요청에 답하는 서버를 연결한다."
     },
     {
       "term": "게이트웨이",
@@ -674,7 +689,7 @@
         "server",
         "웹 서버"
       ],
-      "introduced_by": "요청에 답하는 서버"
+      "introduced_by": "앞에서는 이름을 조회하는 통신과 웹페이지를 받는 통신의 원리를 알아보았다. 이제 가상 장비로 네트워크 통신을 시험하는 프로그램인 Packet Tracer에서 두 통신을 직접 구성한다. 작은 내부망에서 정상 상태를 만든 뒤, 숫자 주소 확인과 이름 조회, 웹 접속을 차례로 성공시키는 것이 이번 시간의 목표다. 요청을 보내는 사용자 컴퓨터인 PC와 요청에 답하는 서버를 연결한다."
     },
     {
       "term": "IntranetServer",
@@ -688,5 +703,6 @@
       ],
       "introduced_by": "이름에 맞는 주소를 알려 주는 DNS 서버"
     }
-  ]
+  ],
+  "lesson_role": "guided_practice"
 }
